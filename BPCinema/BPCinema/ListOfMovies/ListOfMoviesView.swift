@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class ListOfMoviesView: UIViewController {
-    private let presenter: ListOfMoviesPresenter
+    private let presenter: ListOfMoviesPresentable
     
     private var moviesTableView: UITableView = {
         let tv = UITableView()
@@ -20,7 +20,7 @@ final class ListOfMoviesView: UIViewController {
         return tv
     }()
     
-    init(presenter: ListOfMoviesPresenter) {
+    init(presenter: ListOfMoviesPresentable) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }

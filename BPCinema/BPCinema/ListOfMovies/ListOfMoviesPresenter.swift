@@ -7,18 +7,24 @@
 
 import Foundation
 
+protocol ListOfMoviesPresentable: AnyObject {
+    var ui: ListOfMoviesUI? { get }
+    var viewModels: [MovieViewModel] { get }
+    func onViewAppear()
+}
+
 protocol ListOfMoviesUI: AnyObject {
     func update(movies: [MovieViewModel])
 }
 
-final class ListOfMoviesPresenter {
-    var ui: ListOfMoviesUI?
+final class ListOfMoviesPresenter: ListOfMoviesPresentable {
+    weak var ui: ListOfMoviesUI?
     
-    private let listOfMoviesInteractor: ListOfMoviesInteractor
+    private let listOfMoviesInteractor: ListOfMoviesInteractable
     var viewModels: [MovieViewModel] = []
     private let mapper: Mapper
     
-    init(listOfMoviesInteractor: ListOfMoviesInteractor, mapper: Mapper = Mapper()) {
+    init(listOfMoviesInteractor: ListOfMoviesInteractable, mapper: Mapper = Mapper()) {
         self.listOfMoviesInteractor = listOfMoviesInteractor
         self.mapper = mapper
     }

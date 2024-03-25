@@ -11,11 +11,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     var listOfMoviesRouter = ListOfMoviesRouter()
+    var loginRouter = LoginRouter()
+    var loginView = LoginViewController()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        listOfMoviesRouter.showListOfMovies(window: window)
+        window?.rootViewController = loginView
+        window?.makeKeyAndVisible()
+//        loginRouter.showLoginView(window: window)
+//        listOfMoviesRouter.showListOfMovies(window: window)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

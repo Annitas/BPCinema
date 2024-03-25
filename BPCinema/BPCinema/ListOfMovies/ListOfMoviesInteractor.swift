@@ -8,6 +8,7 @@
 // API Key: fae05adc59b94dcb33377a38bfd09528
 
 import Foundation
+import CoreData
 
 protocol ListOfMoviesInteractable: AnyObject {
     func getListOfMoview() async -> PopularMovieResponseEntity

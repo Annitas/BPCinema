@@ -6,6 +6,10 @@ target 'BPCinema' do
   use_frameworks!
   pod 'SwiftLint'
   pod 'Kingfisher', '~> 7.6.1'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Storage'
   # Pods for BPCinema
 
 end

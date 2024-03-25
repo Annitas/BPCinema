@@ -16,12 +16,11 @@ class LoginViewController: UIViewController {
     
     private var headerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .red
+        view.backgroundColor = .custom
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-    
     private var emailTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Email"
@@ -58,7 +57,7 @@ class LoginViewController: UIViewController {
     private let loginButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .red
+        button.backgroundColor = .custom
         button.setTitle("Login", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 9
@@ -85,8 +84,8 @@ class LoginViewController: UIViewController {
         loginButton.addTarget(self, action: #selector(performTabbar(_:)), for: .touchUpInside)
         registerButton.addTarget(self, action: #selector(performRegister(_:)), for: .touchUpInside)
         
-        emailTextField.text = "anita@gmail.com"
-        passwordTextField.text = "anita123"
+        emailTextField.text = "anita.stashevskayaa@mail.ru"
+        passwordTextField.text = "qazwsx"
 
     }
     
@@ -103,7 +102,13 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if Auth.auth().currentUser != nil {
-            // TODO: Present ListOfMovies from here
+            guard let window = UIApplication.shared.windows.first else {
+                return
+            }
+            
+            // Вызов метода showListOfMovies у ListOfMoviesRouter
+            let listRouter = ListOfMoviesRouter()
+            listRouter.showListOfMovies(window: window)
         }
         emailTextField.becomeFirstResponder()
     }
@@ -145,7 +150,7 @@ class LoginViewController: UIViewController {
         //allow user to sign out with button
         
         
-        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { [weak self] resut, error in
+        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
             guard let strongSelf = self else {
                 return
             }
@@ -157,7 +162,14 @@ class LoginViewController: UIViewController {
             
             print("User signed in")
             
-            // MARK: Push ListOfMoviesView
+            // Получение текущего окна
+            guard let window = UIApplication.shared.windows.first else {
+                return
+            }
+            
+            // Вызов метода showListOfMovies у ListOfMoviesRouter
+            let listRouter = ListOfMoviesRouter()
+            listRouter.showListOfMovies(window: window)
             
             strongSelf.emailTextField.resignFirstResponder()
             strongSelf.passwordTextField.resignFirstResponder()

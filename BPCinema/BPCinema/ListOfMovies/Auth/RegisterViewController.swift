@@ -17,7 +17,7 @@ class RegisterViewController: UIViewController {
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.borderWidth = 2.0
-        imageView.layer.borderColor = UIColor.red.cgColor
+        imageView.layer.borderColor = UIColor.systemBlue.cgColor
         imageView.layer.masksToBounds = false
         return imageView
     }()
@@ -108,7 +108,7 @@ class RegisterViewController: UIViewController {
     private let registerButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .red
+        button.backgroundColor = .custom
         button.setTitle("Register", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 9
@@ -129,7 +129,7 @@ class RegisterViewController: UIViewController {
         view.addSubview(password2TextField)
         view.addSubview(registerButton)
         addConstraints()
-        registerButton.addTarget(self, action: #selector(performTabbar(_:)), for: .touchUpInside)
+        registerButton.addTarget(self, action: #selector(performList(_:)), for: .touchUpInside)
         
         headerImage.isUserInteractionEnabled = true
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapChangeProfilePicture))
@@ -184,7 +184,7 @@ class RegisterViewController: UIViewController {
         ])
     }
     
-    @objc func performTabbar(_ sender: UIButton) {
+    @objc func performList(_ sender: UIButton) {
         
         guard let name = nameTextField.text, !name.isEmpty,
               let surname = surnameTextField.text, !surname.isEmpty,
@@ -198,8 +198,6 @@ class RegisterViewController: UIViewController {
             showCreateAccount(title: "Error", message: "Passwords aren't equal")
             return
         }
-        
-        
         
         FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { [weak self] resut, error in
             guard let strongSelf = self else {

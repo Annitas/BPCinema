@@ -162,10 +162,12 @@ class LoginViewController: UIViewController {
             print("User signed in")
             
             // Получение текущего окна
-            guard let window = UIApplication.shared.windows.first else {
+            // Получение текущей сцены окна
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first else {
                 return
             }
-            
+
             let listRouter = ListOfMoviesRouter()
             listRouter.showListOfMovies(window: window)
             
@@ -187,7 +189,6 @@ class LoginViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
             
         }))
-        
         present(alert, animated: true)
     }
 

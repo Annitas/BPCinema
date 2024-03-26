@@ -245,12 +245,9 @@ class RegisterViewController: UIViewController {
             }
             
             // MARK: Open ListOfMoviesView
-            
             strongSelf.emailTextField.resignFirstResponder()
             strongSelf.passwordTextField.resignFirstResponder()
         }
-        
-        
     }
     
     func showCreateAccount(title: String, message: String) {
@@ -269,7 +266,6 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
         actionSheet.addAction(UIAlertAction(title: "Choose from gallery", style: .default, handler: {[weak self] _ in
             self?.presentPhotoLibrary()
         }))
-        
         present(actionSheet, animated: true)
     }
     

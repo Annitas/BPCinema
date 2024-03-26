@@ -14,8 +14,9 @@ final class DetailMovieView: UIViewController {
     
     private let movieImageView: UIImageView = {
         let iv = UIImageView()
-        
-        iv.contentMode = .scaleAspectFit
+        iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
+        iv.layer.cornerRadius = 10
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
@@ -23,7 +24,7 @@ final class DetailMovieView: UIViewController {
     private let movieName: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 30, weight: .bold)
+        label.font = .systemFont(ofSize: 28, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -61,15 +62,15 @@ final class DetailMovieView: UIViewController {
             movieImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             movieImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
             movieImageView.heightAnchor.constraint(equalToConstant: 200),
-            movieImageView.widthAnchor.constraint(equalToConstant: 300),
+            movieImageView.widthAnchor.constraint(equalToConstant: 350),
             
-            movieName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            movieName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            movieName.leadingAnchor.constraint(equalTo: movieImageView.leadingAnchor),
+            movieName.trailingAnchor.constraint(equalTo: movieImageView.trailingAnchor),
             movieName.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: 10),
             
             movieDescription.topAnchor.constraint(equalTo: movieName.bottomAnchor, constant: 10),
-            movieDescription.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            movieDescription.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            movieDescription.leadingAnchor.constraint(equalTo: movieImageView.leadingAnchor),
+            movieDescription.trailingAnchor.constraint(equalTo: movieImageView.trailingAnchor),
         ])
     }
 }

@@ -12,7 +12,9 @@ import Kingfisher
 final class MovieCellView: UITableViewCell {
     private let movieImageView: UIImageView = {
         let imageV = UIImageView()
-        imageV.contentMode = .scaleAspectFit
+        imageV.contentMode = .scaleAspectFill
+        imageV.clipsToBounds = true
+        imageV.layer.cornerRadius = 10
         imageV.translatesAutoresizingMaskIntoConstraints = false
         return imageV
     }()
@@ -52,16 +54,16 @@ final class MovieCellView: UITableViewCell {
         NSLayoutConstraint.activate([
             movieImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
             movieImageView.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            movieImageView.heightAnchor.constraint(equalToConstant: 200),
-            movieImageView.widthAnchor.constraint(equalToConstant: 100),
+            movieImageView.heightAnchor.constraint(equalToConstant: 180),
+            movieImageView.widthAnchor.constraint(equalToConstant: 110),
             movieImageView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -12),
             
             movieName.leadingAnchor.constraint(equalTo: movieImageView.trailingAnchor, constant: 18),
-            movieName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-            movieName.topAnchor.constraint(equalTo: movieImageView.topAnchor, constant: 24),
+            movieName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11),
+            movieName.topAnchor.constraint(equalTo: movieImageView.topAnchor, constant: 5),
             
             movieDescription.leadingAnchor.constraint(equalTo: movieImageView.trailingAnchor, constant: 20),
-            movieDescription.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+            movieDescription.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11),
             movieDescription.topAnchor.constraint(equalTo: movieName.bottomAnchor, constant: 8),
             movieDescription.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -12),
         ])

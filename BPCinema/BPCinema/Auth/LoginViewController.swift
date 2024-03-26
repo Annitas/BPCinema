@@ -101,14 +101,14 @@ class LoginViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        if Auth.auth().currentUser != nil {
-//            guard let window = UIApplication.shared.windows.first else {
-//                return
-//            }
-//            
-//            let listRouter = ListOfMoviesRouter()
-//            listRouter.showListOfMovies(window: window)
-//        }
+        if Auth.auth().currentUser != nil {
+            guard let window = UIApplication.shared.windows.first else {
+                return
+            }
+            
+            let listRouter = ListOfMoviesRouter()
+            listRouter.showListOfMovies(window: window)
+        }
         emailTextField.becomeFirstResponder()
     }
     

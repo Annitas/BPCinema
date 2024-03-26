@@ -116,6 +116,14 @@ class RegisterViewController: UIViewController {
         return button
     }()
     
+    private let backToLoginButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Back to sign in", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //        self.hideKeyboardWhenTappedAround()
@@ -128,8 +136,10 @@ class RegisterViewController: UIViewController {
         view.addSubview(passwordTextField)
         view.addSubview(password2TextField)
         view.addSubview(registerButton)
+        view.addSubview(backToLoginButton)
         addConstraints()
         registerButton.addTarget(self, action: #selector(performList(_:)), for: .touchUpInside)
+        backToLoginButton.addTarget(self, action: #selector(backToLogin(_:)), for: .touchUpInside)
         
         headerImage.isUserInteractionEnabled = true
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapChangeProfilePicture))
@@ -181,7 +191,17 @@ class RegisterViewController: UIViewController {
             registerButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             registerButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             registerButton.topAnchor.constraint(equalTo: password2TextField.bottomAnchor, constant: 20),
+            
+            backToLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            backToLoginButton.topAnchor.constraint(equalTo: registerButton.bottomAnchor, constant: 20),
         ])
+    }
+    
+    @objc func backToLogin(_ sender: UIButton) {
+        let loginVC = LoginViewController()
+        loginVC.modalPresentationStyle = .fullScreen
+        present(loginVC, animated: true)
     }
     
     @objc func performList(_ sender: UIButton) {
@@ -213,7 +233,7 @@ class RegisterViewController: UIViewController {
             strongSelf.showCreateAccount(title: "Account created", message: "Account created, log in")
             
             let cinemaUser = CinemaUser(firstName: name, lastName: surname, emailAddress: email)
-            // MARK: save to db
+            // MARK: save to db here
             DBManager.shared.addUser(with: cinemaUser) { done in
                 if done {
                     //Upload photo

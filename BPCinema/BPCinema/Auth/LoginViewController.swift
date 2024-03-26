@@ -81,7 +81,7 @@ class LoginViewController: UIViewController {
         view.addSubview(loginButton)
         view.addSubview(registerButton)
         addConstraints()
-        loginButton.addTarget(self, action: #selector(performTabbar(_:)), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(performLogin(_:)), for: .touchUpInside)
         registerButton.addTarget(self, action: #selector(performRegister(_:)), for: .touchUpInside)
         
         emailTextField.text = "anita.stashevskayaa@mail.ru"
@@ -101,15 +101,14 @@ class LoginViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if Auth.auth().currentUser != nil {
-            guard let window = UIApplication.shared.windows.first else {
-                return
-            }
-            
-            // Вызов метода showListOfMovies у ListOfMoviesRouter
-            let listRouter = ListOfMoviesRouter()
-            listRouter.showListOfMovies(window: window)
-        }
+//        if Auth.auth().currentUser != nil {
+//            guard let window = UIApplication.shared.windows.first else {
+//                return
+//            }
+//            
+//            let listRouter = ListOfMoviesRouter()
+//            listRouter.showListOfMovies(window: window)
+//        }
         emailTextField.becomeFirstResponder()
     }
     
@@ -132,7 +131,7 @@ class LoginViewController: UIViewController {
         ])
     }
     
-    @objc func performTabbar(_ sender: UIButton) {
+    @objc func performLogin(_ sender: UIButton) {
         
         guard let email = emailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else {
@@ -167,7 +166,6 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            // Вызов метода showListOfMovies у ListOfMoviesRouter
             let listRouter = ListOfMoviesRouter()
             listRouter.showListOfMovies(window: window)
             

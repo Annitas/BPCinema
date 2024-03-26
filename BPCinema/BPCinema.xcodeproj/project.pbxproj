@@ -113,6 +113,8 @@
 		752946542BA8461400D4F8CB /* BPCinema */ = {
 			isa = PBXGroup;
 			children = (
+				75F5250E2BAD49E300DFFC4B /* Auth */,
+				7529467E2BA99B1800D4F8CB /* DetailMovie */,
 				752946692BA84F5100D4F8CB /* ListOfMovies */,
 				752946552BA8461400D4F8CB /* AppDelegate.swift */,
 				752946572BA8461400D4F8CB /* SceneDelegate.swift */,
@@ -128,9 +130,6 @@
 		752946692BA84F5100D4F8CB /* ListOfMovies */ = {
 			isa = PBXGroup;
 			children = (
-				75F5250E2BAD49E300DFFC4B /* Auth */,
-				75F525022BAD278B00DFFC4B /* MovieDB */,
-				7529467E2BA99B1800D4F8CB /* DetailMovie */,
 				752946792BA956C900D4F8CB /* ViewModel */,
 				7529466A2BA84F8C00D4F8CB /* ListOfMoviesView.swift */,
 				7529466C2BA84FA700D4F8CB /* ListOfMoviesPresenter.swift */,
@@ -201,6 +200,7 @@
 		75F5250E2BAD49E300DFFC4B /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				75F525022BAD278B00DFFC4B /* MovieDB */,
 				75F5250F2BAD4A0C00DFFC4B /* LoginViewController.swift */,
 				7596F7552BAD74C60052D1B2 /* RegisterViewController.swift */,
 				7596F7572BAD7FF50052D1B2 /* CinemaUser.swift */,
@@ -430,7 +430,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -508,7 +508,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -537,7 +537,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

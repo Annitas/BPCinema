@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+// TODO: Remake to "FavouriteMovie"
 struct CinemaUser {
     var firstName: String
     var lastName: String

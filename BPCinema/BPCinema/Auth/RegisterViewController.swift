@@ -49,8 +49,13 @@ class RegisterViewController: UIViewController {
         headerImage.isUserInteractionEnabled = true
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapChangeProfilePicture))
         headerImage.addGestureRecognizer(gesture)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
     }
-    
+    @objc func hideKeyboard() {
+        view.endEditing(true)
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         headerImage.layer.cornerRadius = headerImage.frame.size.width / 2
@@ -141,7 +146,7 @@ class RegisterViewController: UIViewController {
             DBManager.shared.addUser(with: cinemaUser) { done in
                 if done {
                     //Upload photo
-                    guard let image = strongSelf.headerImage.image, let data = image.pngData() else {
+                    guard let image = strongSelf.headerImage.image, let _ = image.pngData() else {
                         return
                     }
                     

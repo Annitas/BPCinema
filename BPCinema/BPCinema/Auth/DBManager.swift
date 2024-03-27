@@ -13,7 +13,7 @@ final class DBManager {
     public static let shared: DBManager = DBManager()
     
     private let database = Database.database().reference()
-    
+    // TODO: Remake to save movie, not user
     public func addUser(with user: CinemaUser, completion: @escaping (Bool) -> Void) {
         database.child(user.safeEmail).setValue([
             "first_name": user.firstName,

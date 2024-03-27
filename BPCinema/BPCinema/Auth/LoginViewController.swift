@@ -25,7 +25,7 @@ class LoginViewController: UIViewController {
     private var passwordTextField = CustomTextField(placeholderText: "Password", isPassword: true)
     private let loginButton = CustomButton(title: "Login")
     private let goToRegisterButton = GoToButton(title: "Create an account")
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -38,9 +38,14 @@ class LoginViewController: UIViewController {
         goToRegisterButton.addTarget(self, action: #selector(performRegister(_:)), for: .touchUpInside)
         emailTextField.text = "anita.stashevskayaa@mail.ru"
         passwordTextField.text = "qazwsx"
-
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+        
     }
-    
+    @objc func hideKeyboard() {
+        view.endEditing(true)
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -53,14 +58,14 @@ class LoginViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        if Auth.auth().currentUser != nil {
-//            guard let window = UIApplication.shared.windows.first else {
-//                return
-//            }
-//            
-//            let listRouter = ListOfMoviesRouter()
-//            listRouter.showListOfMovies(window: window)
-//        }
+        //        if Auth.auth().currentUser != nil {
+        //            guard let window = UIApplication.shared.windows.first else {
+        //                return
+        //            }
+        //
+        //            let listRouter = ListOfMoviesRouter()
+        //            listRouter.showListOfMovies(window: window)
+        //        }
         emailTextField.becomeFirstResponder()
     }
     
@@ -119,7 +124,7 @@ class LoginViewController: UIViewController {
                   let window = windowScene.windows.first else {
                 return
             }
-
+            
             let listRouter = ListOfMoviesRouter()
             listRouter.showListOfMovies(window: window)
             
@@ -143,6 +148,6 @@ class LoginViewController: UIViewController {
         }))
         present(alert, animated: true)
     }
-
-
+    
+    
 }

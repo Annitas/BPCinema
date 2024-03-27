@@ -10,6 +10,11 @@
 		4284D37A929892F212AE8DFB /* Pods_BPCinema.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AC007DBEE8EA5D90860AF3 /* Pods_BPCinema.framework */; };
 		750864172BB06E6400A2AEBF /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750864162BB06E6400A2AEBF /* DBManager.swift */; };
 		752133672BB1696C00C17682 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 752133662BB1696C00C17682 /* GoogleService-Info.plist */; };
+		7521336F2BB294D400C17682 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7521336E2BB294D400C17682 /* Constants.swift */; };
+		752133722BB2B18600C17682 /* MovieDBModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 752133702BB2B18600C17682 /* MovieDBModel.xcdatamodeld */; };
+		752133752BB3E73D00C17682 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752133742BB3E73C00C17682 /* CustomButton.swift */; };
+		752133772BB3EA8100C17682 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752133762BB3EA8100C17682 /* CustomTextField.swift */; };
+		752133792BB3EF5600C17682 /* GoToButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752133782BB3EF5600C17682 /* GoToButton.swift */; };
 		752946562BA8461400D4F8CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752946552BA8461400D4F8CB /* AppDelegate.swift */; };
 		752946582BA8461400D4F8CB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752946572BA8461400D4F8CB /* SceneDelegate.swift */; };
 		7529465A2BA8461400D4F8CB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752946592BA8461400D4F8CB /* ViewController.swift */; };
@@ -33,13 +38,17 @@
 		7529468F2BA9A1BA00D4F8CB /* MapperDetailMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7529468E2BA9A1BA00D4F8CB /* MapperDetailMovieViewModel.swift */; };
 		7596F7562BAD74C60052D1B2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7596F7552BAD74C60052D1B2 /* RegisterViewController.swift */; };
 		7596F7582BAD7FF50052D1B2 /* CinemaUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7596F7572BAD7FF50052D1B2 /* CinemaUser.swift */; };
-		75F525052BAD280C00DFFC4B /* MovieDBModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75F525032BAD280B00DFFC4B /* MovieDBModel.xcdatamodeld */; };
 		75F525102BAD4A0C00DFFC4B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F5250F2BAD4A0C00DFFC4B /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		750864162BB06E6400A2AEBF /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		752133662BB1696C00C17682 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7521336E2BB294D400C17682 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		752133712BB2B18600C17682 /* MovieDBModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieDBModel.xcdatamodel; sourceTree = "<group>"; };
+		752133742BB3E73C00C17682 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		752133762BB3EA8100C17682 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		752133782BB3EF5600C17682 /* GoToButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoToButton.swift; sourceTree = "<group>"; };
 		752946522BA8461400D4F8CB /* BPCinema.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BPCinema.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		752946552BA8461400D4F8CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		752946572BA8461400D4F8CB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,7 +74,6 @@
 		7529468E2BA9A1BA00D4F8CB /* MapperDetailMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapperDetailMovieViewModel.swift; sourceTree = "<group>"; };
 		7596F7552BAD74C60052D1B2 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		7596F7572BAD7FF50052D1B2 /* CinemaUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaUser.swift; sourceTree = "<group>"; };
-		75F525042BAD280B00DFFC4B /* MovieDBModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieDBModel.xcdatamodel; sourceTree = "<group>"; };
 		75F5250F2BAD4A0C00DFFC4B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		79AC007DBEE8EA5D90860AF3 /* Pods_BPCinema.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BPCinema.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95ED11D7E949EBC14377EA6F /* Pods-BPCinema.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BPCinema.debug.xcconfig"; path = "Target Support Files/Pods-BPCinema/Pods-BPCinema.debug.xcconfig"; sourceTree = "<group>"; };
@@ -92,6 +100,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		752133732BB3E70900C17682 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				752133742BB3E73C00C17682 /* CustomButton.swift */,
+				752133762BB3EA8100C17682 /* CustomTextField.swift */,
+				752133782BB3EF5600C17682 /* GoToButton.swift */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
 		752946492BA8461400D4F8CB = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +131,8 @@
 		752946542BA8461400D4F8CB /* BPCinema */ = {
 			isa = PBXGroup;
 			children = (
+				752133732BB3E70900C17682 /* UIComponents */,
+				75F525022BAD278B00DFFC4B /* MovieDB */,
 				75F5250E2BAD49E300DFFC4B /* Auth */,
 				7529467E2BA99B1800D4F8CB /* DetailMovie */,
 				752946692BA84F5100D4F8CB /* ListOfMovies */,
@@ -168,6 +188,7 @@
 				752946832BA99B8C00D4F8CB /* DetailInteractor.swift */,
 				752946852BA99BA900D4F8CB /* DetailRouter.swift */,
 				752946872BA99BD600D4F8CB /* Entities */,
+				7521336E2BB294D400C17682 /* Constants.swift */,
 			);
 			path = DetailMovie;
 			sourceTree = "<group>";
@@ -192,7 +213,7 @@
 		75F525022BAD278B00DFFC4B /* MovieDB */ = {
 			isa = PBXGroup;
 			children = (
-				75F525032BAD280B00DFFC4B /* MovieDBModel.xcdatamodeld */,
+				752133702BB2B18600C17682 /* MovieDBModel.xcdatamodeld */,
 			);
 			path = MovieDB;
 			sourceTree = "<group>";
@@ -200,7 +221,6 @@
 		75F5250E2BAD49E300DFFC4B /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				75F525022BAD278B00DFFC4B /* MovieDB */,
 				75F5250F2BAD4A0C00DFFC4B /* LoginViewController.swift */,
 				7596F7552BAD74C60052D1B2 /* RegisterViewController.swift */,
 				7596F7572BAD7FF50052D1B2 /* CinemaUser.swift */,
@@ -333,12 +353,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				752133792BB3EF5600C17682 /* GoToButton.swift in Sources */,
+				752133752BB3E73D00C17682 /* CustomButton.swift in Sources */,
+				7521336F2BB294D400C17682 /* Constants.swift in Sources */,
 				75F525102BAD4A0C00DFFC4B /* LoginViewController.swift in Sources */,
 				7596F7582BAD7FF50052D1B2 /* CinemaUser.swift in Sources */,
-				75F525052BAD280C00DFFC4B /* MovieDBModel.xcdatamodeld in Sources */,
 				7529466B2BA84F8C00D4F8CB /* ListOfMoviesView.swift in Sources */,
 				752946862BA99BA900D4F8CB /* DetailRouter.swift in Sources */,
+				752133722BB2B18600C17682 /* MovieDBModel.xcdatamodeld in Sources */,
 				750864172BB06E6400A2AEBF /* DBManager.swift in Sources */,
+				752133772BB3EA8100C17682 /* CustomTextField.swift in Sources */,
 				7596F7562BAD74C60052D1B2 /* RegisterViewController.swift in Sources */,
 				7529465A2BA8461400D4F8CB /* ViewController.swift in Sources */,
 				7529468F2BA9A1BA00D4F8CB /* MapperDetailMovieViewModel.swift in Sources */,
@@ -575,14 +599,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		75F525032BAD280B00DFFC4B /* MovieDBModel.xcdatamodeld */ = {
+		752133702BB2B18600C17682 /* MovieDBModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				75F525042BAD280B00DFFC4B /* MovieDBModel.xcdatamodel */,
+				752133712BB2B18600C17682 /* MovieDBModel.xcdatamodel */,
 			);
-			currentVersion = 75F525042BAD280B00DFFC4B /* MovieDBModel.xcdatamodel */;
+			currentVersion = 752133712BB2B18600C17682 /* MovieDBModel.xcdatamodel */;
 			name = MovieDBModel.xcdatamodeld;
-			path = /Users/anitastashevskaya/Desktop/Programming/BPCinema/BPCinema/BPCinema/ListOfMovies/MovieDB/MovieDBModel.xcdatamodeld;
+			path = /Users/anitastashevskaya/Desktop/Programming/BPCinema/BPCinema/BPCinema/MovieDB/MovieDBModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

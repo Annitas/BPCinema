@@ -16,7 +16,7 @@ protocol ListOfMoviesInteractable: AnyObject {
 
 final class ListOfMoviesInteractor: ListOfMoviesInteractable {
     func getListOfMoview() async -> PopularMovieResponseEntity {
-        let url = URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=fae05adc59b94dcb33377a38bfd09528")!
+        let url = URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=fae05adc59b94dcb33377a38bfd09528&page=1")!
         let (data, _) = try! await URLSession.shared.data(from: url)
         return try! JSONDecoder().decode(PopularMovieResponseEntity.self, from: data)
     }

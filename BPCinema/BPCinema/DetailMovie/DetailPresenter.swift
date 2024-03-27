@@ -14,6 +14,7 @@ protocol DetailPresenterUI: AnyObject {
 protocol DetailPresentable: AnyObject {
     var ui: DetailPresenterUI? { get }
     var movieID: String { get }
+    var movieDetail: DetailMovieEntity? { get }
     func onViewAppear()
 }
 
@@ -23,6 +24,7 @@ final class DetailPresenter: DetailPresentable {
     let movieID: String
     private let interactor: DetailMovieInteractable
     private let mapper: MapperDetailMovieViewModel
+    var movieDetail: DetailMovieEntity?
     
     init(movieID: String,
          interactor: DetailMovieInteractable,

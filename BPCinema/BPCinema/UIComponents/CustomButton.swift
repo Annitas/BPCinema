@@ -8,13 +8,19 @@
 import UIKit
 
 class CustomButton: UIButton {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    init(title: String) {
+        super.init(frame: .zero)
+        backgroundColor = .custom
+        setTitle(title, for: .normal)
+        setTitleColor(.white, for: .normal)        
+        layer.cornerRadius = 9
+        layer.masksToBounds = true
+        translatesAutoresizingMaskIntoConstraints = false
     }
-    */
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
 }

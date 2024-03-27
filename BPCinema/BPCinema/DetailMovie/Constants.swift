@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct Constants {
+    static let accountID = "21098921"
+    static let account = "https://api.themoviedb.org/3/account/21098921/favorite"
+}

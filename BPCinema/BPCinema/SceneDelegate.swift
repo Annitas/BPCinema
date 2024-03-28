@@ -12,6 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var listOfMoviesRouter = ListOfMoviesRouter()
 //    var loginRouter = LoginRouter()
+//    var loginPresenter = LoginPresenter()
     var loginView = LoginViewController()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {

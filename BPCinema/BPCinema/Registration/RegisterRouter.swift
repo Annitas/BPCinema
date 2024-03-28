@@ -9,10 +9,12 @@ import Foundation
 
 
 protocol RegisterRouting {
-    
+    static func createRegisterModule(ref: RegisterViewController)
 }
 
-final class RegisterRouter {
-    var listOfMoviesRouter: ListOfMoviesRouting?
-    
+final class RegisterRouter: RegisterRouting {
+    static func createRegisterModule(ref: RegisterViewController) {
+        ref.register = RegisterPresenter()
+        ref.register?.registerInteractor = RegisterInteractor()
+    }
 }

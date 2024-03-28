@@ -29,6 +29,8 @@ class RegisterViewController: UIViewController {
     private let registerButton = CustomButton(title: "Register")
     private let goToLoginButton = GoToButton(title: "Back to sign in")
     
+    var register: RegisterPresentable?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //        self.hideKeyboardWhenTappedAround()
@@ -122,41 +124,14 @@ class RegisterViewController: UIViewController {
             print("Missing fields")
             return
         }
-        
         if password != password2 {
             showCreateAccount(title: "Error", message: "Passwords aren't equal")
             return
         }
-        
-        FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { [weak self] _, error in
-            guard let strongSelf = self else {
-                return
-            }
-            
-            guard error == nil else {
-                strongSelf.showCreateAccount(title: "Error", message: "Can't create account")
-                return
-            }
-            
-            print("User signed in")
-            strongSelf.showCreateAccount(title: "Account created", message: "Account created, log in")
-            
-            let cinemaUser = CinemaUser(firstName: name, lastName: surname, emailAddress: email)
-            // MARK: save to db here
-            DBManager.shared.addUser(with: cinemaUser) { done in
-                if done {
-                    //Upload photo
-                    guard let image = strongSelf.headerImage.image, let _ = image.pngData() else {
-                        return
-                    }
-                    
-                }
-            }
-            
-            // MARK: Open ListOfMoviesView
-            strongSelf.emailTextField.resignFirstResponder()
-            strongSelf.passwordTextField.resignFirstResponder()
+        if let te = emailTextField.text, let tp = passwordTextField.text {
+            register?.registerAll(email: te, password: tp)
         }
+        showCreateAccount(title: "Account created", message: "Account created, log in")
     }
     
     func showCreateAccount(title: String, message: String) {

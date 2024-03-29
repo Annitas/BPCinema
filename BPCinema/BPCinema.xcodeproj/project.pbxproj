@@ -150,6 +150,7 @@
 				757A8D0E2BB5B4BB00E3DF74 /* Registration */,
 				7529467E2BA99B1800D4F8CB /* DetailMovie */,
 				752946692BA84F5100D4F8CB /* ListOfMovies */,
+				757A8D0F2BB6759B00E3DF74 /* ListOfFavourites */,
 				752946552BA8461400D4F8CB /* AppDelegate.swift */,
 				752946572BA8461400D4F8CB /* SceneDelegate.swift */,
 				752946632BA8461600D4F8CB /* Info.plist */,
@@ -243,6 +244,13 @@
 				75294BDA2BB420BB00E02E06 /* RegisterRouter.swift */,
 			);
 			path = Registration;
+			sourceTree = "<group>";
+		};
+		757A8D0F2BB6759B00E3DF74 /* ListOfFavourites */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ListOfFavourites;
 			sourceTree = "<group>";
 		};
 		75F525022BAD278B00DFFC4B /* MovieDB */ = {

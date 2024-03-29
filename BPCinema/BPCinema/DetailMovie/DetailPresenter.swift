@@ -16,6 +16,7 @@ protocol DetailPresentable: AnyObject {
     var movieID: String { get }
     var movieDetail: DetailMovieEntity? { get }
     func onViewAppear()
+    func addToFavourites(withID: String)
 }
 
 final class DetailPresenter: DetailPresentable {
@@ -44,5 +45,9 @@ final class DetailPresenter: DetailPresentable {
             }
             
         }
+    }
+    
+    func addToFavourites(withID id: String) {
+        interactor.addToFavorites(movieId: id, accountId: "21098921")
     }
 }

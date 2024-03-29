@@ -59,8 +59,13 @@ final class DetailMovieViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        favoriteButton.addTarget(self, action: #selector(addToFavourites(_:)), for: .touchUpInside)
         setupView()
         presenter.onViewAppear()
+    }
+    
+    @objc func addToFavourites(_ sender: UIButton) {
+        presenter.addToFavourites(withID: presenter.movieID)
     }
     
     private func setupView() {

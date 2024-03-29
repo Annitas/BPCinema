@@ -9,7 +9,7 @@ import Foundation
 
 protocol DetailMovieInteractable: AnyObject {
     func getDetailMovie(withID id: String) async -> DetailMovieEntity
-    func addToFavorites(movieId: Int, accountId: Int)
+    func addToFavorites(movieId: String, accountId: String)
 }
 
 final class DetailMovieInteractor: DetailMovieInteractable {
@@ -21,42 +21,41 @@ final class DetailMovieInteractor: DetailMovieInteractable {
         return try! jsonDecoder.decode(DetailMovieEntity.self, from: data)
     }
     
-    func addToFavorites(movieId: Int, accountId: Int) {
+    func addToFavorites(movieId: String, accountId: String) {
         let urlString = "https://api.themoviedb.org/3/account/\(accountId)/favorite?api_key=fae05adc59b94dcb33377a38bfd09528"
-        
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
             return
         }
-        
-        let parameters = [
-            "media_type": "movie",
-            "media_id": "\(movieId)",
-            "favorite": "true"
+        let headers = [
+          "accept": "application/json",
+          "content-type": "application/json",
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmYWUwNWFkYzU5Yjk0ZGNiMzMzNzdhMzhiZmQwOTUyOCIsInN1YiI6IjY1ZjE0NzIyMmZkZWM2MDE4OTIxMzFmNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.NqkryGcwJ1BvUn_id9-DGJgpL_wm2stm4FTC4p5cEVQ"
         ]
+        let parameters = [
+          "media_type": "movie",
+          "media_id": movieId,
+          "favorite": "true"
+        ] as [String : Any]
         
-        var request = URLRequest(url: url)
+        let postData = try! JSONSerialization.data(withJSONObject: parameters, options: []) // TODO: Fix force unwrap
+
+        let request = NSMutableURLRequest(url: NSURL(string: "https://api.themoviedb.org/3/account/\(accountId)/favorite")! as URL,
+                                                cachePolicy: .useProtocolCachePolicy,
+                                            timeoutInterval: 10.0)
         request.httpMethod = "POST"
-        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters)
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Error: \(error)")
-                return
-            }
-            if let data = data {
-                if let httpResponse = response as? HTTPURLResponse {
-                    if httpResponse.statusCode == 200 {
-                        // MARK: return status to change button's color?
-                        print("Movie added to favorites successfully")
-                    } else {
-                        print("Failed to add movie to favorites. Status code: \(httpResponse.statusCode)")
-                    }
-                }
-            }
-        }
-        task.resume()
+        request.allHTTPHeaderFields = headers
+        request.httpBody = postData as Data
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+          if (error != nil) {
+            print(error as Any)
+          } else {
+            let httpResponse = response as? HTTPURLResponse
+              print(httpResponse ?? "")
+          }
+        })
+        dataTask.resume()
     }
 }
 
@@ -64,7 +63,4 @@ final class DetailMovieInteractor: DetailMovieInteractable {
 
 
 // Add NetworkService
-// redo login/register to screen architecture with presenters and interactors, router
-// refactor duplicated code
 // Constraint -> PinLayout
-//

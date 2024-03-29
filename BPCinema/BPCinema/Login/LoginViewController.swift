@@ -58,9 +58,10 @@ final class LoginViewController: UIViewController {
 //            let listRouter = ListOfMoviesRouter()
 //            listRouter.showListOfMovies(window: window)
 //        }
-                presenter?.isAlreadyLogin()
+                
         emailTextField.becomeFirstResponder()
         LoginRouter.createLoginModule(ref: self)
+        presenter?.isAlreadyLogin()
     }
     
     private func setupView() {

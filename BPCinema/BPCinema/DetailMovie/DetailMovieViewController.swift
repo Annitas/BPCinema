@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Kingfisher
 
-final class DetailMovieView: UIViewController {
+final class DetailMovieViewController: UIViewController {
     private let presenter: DetailPresentable
     
     private let movieImageView: UIImageView = {
@@ -89,7 +89,7 @@ final class DetailMovieView: UIViewController {
     }
 }
 
-extension DetailMovieView: DetailPresenterUI {
+extension DetailMovieViewController: DetailPresenterUI {
     func updateUI(viewModel: DetailMovieViewModel) {
         movieImageView.kf.setImage(with: viewModel.backdropPath)
         movieName.text = viewModel.title

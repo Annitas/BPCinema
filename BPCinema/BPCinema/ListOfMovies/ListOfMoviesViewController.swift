@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class ListOfMoviesView: UIViewController {
+final class ListOfMoviesViewController: UIViewController {
     private let presenter: ListOfMoviesPresentable
     
     private var moviesTableView: UITableView = {
@@ -52,7 +52,7 @@ final class ListOfMoviesView: UIViewController {
     }
 }
 
-extension ListOfMoviesView: UITableViewDataSource {
+extension ListOfMoviesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         presenter.viewModels.count
     }
@@ -69,13 +69,13 @@ extension ListOfMoviesView: UITableViewDataSource {
     }
 }
 
-extension ListOfMoviesView: UITableViewDelegate {
+extension ListOfMoviesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.onTapCell(atIndex: indexPath.row)
     }
 }
 
-extension ListOfMoviesView: ListOfMoviesUI {
+extension ListOfMoviesViewController: ListOfMoviesUI {
     func update(movies: [MovieViewModel]) {
         DispatchQueue.main.async {
             self.moviesTableView.reloadData()

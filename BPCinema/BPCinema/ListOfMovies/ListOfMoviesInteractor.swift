@@ -11,12 +11,26 @@ import Foundation
 import CoreData
 
 protocol ListOfMoviesInteractable: AnyObject {
+//    var favouriteMovies: PopularMovieResponseEntity { get }
     func getListOfMoview() async -> PopularMovieResponseEntity
 }
 
 final class ListOfMoviesInteractor: ListOfMoviesInteractable {
+//    var favouriteMovies: Pop
+    
     func getListOfMoview() async -> PopularMovieResponseEntity {
         await APIService.shared.getListOfMoview()
+    }
+    
+    func getFavouriteMovies() {
+        APIService.shared.getFavouriteMovies { result in
+            switch result {
+            case .success(let popularMovieResponse):
+                print(popularMovieResponse)
+            case .failure(let error):
+                print("Ошибка получения избранных фильмов: \(error)")
+            }
+        }
     }
 }
 

@@ -48,8 +48,9 @@
 		757A8D182BB678E200E3DF74 /* FavouriveMovieResponseEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757A8D172BB678E200E3DF74 /* FavouriveMovieResponseEntity.swift */; };
 		757A8D1A2BB67BA000E3DF74 /* ListOfFavouriteMoviesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757A8D192BB67BA000E3DF74 /* ListOfFavouriteMoviesRouter.swift */; };
 		757A8D1C2BB681CB00E3DF74 /* FavouriteMovieEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757A8D1B2BB681CB00E3DF74 /* FavouriteMovieEntity.swift */; };
+		757A8D1F2BB6B23900E3DF74 /* DBFavouriteMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757A8D1E2BB6B23900E3DF74 /* DBFavouriteMovies.swift */; };
 		7596F7562BAD74C60052D1B2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7596F7552BAD74C60052D1B2 /* RegisterViewController.swift */; };
-		7596F7582BAD7FF50052D1B2 /* CinemaUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7596F7572BAD7FF50052D1B2 /* CinemaUser.swift */; };
+		7596F7582BAD7FF50052D1B2 /* DBMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7596F7572BAD7FF50052D1B2 /* DBMovie.swift */; };
 		75F525102BAD4A0C00DFFC4B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F5250F2BAD4A0C00DFFC4B /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -96,8 +97,9 @@
 		757A8D172BB678E200E3DF74 /* FavouriveMovieResponseEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriveMovieResponseEntity.swift; sourceTree = "<group>"; };
 		757A8D192BB67BA000E3DF74 /* ListOfFavouriteMoviesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfFavouriteMoviesRouter.swift; sourceTree = "<group>"; };
 		757A8D1B2BB681CB00E3DF74 /* FavouriteMovieEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteMovieEntity.swift; sourceTree = "<group>"; };
+		757A8D1E2BB6B23900E3DF74 /* DBFavouriteMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBFavouriteMovies.swift; sourceTree = "<group>"; };
 		7596F7552BAD74C60052D1B2 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		7596F7572BAD7FF50052D1B2 /* CinemaUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaUser.swift; sourceTree = "<group>"; };
+		7596F7572BAD7FF50052D1B2 /* DBMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMovie.swift; sourceTree = "<group>"; };
 		75F5250F2BAD4A0C00DFFC4B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		79AC007DBEE8EA5D90860AF3 /* Pods_BPCinema.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BPCinema.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95ED11D7E949EBC14377EA6F /* Pods-BPCinema.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BPCinema.debug.xcconfig"; path = "Target Support Files/Pods-BPCinema/Pods-BPCinema.debug.xcconfig"; sourceTree = "<group>"; };
@@ -283,7 +285,8 @@
 			isa = PBXGroup;
 			children = (
 				750864162BB06E6400A2AEBF /* DBManager.swift */,
-				7596F7572BAD7FF50052D1B2 /* CinemaUser.swift */,
+				7596F7572BAD7FF50052D1B2 /* DBMovie.swift */,
+				757A8D1E2BB6B23900E3DF74 /* DBFavouriteMovies.swift */,
 				752133702BB2B18600C17682 /* MovieDBModel.xcdatamodeld */,
 			);
 			path = MovieDB;
@@ -419,7 +422,7 @@
 				7521337C2BB3F3B900C17682 /* APIService.swift in Sources */,
 				7521336F2BB294D400C17682 /* Constants.swift in Sources */,
 				75F525102BAD4A0C00DFFC4B /* LoginViewController.swift in Sources */,
-				7596F7582BAD7FF50052D1B2 /* CinemaUser.swift in Sources */,
+				7596F7582BAD7FF50052D1B2 /* DBMovie.swift in Sources */,
 				7529466B2BA84F8C00D4F8CB /* ListOfMoviesViewController.swift in Sources */,
 				752946862BA99BA900D4F8CB /* DetailRouter.swift in Sources */,
 				757A8D1A2BB67BA000E3DF74 /* ListOfFavouriteMoviesRouter.swift in Sources */,
@@ -428,6 +431,7 @@
 				750864172BB06E6400A2AEBF /* DBManager.swift in Sources */,
 				752133772BB3EA8100C17682 /* CustomTextField.swift in Sources */,
 				7596F7562BAD74C60052D1B2 /* RegisterViewController.swift in Sources */,
+				757A8D1F2BB6B23900E3DF74 /* DBFavouriteMovies.swift in Sources */,
 				7529468F2BA9A1BA00D4F8CB /* MapperDetailMovieViewModel.swift in Sources */,
 				7521337F2BB3F49A00C17682 /* LoginPresenter.swift in Sources */,
 				752133862BB404F800C17682 /* LoginRouter.swift in Sources */,

@@ -14,18 +14,18 @@ final class DBManager {
     
     private let database = Database.database().reference()
     // TODO: Remake to save movie, not user
-    public func addUser(with user: CinemaUser, completion: @escaping (Bool) -> Void) {
-        database.child(user.safeEmail).setValue([
-            "first_name": user.firstName,
-            "last_name": user.lastName
-        ]) { error, _ in
-            guard error == nil else {
-                print("Failed to add user to database")
-                completion(false)
-                return
-            }
-            
-            completion(true)
-        }
-    }
+//    public func addUser(with user: DBMovie, completion: @escaping (Bool) -> Void) {
+//        database.child(user.safeEmail).setValue([
+//            "first_name": user.firstName,
+//            "last_name": user.lastName
+//        ]) { error, _ in
+//            guard error == nil else {
+//                print("Failed to add user to database")
+//                completion(false)
+//                return
+//            }
+//            
+//            completion(true)
+//        }
+//    }
 }

@@ -65,16 +65,22 @@ final class APIService {
           }
         })
         dataTask.resume()
+            getFavouriteMovies { result in
+                switch result {
+                case .success(let popularMovieResponse):
+                    print(popularMovieResponse)
+                case .failure(let error):
+                    print("Ошибка получения избранных фильмов: \(error)")
+                }
+            }
     }
     
     // call
 //    getFavouriteMovies { result in
 //        switch result {
 //        case .success(let popularMovieResponse):
-//            // Обработать успешный результат
 //            print(popularMovieResponse)
 //        case .failure(let error):
-//            // Обработать ошибку
 //            print("Ошибка получения избранных фильмов: \(error)")
 //        }
 //    }

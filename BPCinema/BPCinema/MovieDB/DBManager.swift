@@ -19,18 +19,18 @@ final class DBManager {
         try! realm.write() {
             self.dbMovie.title = movie.title
             self.dbMovie.overView = movie.overview
+            print("SAAAVING")
             let imageData = try Data(contentsOf: URL(string: "https://image.tmdb.org/t/p/w300" + movie.backdropPath)!)
             dbMovie.image = imageData
             realm.add(dbMovie)
-            
-//            fetchMoviesFromRealm() // DON'T FORGET TO MOVE FROM HERE
-            
+            fetchMoviesFromRealm()
         }
         
     }
     
     func fetchMoviesFromRealm() {
         do {
+            print("GET DATAAAAA")
             let realm = try Realm()
             let movies = realm.objects(DBMovieModel.self)
             

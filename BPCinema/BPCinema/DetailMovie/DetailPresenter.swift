@@ -16,7 +16,7 @@ protocol DetailPresentable: AnyObject {
     var movieID: String { get }
     var movieDetail: DetailMovieEntity? { get }
     func onViewAppear()
-    func addToFavourites(withID: String)
+    func addToFavourites(withID: String) async
 }
 
 final class DetailPresenter: DetailPresentable {
@@ -41,13 +41,12 @@ final class DetailPresenter: DetailPresentable {
             let viewModel = mapper.map(entity: model)
             await MainActor.run {
                 self.ui?.updateUI(viewModel: viewModel)
-                print(viewModel)
             }
             
         }
     }
     
-    func addToFavourites(withID id: String) {
-        interactor.addToFavorites(movieId: id, accountId: "21098921")
+    func addToFavourites(withID id: String) async {
+        await interactor.addToFavorites(movieId: id, accountId: "21098921")
     }
 }

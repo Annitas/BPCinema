@@ -25,7 +25,7 @@ final class DBManager {
                 if let imageData = try? Data(contentsOf: URL(string: "https://image.tmdb.org/t/p/w300" + movie.backdropPath)!) {
                     dbMovie.image = imageData
                     realm.add(dbMovie)
-                    self.fetchMoviesFromRealm()
+                    self.fetchMoviesFromRealm() // THIS IS FOR TESTING FETCH
                 } else {
                     print("Failed to convert image URL to Data.")
                 }

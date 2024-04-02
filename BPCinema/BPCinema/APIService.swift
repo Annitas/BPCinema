@@ -32,11 +32,8 @@ final class APIService {
     
     func addToFavorites(movieId: String, accountId: String) async {
         do {
-            // Сначала добавляем фильм в базу данных Realm
             let detailMovie = await getDetailMovie(withID: movieId)
             DBManager.shared.addToDB(movie: detailMovie)
-            
-            // Затем делаем запрос на добавление фильма в избранное
             let urlString = "https://api.themoviedb.org/3/account/\(accountId)/favorite?api_key=fae05adc59b94dcb33377a38bfd09528"
             guard let url = URL(string: urlString) else {
                 print("Invalid URL")

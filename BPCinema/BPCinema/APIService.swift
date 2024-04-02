@@ -33,7 +33,7 @@ final class APIService {
     func addToFavorites(movieId: String, accountId: String) async {
         do {
             // Сначала добавляем фильм в базу данных Realm
-            let detailMovie = try await getDetailMovie(withID: movieId)
+            let detailMovie = await getDetailMovie(withID: movieId)
             DBManager.shared.addToDB(movie: detailMovie)
             
             // Затем делаем запрос на добавление фильма в избранное

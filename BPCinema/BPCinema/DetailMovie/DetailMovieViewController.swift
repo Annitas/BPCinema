@@ -71,9 +71,6 @@ final class DetailMovieViewController: UIViewController {
 
     private func addToFavouritesAsync() async {
         do {
-//            guard let presenter = presenter else { return }
-//            // Здесь используем функцию addToFavorites(movieId:accountId:) из presenter, передавая movieID и accountID
-//            await presenter.addToFavorites(withID: presenter.movieID, accountId: "accountId")
             await presenter.addToFavourites(withID: presenter.movieID)
         } catch {
             print("Error adding to favorites: \(error)")

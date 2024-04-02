@@ -16,17 +16,24 @@ final class DBManager {
     var dbMovie = DBMovieModel()
     
     func addToDB(movie: DetailMovieEntity) {
-        try! realm.write() {
-            self.dbMovie.title = movie.title
-            self.dbMovie.overView = movie.overview
-            print("SAAAVING")
-            let imageData = try Data(contentsOf: URL(string: "https://image.tmdb.org/t/p/w300" + movie.backdropPath)!)
-            dbMovie.image = imageData
-            realm.add(dbMovie)
-            fetchMoviesFromRealm()
+        DispatchQueue.global(qos: .background).async {
+            let realm = try! Realm()
+            try! realm.write {
+                let dbMovie = DBMovieModel()
+                dbMovie.title = movie.title
+                dbMovie.overView = movie.overview
+                if let imageData = try? Data(contentsOf: URL(string: "https://image.tmdb.org/t/p/w300" + movie.backdropPath)!) {
+                    dbMovie.image = imageData
+                    realm.add(dbMovie)
+                    self.fetchMoviesFromRealm()
+                } else {
+                    print("Failed to convert image URL to Data.")
+                }
+            }
         }
         
     }
+
     
     func fetchMoviesFromRealm() {
         do {

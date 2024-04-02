@@ -18,7 +18,7 @@ final class DetailRouter: DetailRouting {
         let presenter = DetailPresenter(movieID: movieID,
                                         interactor: interactor,
                                         mapper: MapperDetailMovieViewModel())
-        let view = DetailMovieView(presenter: presenter)
+        let view = DetailMovieViewController(presenter: presenter)
         presenter.ui = view
         fromViewController.present(view, animated: true)
     }

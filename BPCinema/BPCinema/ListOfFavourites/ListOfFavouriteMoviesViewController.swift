@@ -1,15 +1,17 @@
 //
-//  ListOfMoviesView.swift
+//  ListOfFavourites.swift
 //  BPCinema
 //
-//  Created by Anita Stashevskaya on 18.03.2024.
+//  Created by Anita Stashevskaya on 29.03.2024.
 //
+
+import Foundation
 
 import Foundation
 import UIKit
 
-final class ListOfMoviesView: UIViewController {
-    private let presenter: ListOfMoviesPresentable
+final class ListOfFavouriteMoviesViewController: UIViewController {
+    private let presenter: ListOfFavouriteMoviesPresentable
     
     private var moviesTableView: UITableView = {
         let tv = UITableView()
@@ -20,9 +22,7 @@ final class ListOfMoviesView: UIViewController {
         return tv
     }()
     
-    
-    
-    init(presenter: ListOfMoviesPresentable) {
+    init(presenter: ListOfFavouriteMoviesPresentable) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
@@ -52,7 +52,7 @@ final class ListOfMoviesView: UIViewController {
     }
 }
 
-extension ListOfMoviesView: UITableViewDataSource {
+extension ListOfFavouriteMoviesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         presenter.viewModels.count
     }
@@ -69,13 +69,13 @@ extension ListOfMoviesView: UITableViewDataSource {
     }
 }
 
-extension ListOfMoviesView: UITableViewDelegate {
+extension ListOfFavouriteMoviesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.onTapCell(atIndex: indexPath.row)
     }
 }
 
-extension ListOfMoviesView: ListOfMoviesUI {
+extension ListOfFavouriteMoviesViewController: ListOfMoviesUI {
     func update(movies: [MovieViewModel]) {
         DispatchQueue.main.async {
             self.moviesTableView.reloadData()

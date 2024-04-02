@@ -8,5 +8,6 @@
 import Foundation
 
 struct PopularMovieResponseEntity: Decodable {
+    let page: Int?
     let results: [PopularMovieEntity]
 }

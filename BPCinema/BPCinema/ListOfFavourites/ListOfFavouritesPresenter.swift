@@ -22,7 +22,6 @@ protocol ListOfFavouriteMoviesUI: AnyObject {
 
 final class ListOfFavouriteMoviesPresenter: ListOfFavouriteMoviesPresentable {
     weak var ui: ListOfFavouriteMoviesUI?
-//    var viewModelUpdated: () -> Void?
     private let listOfFavouriteMoviesInteractor: ListOfFavouriteMoviesInteractable
     var viewModels: [MovieViewModel] = []
     private var models: [PopularMovieEntity] = []
@@ -39,8 +38,8 @@ final class ListOfFavouriteMoviesPresenter: ListOfFavouriteMoviesPresentable {
     
     func onViewAppear() {
         Task {
-//            models = await listOfFavouriteMoviesInteractor.getFavouriteMovies().results
-//            print(await listOfFavouriteMoviesInteractor.getListOfMoview().page)
+            models = await listOfFavouriteMoviesInteractor.getFavouriteMovies().results
+            print(await listOfFavouriteMoviesInteractor.getFavouriteMovies().page ?? "")
             viewModels = models.map(mapper.map(entity:))
             ui?.update(movies: viewModels)
         }

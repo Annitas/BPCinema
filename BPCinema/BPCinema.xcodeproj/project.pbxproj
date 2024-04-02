@@ -45,10 +45,12 @@
 		757A8D112BB6765000E3DF74 /* ListOfFavouriteMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757A8D102BB6765000E3DF74 /* ListOfFavouriteMoviesViewController.swift */; };
 		757A8D132BB6769900E3DF74 /* ListOfFavouritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757A8D122BB6769900E3DF74 /* ListOfFavouritesPresenter.swift */; };
 		757A8D152BB6773700E3DF74 /* ListOfFavouriteMoviesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757A8D142BB6773700E3DF74 /* ListOfFavouriteMoviesInteractor.swift */; };
-		757A8D182BB678E200E3DF74 /* FavouriveMovieResponseEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757A8D172BB678E200E3DF74 /* FavouriveMovieResponseEntity.swift */; };
 		757A8D1A2BB67BA000E3DF74 /* ListOfFavouriteMoviesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757A8D192BB67BA000E3DF74 /* ListOfFavouriteMoviesRouter.swift */; };
-		757A8D1C2BB681CB00E3DF74 /* FavouriteMovieEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757A8D1B2BB681CB00E3DF74 /* FavouriteMovieEntity.swift */; };
 		757A8D1F2BB6B23900E3DF74 /* DBFavouriteMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757A8D1E2BB6B23900E3DF74 /* DBFavouriteMovies.swift */; };
+		757A8D2D2BBA84C900E3DF74 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757A8D2C2BBA84C900E3DF74 /* TabBarController.swift */; };
+		757A8D302BBA9DFC00E3DF74 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 757A8D2F2BBA9DFC00E3DF74 /* Realm */; };
+		757A8D322BBA9DFC00E3DF74 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 757A8D312BBA9DFC00E3DF74 /* RealmSwift */; };
+		757A8D342BBAAC2100E3DF74 /* DBMovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757A8D332BBAAC2100E3DF74 /* DBMovieModel.swift */; };
 		7596F7562BAD74C60052D1B2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7596F7552BAD74C60052D1B2 /* RegisterViewController.swift */; };
 		7596F7582BAD7FF50052D1B2 /* DBMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7596F7572BAD7FF50052D1B2 /* DBMovie.swift */; };
 		75F525102BAD4A0C00DFFC4B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F5250F2BAD4A0C00DFFC4B /* LoginViewController.swift */; };
@@ -94,10 +96,10 @@
 		757A8D102BB6765000E3DF74 /* ListOfFavouriteMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfFavouriteMoviesViewController.swift; sourceTree = "<group>"; };
 		757A8D122BB6769900E3DF74 /* ListOfFavouritesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfFavouritesPresenter.swift; sourceTree = "<group>"; };
 		757A8D142BB6773700E3DF74 /* ListOfFavouriteMoviesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfFavouriteMoviesInteractor.swift; sourceTree = "<group>"; };
-		757A8D172BB678E200E3DF74 /* FavouriveMovieResponseEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriveMovieResponseEntity.swift; sourceTree = "<group>"; };
 		757A8D192BB67BA000E3DF74 /* ListOfFavouriteMoviesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfFavouriteMoviesRouter.swift; sourceTree = "<group>"; };
-		757A8D1B2BB681CB00E3DF74 /* FavouriteMovieEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteMovieEntity.swift; sourceTree = "<group>"; };
 		757A8D1E2BB6B23900E3DF74 /* DBFavouriteMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBFavouriteMovies.swift; sourceTree = "<group>"; };
+		757A8D2C2BBA84C900E3DF74 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		757A8D332BBAAC2100E3DF74 /* DBMovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMovieModel.swift; sourceTree = "<group>"; };
 		7596F7552BAD74C60052D1B2 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		7596F7572BAD7FF50052D1B2 /* DBMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMovie.swift; sourceTree = "<group>"; };
 		75F5250F2BAD4A0C00DFFC4B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +113,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				757A8D322BBA9DFC00E3DF74 /* RealmSwift in Frameworks */,
+				757A8D302BBA9DFC00E3DF74 /* Realm in Frameworks */,
 				4284D37A929892F212AE8DFB /* Pods_BPCinema.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,6 +170,7 @@
 				752946692BA84F5100D4F8CB /* ListOfMovies */,
 				757A8D0F2BB6759B00E3DF74 /* ListOfFavourites */,
 				752946552BA8461400D4F8CB /* AppDelegate.swift */,
+				757A8D2C2BBA84C900E3DF74 /* TabBarController.swift */,
 				752946572BA8461400D4F8CB /* SceneDelegate.swift */,
 				752946632BA8461600D4F8CB /* Info.plist */,
 				7529465E2BA8461600D4F8CB /* Assets.xcassets */,
@@ -263,7 +268,6 @@
 		757A8D0F2BB6759B00E3DF74 /* ListOfFavourites */ = {
 			isa = PBXGroup;
 			children = (
-				757A8D162BB678CB00E3DF74 /* Entities */,
 				757A8D102BB6765000E3DF74 /* ListOfFavouriteMoviesViewController.swift */,
 				757A8D122BB6769900E3DF74 /* ListOfFavouritesPresenter.swift */,
 				757A8D142BB6773700E3DF74 /* ListOfFavouriteMoviesInteractor.swift */,
@@ -272,22 +276,22 @@
 			path = ListOfFavourites;
 			sourceTree = "<group>";
 		};
-		757A8D162BB678CB00E3DF74 /* Entities */ = {
+		757A8D352BBBC20D00E3DF74 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				757A8D172BB678E200E3DF74 /* FavouriveMovieResponseEntity.swift */,
-				757A8D1B2BB681CB00E3DF74 /* FavouriteMovieEntity.swift */,
+				7596F7572BAD7FF50052D1B2 /* DBMovie.swift */,
+				757A8D1E2BB6B23900E3DF74 /* DBFavouriteMovies.swift */,
+				752133702BB2B18600C17682 /* MovieDBModel.xcdatamodeld */,
 			);
-			path = Entities;
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		75F525022BAD278B00DFFC4B /* MovieDB */ = {
 			isa = PBXGroup;
 			children = (
+				757A8D352BBBC20D00E3DF74 /* CoreData */,
 				750864162BB06E6400A2AEBF /* DBManager.swift */,
-				7596F7572BAD7FF50052D1B2 /* DBMovie.swift */,
-				757A8D1E2BB6B23900E3DF74 /* DBFavouriteMovies.swift */,
-				752133702BB2B18600C17682 /* MovieDBModel.xcdatamodeld */,
+				757A8D332BBAAC2100E3DF74 /* DBMovieModel.swift */,
 			);
 			path = MovieDB;
 			sourceTree = "<group>";
@@ -319,6 +323,10 @@
 			dependencies = (
 			);
 			name = BPCinema;
+			packageProductDependencies = (
+				757A8D2F2BBA9DFC00E3DF74 /* Realm */,
+				757A8D312BBA9DFC00E3DF74 /* RealmSwift */,
+			);
 			productName = BPCinema;
 			productReference = 752946522BA8461400D4F8CB /* BPCinema.app */;
 			productType = "com.apple.product-type.application";
@@ -347,6 +355,9 @@
 				Base,
 			);
 			mainGroup = 752946492BA8461400D4F8CB;
+			packageReferences = (
+				757A8D2E2BBA9DFC00E3DF74 /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = 752946532BA8461400D4F8CB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -427,7 +438,6 @@
 				752946862BA99BA900D4F8CB /* DetailRouter.swift in Sources */,
 				757A8D1A2BB67BA000E3DF74 /* ListOfFavouriteMoviesRouter.swift in Sources */,
 				752133722BB2B18600C17682 /* MovieDBModel.xcdatamodeld in Sources */,
-				757A8D182BB678E200E3DF74 /* FavouriveMovieResponseEntity.swift in Sources */,
 				750864172BB06E6400A2AEBF /* DBManager.swift in Sources */,
 				752133772BB3EA8100C17682 /* CustomTextField.swift in Sources */,
 				7596F7562BAD74C60052D1B2 /* RegisterViewController.swift in Sources */,
@@ -441,6 +451,7 @@
 				7529468C2BA9A14A00D4F8CB /* DetailMovieViewModel.swift in Sources */,
 				75294BDB2BB420BB00E02E06 /* RegisterRouter.swift in Sources */,
 				752946782BA940CE00D4F8CB /* MovieCellView.swift in Sources */,
+				757A8D342BBAAC2100E3DF74 /* DBMovieModel.swift in Sources */,
 				7529467D2BA9598000D4F8CB /* Mapper.swift in Sources */,
 				752946892BA99D0000D4F8CB /* DetailMovieEntity.swift in Sources */,
 				752946822BA99B7100D4F8CB /* DetailPresenter.swift in Sources */,
@@ -455,8 +466,8 @@
 				7529467B2BA956DF00D4F8CB /* MovieViewModel.swift in Sources */,
 				75294BD92BB420A300E02E06 /* RegisterInteractor.swift in Sources */,
 				752946762BA8573A00D4F8CB /* PopularMovieResponseEntity.swift in Sources */,
+				757A8D2D2BBA84C900E3DF74 /* TabBarController.swift in Sources */,
 				752946582BA8461400D4F8CB /* SceneDelegate.swift in Sources */,
-				757A8D1C2BB681CB00E3DF74 /* FavouriteMovieEntity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -674,6 +685,30 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		757A8D2E2BBA9DFC00E3DF74 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		757A8D2F2BBA9DFC00E3DF74 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 757A8D2E2BBA9DFC00E3DF74 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		757A8D312BBA9DFC00E3DF74 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 757A8D2E2BBA9DFC00E3DF74 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
+
 /* Begin XCVersionGroup section */
 		752133702BB2B18600C17682 /* MovieDBModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
@@ -681,8 +716,7 @@
 				752133712BB2B18600C17682 /* MovieDBModel.xcdatamodel */,
 			);
 			currentVersion = 752133712BB2B18600C17682 /* MovieDBModel.xcdatamodel */;
-			name = MovieDBModel.xcdatamodeld;
-			path = /Users/anitastashevskaya/Desktop/Programming/BPCinema/BPCinema/BPCinema/MovieDB/MovieDBModel.xcdatamodeld;
+			path = MovieDBModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

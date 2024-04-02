@@ -5,27 +5,42 @@
 //  Created by Anita Stashevskaya on 23.03.2024.
 //
 
+import RealmSwift
 import Foundation
-import FirebaseDatabase
-import FirebaseAuth
 
 final class DBManager {
     public static let shared: DBManager = DBManager()
     
-    private let database = Database.database().reference()
-    // TODO: Remake to save movie, not user
-//    public func addUser(with user: DBMovie, completion: @escaping (Bool) -> Void) {
-//        database.child(user.safeEmail).setValue([
-//            "first_name": user.firstName,
-//            "last_name": user.lastName
-//        ]) { error, _ in
-//            guard error == nil else {
-//                print("Failed to add user to database")
-//                completion(false)
-//                return
-//            }
-//            
-//            completion(true)
-//        }
-//    }
+    let realm = try! Realm()
+    lazy var categories: Results<DBMovieModel> = { self.realm.objects(DBMovieModel.self) }()
+    var dbMovie = DBMovieModel()
+    
+    func addToDB(movie: DetailMovieEntity) {
+        try! realm.write() {
+            self.dbMovie.title = movie.title
+            self.dbMovie.overView = movie.overview
+            let imageData = try Data(contentsOf: URL(string: "https://image.tmdb.org/t/p/w300" + movie.backdropPath)!)
+            dbMovie.image = imageData
+            realm.add(dbMovie)
+            
+//            fetchMoviesFromRealm() // DON'T FORGET TO MOVE FROM HERE
+            
+        }
+        
+    }
+    
+    func fetchMoviesFromRealm() {
+        do {
+            let realm = try Realm()
+            let movies = realm.objects(DBMovieModel.self)
+            
+            for movie in movies {
+                print("Title: \(movie.title)")
+                print("Overview: \(movie.overView)")
+                print("Image \(movie.image)")
+            }
+        } catch {
+            print("Ошибка при доступе к базе данных Realm: \(error)")
+        }
+    }
 }

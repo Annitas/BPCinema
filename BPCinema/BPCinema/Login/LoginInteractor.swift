@@ -22,10 +22,9 @@ final class LoginInteractor: LoginInteractable {
                   let window = windowScene.windows.first else {
                 return
             }
+            // open tabbar?
             let listRouter = ListOfMoviesRouter()
             listRouter.showListOfMovies(window: window)
-            //                        strongSelf.emailTextField.resignFirstResponder()
-            //                        strongSelf.passwordTextField.resignFirstResponder()
         }
     }
     

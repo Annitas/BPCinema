@@ -13,6 +13,10 @@ protocol DetailMovieInteractable: AnyObject {
 }
 
 final class DetailMovieInteractor: DetailMovieInteractable {
+//    func addToFavorites(movieId: String, accountId: String) {
+//        <#code#>
+//    }
+    
     func getDetailMovie(withID id: String) async -> DetailMovieEntity {
         return await APIService.shared.getDetailMovie(withID: id)
     }

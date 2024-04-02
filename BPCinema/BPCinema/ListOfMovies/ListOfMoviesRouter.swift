@@ -27,8 +27,6 @@ final class ListOfMoviesRouter: ListOfMoviesRouting {
                                               router: self)
         listOfMoviesView = ListOfMoviesViewController(presenter: presenter)
         presenter.ui = listOfMoviesView
-//        view.presenter = presenter
-        
         window?.rootViewController = listOfMoviesView
         window?.makeKeyAndVisible()
     }
@@ -40,6 +38,3 @@ final class ListOfMoviesRouter: ListOfMoviesRouting {
         detailRouter?.showDetails(fromViewController: fromViewController, withMovieID: movieID)
     }
 }
-
-//coupling vs cohesion
-// low          high

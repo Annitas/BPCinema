@@ -8,32 +8,24 @@
 import Foundation
 
 protocol ListOfFavouriteMoviesInteractable: AnyObject {
-    func getFavouriteMovies() // async -> PopularMovieResponseEntity
+    func getFavouriteMovies() async -> PopularMovieResponseEntity
 }
 
 final class ListOfFavouriteMoviesInteractor: ListOfFavouriteMoviesInteractable  {
-    func getFavouriteMovies() { //  async -> FavouriteMovieResponseEntity
-        let headers = [
-          "accept": "application/json",
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmYWUwNWFkYzU5Yjk0ZGNiMzMzNzdhMzhiZmQwOTUyOCIsInN1YiI6IjY1ZjE0NzIyMmZkZWM2MDE4OTIxMzFmNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.NqkryGcwJ1BvUn_id9-DGJgpL_wm2stm4FTC4p5cEVQ"
-        ]
+    func getFavouriteMovies() async -> PopularMovieResponseEntity {
+        await APIService.shared.getFavouriteMovies()
+    }
+}
 
-        let request = NSMutableURLRequest(url: NSURL(string: "https://api.themoviedb.org/3/account/21098921/favorite/movies?language=en-US&page=1&sort_by=created_at.asc")! as URL,
-                                                cachePolicy: .useProtocolCachePolicy,
-                                            timeoutInterval: 10.0)
-        request.httpMethod = "GET"
-        request.allHTTPHeaderFields = headers
-
-        let session = URLSession.shared
-        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-          if (error != nil) {
-            print(error as Any)
-          } else {
-            let httpResponse = response as? HTTPURLResponse
-            print(httpResponse ?? "")
-          }
-        })
-
-        dataTask.resume()
+final class ListOfFavouriteMoviesInteractorMock: ListOfFavouriteMoviesInteractable {
+    func getFavouriteMovies() async -> PopularMovieResponseEntity {
+        return PopularMovieResponseEntity(page: 1, results: [
+            .init(id: 0, title: "Panda", overview: "----", imageURL: "", votes: 10),
+            .init(id: 1, title: "Red Panda", overview: "rferferf", imageURL: "", votes: 10),
+            .init(id: 2, title: "Kung Fu Panda", overview: "kmlkmlkm", imageURL: "", votes: 20),
+            .init(id: 3, title: "Panda panda", overview: "m;mom[", imageURL: "", votes: 20),
+            .init(id: 4, title: "Another Panda", overview: "yftcuvuoijok", imageURL: "", votes: 30),
+            .init(id: 5, title: "Another Panda", overview: "yftcuvuoijok", imageURL: "", votes: 40),
+        ])
     }
 }

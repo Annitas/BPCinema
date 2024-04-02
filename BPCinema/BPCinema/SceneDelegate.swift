@@ -10,9 +10,6 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var listOfMoviesRouter = ListOfMoviesRouter()
-//    var loginRouter = LoginRouter()
-//    var loginPresenter = LoginPresenter()
     var loginView = LoginViewController()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -20,9 +17,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = loginView
         window?.makeKeyAndVisible()
-//        loginRouter.showLoginView(window: window)
-        
-//        listOfMoviesRouter.showListOfMovies(window: window)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

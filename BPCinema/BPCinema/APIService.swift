@@ -46,7 +46,6 @@ final class APIService {
           "media_id": movieId,
           "favorite": "true"
         ] as [String : Any]
-        
         let postData = try! JSONSerialization.data(withJSONObject: parameters, options: []) // TODO: Fix force unwrap
 
         let request = NSMutableURLRequest(url: NSURL(string: "https://api.themoviedb.org/3/account/\(accountId)/favorite")! as URL,
@@ -65,58 +64,32 @@ final class APIService {
           }
         })
         dataTask.resume()
-            getFavouriteMovies { result in
-                switch result {
-                case .success(let popularMovieResponse):
-                    print(popularMovieResponse)
-                case .failure(let error):
-                    print("Ошибка получения избранных фильмов: \(error)")
-                }
-            }
     }
     
-    // call
-//    getFavouriteMovies { result in
-//        switch result {
-//        case .success(let popularMovieResponse):
-//            print(popularMovieResponse)
-//        case .failure(let error):
-//            print("Ошибка получения избранных фильмов: \(error)")
-//        }
-//    }
-    
-    func getFavouriteMovies(completion: @escaping (Result<PopularMovieResponseEntity, Error>) -> Void) {
+    func addToDB(movieId: String) async {
+        DBManager.shared.addToDB(movie: await getDetailMovie(withID: movieId))
+         // save to db this DetailMovieEntity
+    }
+
+    func getFavouriteMovies() async -> PopularMovieResponseEntity {
         let headers = [
             "accept": "application/json",
             "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmYWUwNWFkYzU5Yjk0ZGNiMzMzNzdhMzhiZmQwOTUyOCIsInN1YiI6IjY1ZjE0NzIyMmZkZWM2MDE4OTIxMzFmNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.NqkryGcwJ1BvUn_id9-DGJgpL_wm2stm4FTC4p5cEVQ"
         ]
 
-        let request = NSMutableURLRequest(url: NSURL(string: "https://api.themoviedb.org/3/account/21098921/favorite/movies?language=en-US&page=1&sort_by=created_at.asc")! as URL,
-                                          cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+        let url = URL(string: "https://api.themoviedb.org/3/account/21098921/favorite/movies?language=en-US&page=1&sort_by=created_at.asc")!
+        var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         
-        let session = URLSession.shared
-        let dataTask = session.dataTask(with: request as URLRequest) { (data, response, error) in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            if let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) {
-                do {
-                    let decoder = JSONDecoder()
-                    let popularMovieResponse = try decoder.decode(PopularMovieResponseEntity.self, from: data!)
-                    completion(.success(popularMovieResponse))
-                } catch {
-                    completion(.failure(error))
-                }
-            } else {
-                completion(.failure(NSError(domain: "HTTPError", code: (response as? HTTPURLResponse)?.statusCode ?? 500, userInfo: nil)))
-            }
-        }
+        let (data, response) = try! await URLSession.shared.data(for: request)
         
-        dataTask.resume()
+//        print(data)
+//        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+//            throw NSError(domain: "HTTPError", code: (response as? HTTPURLResponse)?.statusCode ?? 500, userInfo: nil)
+//        }
+
+        return try! JSONDecoder().decode(PopularMovieResponseEntity.self, from: data)
     }
+
 }

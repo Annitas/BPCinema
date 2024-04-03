@@ -84,9 +84,9 @@ final class APIService {
         
         let (data, response) = try! await URLSession.shared.data(for: request)
         let heroes = try! JSONDecoder().decode(PopularMovieResponseEntity.self, from: data)
-        for hero in heroes.results {
-            print("Hero... \(hero)")
-        }
+//        for hero in heroes.results {
+//            print("Hero... \(hero)")
+//        }
 //        print(data)
 //        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
 //            throw NSError(domain: "HTTPError", code: (response as? HTTPURLResponse)?.statusCode ?? 500, userInfo: nil)

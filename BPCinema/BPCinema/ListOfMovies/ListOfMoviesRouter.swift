@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol ListOfMoviesRouting: AnyObject {
-    var detailRouter: DetailRouting? { get }
+    var detailRouter: DetailRouting? { get set } // remove set
     var listOfMoviesView: ListOfMoviesViewController? { get }
     
     func showListOfMovies(window: UIWindow?)
@@ -27,7 +27,7 @@ final class ListOfMoviesRouter: ListOfMoviesRouting {
                                               router: self)
         listOfMoviesView = ListOfMoviesViewController(presenter: presenter)
         presenter.ui = listOfMoviesView
-        window?.rootViewController = listOfMoviesView
+//        window?.rootViewController = listOfMoviesView
         window?.makeKeyAndVisible()
     }
     

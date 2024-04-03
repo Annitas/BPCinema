@@ -48,17 +48,7 @@ final class LoginViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-//        if Auth.auth().currentUser != nil {
-//            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-//                  let window = windowScene.windows.first else {
-//                return
-//            }
-//            
-//            let listRouter = ListOfMoviesRouter()
-//            listRouter.showListOfMovies(window: window)
-//        }
-                
+        super.viewDidAppear(animated)      
         emailTextField.becomeFirstResponder()
         LoginRouter.createLoginModule(ref: self)
         presenter?.isAlreadyLogin()

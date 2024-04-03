@@ -9,7 +9,6 @@ import Foundation
 
 protocol ListOfMoviesPresentable: AnyObject {
     var ui: ListOfMoviesUI? { get }
-//    var viewModelUpdated: (() -> Void)? { get }
     var viewModels: [MovieViewModel] { get }
     func onViewAppear()
     func onTapCell(atIndex: Int)
@@ -39,7 +38,6 @@ final class ListOfMoviesPresenter: ListOfMoviesPresentable {
         Task {
             models = await listOfMoviesInteractor.getListOfMoview().results
             print(await listOfMoviesInteractor.getListOfMoview().page ?? "")
-//            print(await "https://image.tmdb.org/t/p/w300" + (listOfMoviesInteractor.getFavouriteMovies().results.first?.imageURL ?? ""))
             viewModels = models.map(mapper.map(entity:))
             ui?.update(movies: viewModels)
         }

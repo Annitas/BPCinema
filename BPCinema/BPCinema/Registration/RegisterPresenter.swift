@@ -19,6 +19,4 @@ final class RegisterPresenter: RegisterPresentable {
     func registerAll(email: String, password: String) {
         registerInteractor?.register(email: email, password: password)
     }
-    
-    
 }

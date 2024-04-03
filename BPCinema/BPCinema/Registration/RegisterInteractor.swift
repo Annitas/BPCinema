@@ -27,7 +27,5 @@ final class RegisterInteractor: RegisterInteractable {
                 print("User can't enter.")
             }
         }
-        
     }
-    
 }

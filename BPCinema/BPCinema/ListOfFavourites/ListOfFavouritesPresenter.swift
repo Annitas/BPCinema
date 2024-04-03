@@ -10,7 +10,6 @@ import Foundation
 
 protocol ListOfFavouriteMoviesPresentable: AnyObject {
     var ui: ListOfFavouriteMoviesUI? { get }
-//    var viewModelUpdated: (() -> Void)? { get }
     var viewModels: [MovieViewModel] { get }
     func onViewAppear()
     func onTapCell(atIndex: Int)

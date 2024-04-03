@@ -26,8 +26,7 @@ final class ListOfFavouriteMoviesRouter: ListOfFavouriteMoviesRouting {
         let presenter = ListOfFavouriteMoviesPresenter(listOfFavouriteMoviesInteractor: interactor,
                                               router: self)
         listOfFavouriteMoviesView = ListOfFavouriteMoviesViewController(presenter: presenter)
-        presenter.ui = listOfFavouriteMoviesView as? any ListOfFavouriteMoviesUI
-//        window?.rootViewController = listOfFavouriteMoviesView
+        presenter.ui = listOfFavouriteMoviesView
         window?.makeKeyAndVisible()
     }
     

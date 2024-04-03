@@ -36,18 +36,20 @@ final class DBManager {
 
     
     func fetchMoviesFromRealm() {
-        do {
-            print("GET DATAAAAA")
-            let realm = try Realm()
-            let movies = realm.objects(DBMovieModel.self)
-            
-            for movie in movies {
-                print("Title: \(movie.title)")
-                print("Overview: \(movie.overView)")
-                print("Image \(movie.image)")
+        DispatchQueue.global(qos: .background).async {
+            do {
+                print("GET DATAAAAA")
+                let realm = try Realm()
+                let movies = realm.objects(DBMovieModel.self)
+                
+                for movie in movies {
+                    print("Title: \(movie.title)")
+                    print("Overview: \(movie.overView)")
+                    print("Image \(movie.image)")
+                }
+            } catch {
+                print("Ошибка при доступе к базе данных Realm: \(error)")
             }
-        } catch {
-            print("Ошибка при доступе к базе данных Realm: \(error)")
         }
     }
 }

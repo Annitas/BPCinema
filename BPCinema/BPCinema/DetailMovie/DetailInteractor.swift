@@ -13,10 +13,6 @@ protocol DetailMovieInteractable: AnyObject {
 }
 
 final class DetailMovieInteractor: DetailMovieInteractable {
-//    func addToFavorites(movieId: String, accountId: String) {
-//        <#code#>
-//    }
-    
     func getDetailMovie(withID id: String) async -> DetailMovieEntity {
         return await APIService.shared.getDetailMovie(withID: id)
     }
@@ -25,9 +21,3 @@ final class DetailMovieInteractor: DetailMovieInteractable {
         await APIService.shared.addToFavorites(movieId: movieId, accountId: accountId)
     }
 }
-
-
-
-
-// Add NetworkService
-// Constraint -> PinLayout

@@ -10,7 +10,7 @@ import UIKit
 
 protocol ListOfMoviesRouting: AnyObject {
     var detailRouter: DetailRouting? { get }
-    var listOfMoviesView: ListOfMoviesView? { get }
+    var listOfMoviesView: ListOfMoviesViewController? { get }
     
     func showListOfMovies(window: UIWindow?)
     func showDetailMovie(withMovieID movieID: String)
@@ -18,18 +18,15 @@ protocol ListOfMoviesRouting: AnyObject {
 
 final class ListOfMoviesRouter: ListOfMoviesRouting {
     var detailRouter: DetailRouting?
-    var listOfMoviesView: ListOfMoviesView?
+    var listOfMoviesView: ListOfMoviesViewController?
     
     func showListOfMovies(window: UIWindow?) {
         self.detailRouter = DetailRouter()
         let interactor = ListOfMoviesInteractor()
         let presenter = ListOfMoviesPresenter(listOfMoviesInteractor: interactor, 
                                               router: self)
-        listOfMoviesView = ListOfMoviesView(presenter: presenter)
+        listOfMoviesView = ListOfMoviesViewController(presenter: presenter)
         presenter.ui = listOfMoviesView
-//        view.presenter = presenter
-        
-        window?.rootViewController = listOfMoviesView
         window?.makeKeyAndVisible()
     }
     
@@ -40,6 +37,3 @@ final class ListOfMoviesRouter: ListOfMoviesRouting {
         detailRouter?.showDetails(fromViewController: fromViewController, withMovieID: movieID)
     }
 }
-
-//coupling vs cohesion
-// low          high

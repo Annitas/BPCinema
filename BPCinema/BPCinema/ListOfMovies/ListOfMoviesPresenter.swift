@@ -9,7 +9,6 @@ import Foundation
 
 protocol ListOfMoviesPresentable: AnyObject {
     var ui: ListOfMoviesUI? { get }
-//    var viewModelUpdated: (() -> Void)? { get }
     var viewModels: [MovieViewModel] { get }
     func onViewAppear()
     func onTapCell(atIndex: Int)
@@ -21,7 +20,6 @@ protocol ListOfMoviesUI: AnyObject {
 
 final class ListOfMoviesPresenter: ListOfMoviesPresentable {
     weak var ui: ListOfMoviesUI?
-//    var viewModelUpdated: () -> Void?
     private let listOfMoviesInteractor: ListOfMoviesInteractable
     var viewModels: [MovieViewModel] = []
     private var models: [PopularMovieEntity] = []
@@ -39,7 +37,7 @@ final class ListOfMoviesPresenter: ListOfMoviesPresentable {
     func onViewAppear() {
         Task {
             models = await listOfMoviesInteractor.getListOfMoview().results
-            print(await listOfMoviesInteractor.getListOfMoview().page)
+            print(await listOfMoviesInteractor.getListOfMoview().page ?? "")
             viewModels = models.map(mapper.map(entity:))
             ui?.update(movies: viewModels)
         }

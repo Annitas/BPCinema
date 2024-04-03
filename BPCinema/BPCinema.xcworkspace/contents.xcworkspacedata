@@ -2,12 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:BPCinema/ListOfMovies/MovieDB/Movie+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:BPCinema/ListOfMovies/MovieDB/Movie+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
       location = "group:BPCinema.xcodeproj">
    </FileRef>
    <FileRef

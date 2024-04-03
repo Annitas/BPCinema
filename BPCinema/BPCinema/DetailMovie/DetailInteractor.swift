@@ -9,14 +9,15 @@ import Foundation
 
 protocol DetailMovieInteractable: AnyObject {
     func getDetailMovie(withID id: String) async -> DetailMovieEntity
+    func addToFavorites(movieId: String, accountId: String) async
 }
 
 final class DetailMovieInteractor: DetailMovieInteractable {
     func getDetailMovie(withID id: String) async -> DetailMovieEntity {
-        let url = URL(string: "https://api.themoviedb.org/3/movie/\(id)?api_key=fae05adc59b94dcb33377a38bfd09528")!
-        let (data, _) = try! await URLSession.shared.data(from: url)
-        let jsonDecoder = JSONDecoder()
-        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-        return try! jsonDecoder.decode(DetailMovieEntity.self, from: data)
+        return await APIService.shared.getDetailMovie(withID: id)
+    }
+    
+    func addToFavorites(movieId: String, accountId: String) async {
+        await APIService.shared.addToFavorites(movieId: movieId, accountId: accountId)
     }
 }

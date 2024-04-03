@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Kingfisher
 
-final class DetailMovieView: UIViewController {
+final class DetailMovieViewController: UIViewController {
     private let presenter: DetailPresentable
     
     private let movieImageView: UIImageView = {
@@ -37,6 +37,16 @@ final class DetailMovieView: UIViewController {
         return label
     }()
     
+    let favoriteButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "heart.circle.fill"), for: .normal)
+        button.tintColor = .label
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     init(presenter: DetailPresentable) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -49,20 +59,38 @@ final class DetailMovieView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        favoriteButton.addTarget(self, action: #selector(addToFavourites(_:)), for: .touchUpInside)
         setupView()
         presenter.onViewAppear()
+    }
+    @objc func addToFavourites(_ sender: UIButton) {
+        Task {
+            await addToFavouritesAsync()
+        }
+    }
+
+    private func addToFavouritesAsync() async {
+        do {
+            await presenter.addToFavourites(withID: presenter.movieID)
+        } catch {
+            print("Error adding to favorites: \(error)")
+        }
     }
     
     private func setupView() {
         view.addSubview(movieImageView)
         view.addSubview(movieName)
         view.addSubview(movieDescription)
+        view.addSubview(favoriteButton)
         
         NSLayoutConstraint.activate([
             movieImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             movieImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
             movieImageView.heightAnchor.constraint(equalToConstant: 200),
             movieImageView.widthAnchor.constraint(equalToConstant: 350),
+            
+            favoriteButton.topAnchor.constraint(equalTo: movieName.topAnchor),
+            favoriteButton.trailingAnchor.constraint(equalTo: movieImageView.trailingAnchor, constant: -10),
             
             movieName.leadingAnchor.constraint(equalTo: movieImageView.leadingAnchor),
             movieName.trailingAnchor.constraint(equalTo: movieImageView.trailingAnchor),
@@ -75,7 +103,7 @@ final class DetailMovieView: UIViewController {
     }
 }
 
-extension DetailMovieView: DetailPresenterUI {
+extension DetailMovieViewController: DetailPresenterUI {
     func updateUI(viewModel: DetailMovieViewModel) {
         movieImageView.kf.setImage(with: viewModel.backdropPath)
         movieName.text = viewModel.title

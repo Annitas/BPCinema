@@ -63,9 +63,18 @@ final class DetailMovieViewController: UIViewController {
         setupView()
         presenter.onViewAppear()
     }
-    
     @objc func addToFavourites(_ sender: UIButton) {
-        presenter.addToFavourites(withID: presenter.movieID)
+        Task {
+            await addToFavouritesAsync()
+        }
+    }
+
+    private func addToFavouritesAsync() async {
+        do {
+            await presenter.addToFavourites(withID: presenter.movieID)
+        } catch {
+            print("Error adding to favorites: \(error)")
+        }
     }
     
     private func setupView() {

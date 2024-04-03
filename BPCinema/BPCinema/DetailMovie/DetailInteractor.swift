@@ -9,7 +9,7 @@ import Foundation
 
 protocol DetailMovieInteractable: AnyObject {
     func getDetailMovie(withID id: String) async -> DetailMovieEntity
-    func addToFavorites(movieId: String, accountId: String)
+    func addToFavorites(movieId: String, accountId: String) async
 }
 
 final class DetailMovieInteractor: DetailMovieInteractable {
@@ -21,8 +21,8 @@ final class DetailMovieInteractor: DetailMovieInteractable {
         return await APIService.shared.getDetailMovie(withID: id)
     }
     
-    func addToFavorites(movieId: String, accountId: String) {
-        APIService.shared.addToFavorites(movieId: movieId, accountId: accountId)
+    func addToFavorites(movieId: String, accountId: String) async {
+        await APIService.shared.addToFavorites(movieId: movieId, accountId: accountId)
     }
 }
 

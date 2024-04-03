@@ -11,7 +11,6 @@ import Foundation
 import CoreData
 
 protocol ListOfMoviesInteractable: AnyObject {
-//    var favouriteMovies: PopularMovieResponseEntity { get }
     func getListOfMoview() async -> PopularMovieResponseEntity
     func getFavouriteMovies() async -> PopularMovieResponseEntity
 }

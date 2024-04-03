@@ -75,7 +75,7 @@ extension ListOfFavouriteMoviesViewController: UITableViewDelegate {
     }
 }
 
-extension ListOfFavouriteMoviesViewController: ListOfMoviesUI {
+extension ListOfFavouriteMoviesViewController: ListOfFavouriteMoviesUI {
     func update(movies: [MovieViewModel]) {
         DispatchQueue.main.async {
             self.moviesTableView.reloadData()

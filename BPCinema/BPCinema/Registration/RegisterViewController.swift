@@ -6,14 +6,12 @@
 //
 
 import UIKit
-import Firebase
 
 class RegisterViewController: UIViewController {
     
     private var headerImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "profilepic")
-        
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.borderWidth = 2.0
         imageView.layer.borderColor = UIColor.systemBlue.cgColor
@@ -26,7 +24,18 @@ class RegisterViewController: UIViewController {
     private var emailTextField = CustomTextField(placeholderText: "Email")
     private var passwordTextField = CustomTextField(placeholderText: "Enter password", isPassword: true)
     private var password2TextField = CustomTextField(placeholderText: "Repeat password", isPassword: true)
-    private let registerButton = CustomButton(title: "Register")
+    private let messageLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 10)
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private let minPasswordLength = 6
+    private lazy var regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!#%*?&]).{\(minPasswordLength),}$"
+    
+    private let registerButton = CustomButton(title: "Register") // TODO: disable this while password is incorrect
     private let goToLoginButton = GoToButton(title: "Back to sign in")
     
     var register: RegisterPresentable?
@@ -40,23 +49,20 @@ class RegisterViewController: UIViewController {
         view.addSubview(surnameTextField)
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
+        view.addSubview(messageLabel)
         view.addSubview(password2TextField)
         view.addSubview(registerButton)
         view.addSubview(goToLoginButton)
+        
         addConstraints()
         registerButton.addTarget(self, action: #selector(performList(_:)), for: .touchUpInside)
         goToLoginButton.addTarget(self, action: #selector(backToLogin(_:)), for: .touchUpInside)
-        
+        passwordTextField.delegate = self
         headerImage.isUserInteractionEnabled = true
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapChangeProfilePicture))
         headerImage.addGestureRecognizer(gesture)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        tapGesture.cancelsTouchesInView = false
-        view.addGestureRecognizer(tapGesture)
     }
-    @objc func hideKeyboard() {
-        view.endEditing(true)
-    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         headerImage.layer.cornerRadius = headerImage.frame.size.width / 2
@@ -94,8 +100,13 @@ class RegisterViewController: UIViewController {
             passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 40),
             
-            password2TextField.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 20),
+            messageLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 10),
+            messageLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            messageLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            
+            password2TextField.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 20),
             password2TextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             password2TextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             
@@ -108,7 +119,7 @@ class RegisterViewController: UIViewController {
             goToLoginButton.topAnchor.constraint(equalTo: registerButton.bottomAnchor, constant: 20),
         ])
     }
-    
+
     @objc func backToLogin(_ sender: UIButton) {
         let loginVC = LoginViewController()
         loginVC.modalPresentationStyle = .fullScreen
@@ -116,23 +127,29 @@ class RegisterViewController: UIViewController {
     }
     
     @objc func performList(_ sender: UIButton) {
-        guard let name = nameTextField.text, !name.isEmpty,
-              let surname = surnameTextField.text, !surname.isEmpty,
-              let email = emailTextField.text, !email.isEmpty,
-              let password = passwordTextField.text, !password.isEmpty, let password2 = password2TextField.text, !password2.isEmpty else {
-            print("Missing fields")
-            return
-        }
-        if password != password2 {
-            showCreateAccount(title: "Error", message: "Passwords aren't equal")
-            return
-        }
-        if let te = emailTextField.text, let tp = passwordTextField.text {
-            register?.registerAll(email: te, password: tp)
-        }
-        showCreateAccount(title: "Account created", message: "Account created, log in")
+        register = RegisterPresenter()
+        let registerResult = register?.checkIsRegistrationFormCorrect(name: nameTextField.text,
+                                                 surname: surnameTextField.text,
+                                                 email: emailTextField.text,
+                                                 password1: passwordTextField.text,
+                                                 password2: password2TextField.text)
+        showCreateAccount(title: (registerResult?.0 ?? ""), message: (registerResult?.1 ?? ""))
     }
     
+    private func checkValidation(password: String) { // TODO: Movie this too
+        guard password.count >= minPasswordLength else {
+            messageLabel.text = ""
+            return
+        }
+        if password.matches(regex) {
+            messageLabel.textColor = .systemGreen
+            messageLabel.text = "Password is correct"
+        } else {
+            messageLabel.textColor = .systemRed
+            messageLabel.text = "Passwords should contain at least eight characters\n Must contain special characters"
+        }
+    }
+        
     func showCreateAccount(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ouf", style: .cancel, handler: { _ in
@@ -158,5 +175,31 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
         vc.delegate = self
         vc.allowsEditing = true
         present(vc, animated: true)
+    }
+}
+
+extension RegisterViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) else { return true }
+        
+        if textField == passwordTextField || textField == password2TextField {
+            let isValid = validatePassword(text)
+            messageLabel.textColor = isValid ? .systemGreen : .systemRed
+            messageLabel.text = isValid ? "Password is correct" : "Password should contain at least \(minPasswordLength) characters, one uppercase letter, one lowercase letter, one digit, and one special character."
+            return true
+        }
+        return true
+    }
+    
+    private func validatePassword(_ password: String) -> Bool {
+        let passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!#%*?&])[A-Za-z\\d@$!#%*?&]{\(minPasswordLength),}$"
+        let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+        return passwordPredicate.evaluate(with: password)
+    }
+}
+
+extension String {
+    func matches(_ regex: String) -> Bool {
+        return self.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
     }
 }

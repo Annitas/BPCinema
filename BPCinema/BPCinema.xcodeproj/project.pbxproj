@@ -159,9 +159,9 @@
 		752946542BA8461400D4F8CB /* BPCinema */ = {
 			isa = PBXGroup;
 			children = (
+				759270CD2BBFBF5000559D23 /* NetworkService */,
 				752133732BB3E70900C17682 /* UIComponents */,
 				75F525022BAD278B00DFFC4B /* MovieDB */,
-				7521337B2BB3F3B900C17682 /* APIService.swift */,
 				757A8D0D2BB5B4AC00E3DF74 /* Login */,
 				757A8D0E2BB5B4BB00E3DF74 /* Registration */,
 				7529467E2BA99B1800D4F8CB /* DetailMovie */,
@@ -281,6 +281,14 @@
 				752133702BB2B18600C17682 /* MovieDBModel.xcdatamodeld */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		759270CD2BBFBF5000559D23 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				7521337B2BB3F3B900C17682 /* APIService.swift */,
+			);
+			path = NetworkService;
 			sourceTree = "<group>";
 		};
 		75F525022BAD278B00DFFC4B /* MovieDB */ = {

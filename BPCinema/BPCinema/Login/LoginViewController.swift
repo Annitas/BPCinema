@@ -8,6 +8,18 @@
 import UIKit
 import FirebaseAuth
 
+protocol LoginViewProtocol {
+    var emailLabel: String { get set }
+    var passwordLabel: String { get set }
+    var loginButtonEnabled: Bool { get set }
+}
+
+struct LoginViewModel: LoginViewProtocol {
+    var emailLabel: String = "Enter email"
+    var passwordLabel: String = "Enter password"
+    var loginButtonEnabled: Bool = false
+}
+
 final class LoginViewController: UIViewController {
     private var headerView: UIView = {
         let view = UIView()
@@ -99,15 +111,4 @@ final class LoginViewController: UIViewController {
         registerVC.modalPresentationStyle = .fullScreen
         present(registerVC, animated: true)
     }
-    
-    func showCreateAccount() {
-        let alert = UIAlertController(title: "Anita", message: "Create an acc", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Got it", style: .default))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
-            
-        }))
-        present(alert, animated: true)
-    }
-    
-    
 }

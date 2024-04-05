@@ -27,6 +27,7 @@ final class ListOfMoviesInteractor: ListOfMoviesInteractable {
 }
 
 final class ListOfMoviesInteractorMock: ListOfMoviesInteractable {
+    
     func getFavouriteMovies() async -> PopularMovieResponseEntity {
         return PopularMovieResponseEntity(page: 1, results: [
             .init(id: 0, title: "Panda", overview: "----", imageURL: "", votes: 10),

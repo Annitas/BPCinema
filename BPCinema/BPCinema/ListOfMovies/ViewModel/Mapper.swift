@@ -13,8 +13,4 @@ struct Mapper {
                        overview: entity.overview,
                        imageURL: URL(string: "https://image.tmdb.org/t/p/w200" + entity.imageURL))
     }
-    
-    func dtoMap(dto: MovieDTO) -> PopularMovieEntity {
-        PopularMovieEntity(id: dto.id, title: dto.title, overview: dto.overview, imageURL: dto.imageURL, votes: dto.votes)
-    }
 }

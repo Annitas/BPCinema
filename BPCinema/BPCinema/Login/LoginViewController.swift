@@ -111,15 +111,4 @@ final class LoginViewController: UIViewController {
         registerVC.modalPresentationStyle = .fullScreen
         present(registerVC, animated: true)
     }
-    
-    func showCreateAccount() {
-        let alert = UIAlertController(title: "Anita", message: "Create an acc", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Got it", style: .default))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
-            
-        }))
-        present(alert, animated: true)
-    }
-    
-    
 }

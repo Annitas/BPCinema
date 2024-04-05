@@ -28,9 +28,9 @@ final class LoginInteractor: LoginInteractable {
     }
     
     func isAlreadyLogin() {
-//        if Auth.auth().currentUser != nil {
-//            showTabBar()
-//        }
+        if Auth.auth().currentUser != nil {
+            showTabBar()
+        }
     }
     
      /* почему не так

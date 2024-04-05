@@ -13,9 +13,19 @@ import CoreData
 protocol ListOfMoviesInteractable: AnyObject {
     func getListOfMoview() async -> PopularMovieResponseEntity
     func getFavouriteMovies() async -> PopularMovieResponseEntity
+    func getMovies() async throws -> [MovieDTO]
 }
 
 final class ListOfMoviesInteractor: ListOfMoviesInteractable {
+    func getMovies() async throws -> [MovieDTO] {
+        let userCategories = try await NetworkService.request(type: .getListOfMovies, responseType: [PopularMovieDTO].self)
+        return try await NetworkService.request(type: .getListOfMovies, responseType: [MovieDTO].self)
+            .map { movieDTO in
+                MovieDTO(id: movieDTO.id, title: movieDTO.title,
+                         overview: movieDTO.overview, imageURL: movieDTO.imageURL,
+                         votes: movieDTO.votes)
+            }
+    }
     
     func getListOfMoview() async -> PopularMovieResponseEntity {
         await APIService.shared.getListOfMoview()
@@ -27,6 +37,10 @@ final class ListOfMoviesInteractor: ListOfMoviesInteractable {
 }
 
 final class ListOfMoviesInteractorMock: ListOfMoviesInteractable {
+    func getMovies() async throws -> [MovieDTO] {
+        return []
+    }
+    
     func getFavouriteMovies() async -> PopularMovieResponseEntity {
         return PopularMovieResponseEntity(page: 1, results: [
             .init(id: 0, title: "Panda", overview: "----", imageURL: "", votes: 10),

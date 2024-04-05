@@ -36,7 +36,10 @@ final class ListOfMoviesPresenter: ListOfMoviesPresentable {
     
     func onViewAppear() {
         Task {
-            models = await listOfMoviesInteractor.getListOfMoview().results
+            let a = try await listOfMoviesInteractor.getMovies()
+            let b = a.map(mapper.dtoMap(dto:))
+            models = b // try await listOfMoviesInteractor.getMovies() annot assign value of type '[MovieDTO]' to type '[PopularMovieEntity]'
+//            models = await listOfMoviesInteractor.getListOfMoview().results
             print(await listOfMoviesInteractor.getListOfMoview().page ?? "")
             viewModels = models.map(mapper.map(entity:))
             ui?.update(movies: viewModels)

@@ -8,6 +8,18 @@
 import UIKit
 import FirebaseAuth
 
+protocol LoginViewProtocol {
+    var emailLabel: String { get set }
+    var passwordLabel: String { get set }
+    var loginButtonEnabled: Bool { get set }
+}
+
+struct LoginViewModel: LoginViewProtocol {
+    var emailLabel: String = "Enter email"
+    var passwordLabel: String = "Enter password"
+    var loginButtonEnabled: Bool = false
+}
+
 final class LoginViewController: UIViewController {
     private var headerView: UIView = {
         let view = UIView()

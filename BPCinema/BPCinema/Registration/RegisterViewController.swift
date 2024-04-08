@@ -121,9 +121,9 @@ class RegisterViewController: UIViewController {
     }
 
     @objc func backToLogin(_ sender: UIButton) {
-        let loginVC = LoginViewController()
-        loginVC.modalPresentationStyle = .fullScreen
-        present(loginVC, animated: true)
+//        let loginVC = LoginViewController()
+//        loginVC.modalPresentationStyle = .fullScreen
+//        present(loginVC, animated: true)
     }
     
     @objc func performList(_ sender: UIButton) {

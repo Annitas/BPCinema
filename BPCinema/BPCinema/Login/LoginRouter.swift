@@ -8,20 +8,28 @@
 import Foundation
 import UIKit
 
-protocol LoginRouting {
-    var logiView: LoginViewController? { get }
-//    var listOfMovies: ListOfMoviesC
+protocol LoginRouting: AnyObject {
+    var listOfMoviesRouter: ListOfMoviesRouting? { get }
+    var loginView: LoginViewController? { get }
     
-    static func createLoginModule(ref: LoginViewController)
+    func showLoginView(window: UIWindow?)
 }
 
 final class LoginRouter: LoginRouting {
-    var logiView: LoginViewController?
+    var listOfMoviesRouter: ListOfMoviesRouting?
+    var loginView: LoginViewController?
     
-    
-    
-    static func createLoginModule(ref: LoginViewController) {
-        ref.presenter = LoginPresenter()
-        ref.presenter?.loginInteractor = LoginInteractor()
+    func showLoginView(window: UIWindow?) {
+        self.listOfMoviesRouter = ListOfMoviesRouter()
+        let interactor = LoginInteractor()
+        let presenter = LoginPresenter(loginInteractor: interactor, router: self)
+        loginView = LoginViewController(presenter: presenter)
+        
+        guard let loginView = loginView else {
+            fatalError("Failed to create LoginViewController")
+        }
+        
+        window?.rootViewController = loginView
+        window?.makeKeyAndVisible()
     }
 }

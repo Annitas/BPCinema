@@ -13,9 +13,14 @@ protocol LoginPresentable {
     func isAlreadyLogin()
 }
 
-
 final class LoginPresenter: LoginPresentable {
     var loginInteractor: LoginInteractable?
+    private let router: LoginRouting
+    
+    init(loginInteractor: LoginInteractable? = nil, router: LoginRouting) {
+        self.loginInteractor = loginInteractor
+        self.router = router
+    }
     
     func loginAll(email: String, password: String) {
         loginInteractor?.login(email: email, password: password)

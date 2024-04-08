@@ -8,19 +8,9 @@
 import UIKit
 import FirebaseAuth
 
-protocol LoginViewProtocol {
-    var emailLabel: String { get set }
-    var passwordLabel: String { get set }
-    var loginButtonEnabled: Bool { get set }
-}
-
-struct LoginViewModel: LoginViewProtocol {
-    var emailLabel: String = "Enter email"
-    var passwordLabel: String = "Enter password"
-    var loginButtonEnabled: Bool = false
-}
-
 final class LoginViewController: UIViewController {
+    private let presenter: LoginPresentable
+    
     private var headerView: UIView = {
         let view = UIView()
         view.backgroundColor = .custom
@@ -33,7 +23,14 @@ final class LoginViewController: UIViewController {
     private let loginButton = CustomButton(title: "Login")
     private let goToRegisterButton = GoToButton(title: "Create an account")
     
-    var presenter: LoginPresentable?
+    init(presenter: LoginPresentable) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,8 +59,7 @@ final class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)      
         emailTextField.becomeFirstResponder()
-        LoginRouter.createLoginModule(ref: self)
-        presenter?.isAlreadyLogin()
+        presenter.isAlreadyLogin()
     }
     
     private func setupView() {
@@ -101,7 +97,7 @@ final class LoginViewController: UIViewController {
         
         if let email = emailTextField.text, let pass = passwordTextField.text
         {
-            presenter?.loginAll(email: email, password: pass)
+            presenter.loginAll(email: email, password: pass)
         }
     }
     

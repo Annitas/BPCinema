@@ -59,7 +59,7 @@ final class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)      
         emailTextField.becomeFirstResponder()
-        presenter.isAlreadyLogin()
+//        presenter.isAlreadyLogin()
     }
     
     private func setupView() {
@@ -102,15 +102,7 @@ final class LoginViewController: UIViewController {
     }
     
     @objc func performRegister(_ sender: UIButton) {
-//        print("Button clicked ")
-//        let registerVC = RegisterViewController()
-//        registerVC.modalPresentationStyle = .fullScreen
-//        present(registerVC, animated: true)
         var router = RegisterRouter()
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = windowScene.windows.first else {
-            return
-        }
-        router.showRegisterView(window: window)
+        RegistrationFactory.assembledScreen(withRouter: router)
     }
 }

@@ -11,6 +11,7 @@
 		750864172BB06E6400A2AEBF /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750864162BB06E6400A2AEBF /* DBManager.swift */; };
 		750EF1F92BC3B39C0062C597 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750EF1F82BC3B39C0062C597 /* LoginFactory.swift */; };
 		750EF1FC2BC3BE840062C597 /* MovieTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750EF1FB2BC3BE840062C597 /* MovieTabBar.swift */; };
+		750EF1FE2BC3E61D0062C597 /* RegistrationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750EF1FD2BC3E61D0062C597 /* RegistrationFactory.swift */; };
 		752133672BB1696C00C17682 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 752133662BB1696C00C17682 /* GoogleService-Info.plist */; };
 		7521336F2BB294D400C17682 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7521336E2BB294D400C17682 /* Constants.swift */; };
 		752133722BB2B18600C17682 /* MovieDBModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 752133702BB2B18600C17682 /* MovieDBModel.xcdatamodeld */; };
@@ -61,6 +62,7 @@
 		750864162BB06E6400A2AEBF /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		750EF1F82BC3B39C0062C597 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		750EF1FB2BC3BE840062C597 /* MovieTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTabBar.swift; sourceTree = "<group>"; };
+		750EF1FD2BC3E61D0062C597 /* RegistrationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationFactory.swift; sourceTree = "<group>"; };
 		752133662BB1696C00C17682 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7521336E2BB294D400C17682 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		752133712BB2B18600C17682 /* MovieDBModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieDBModel.xcdatamodel; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 		757A8D0E2BB5B4BB00E3DF74 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
+				750EF1FD2BC3E61D0062C597 /* RegistrationFactory.swift */,
 				7596F7552BAD74C60052D1B2 /* RegisterViewController.swift */,
 				75294BD62BB4209600E02E06 /* RegisterPresenter.swift */,
 				75294BD82BB420A300E02E06 /* RegisterInteractor.swift */,
@@ -470,6 +473,7 @@
 				75294BD72BB4209600E02E06 /* RegisterPresenter.swift in Sources */,
 				7529466F2BA84FCF00D4F8CB /* ListOfMoviesInteractor.swift in Sources */,
 				7529468C2BA9A14A00D4F8CB /* DetailMovieViewModel.swift in Sources */,
+				750EF1FE2BC3E61D0062C597 /* RegistrationFactory.swift in Sources */,
 				75294BDB2BB420BB00E02E06 /* RegisterRouter.swift in Sources */,
 				752946782BA940CE00D4F8CB /* MovieCellView.swift in Sources */,
 				757A8D342BBAAC2100E3DF74 /* DBMovieModel.swift in Sources */,

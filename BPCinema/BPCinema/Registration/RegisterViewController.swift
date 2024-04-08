@@ -131,12 +131,7 @@ class RegisterViewController: UIViewController {
 
     @objc func backToLogin(_ sender: UIButton) {
         let router = LoginRouter()
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = windowScene.windows.first else {
-            return
-        }
-        router.showLoginView(window: window)
-        
+        LoginFactory.assembledScreen(withRouter: router)
     }
     
     @objc func performList(_ sender: UIButton) {

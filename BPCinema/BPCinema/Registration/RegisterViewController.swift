@@ -38,7 +38,16 @@ class RegisterViewController: UIViewController {
     private let registerButton = CustomButton(title: "Register") // TODO: disable this while password is incorrect
     private let goToLoginButton = GoToButton(title: "Back to sign in")
     
-    var register: RegisterPresentable?
+    private let presenter: RegisterPresentable
+    
+    init(presenter: RegisterPresentable) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,7 +130,7 @@ class RegisterViewController: UIViewController {
     }
 
     @objc func backToLogin(_ sender: UIButton) {
-        var router = LoginRouter()
+        let router = LoginRouter()
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let window = windowScene.windows.first else {
             return
@@ -131,16 +140,15 @@ class RegisterViewController: UIViewController {
     }
     
     @objc func performList(_ sender: UIButton) {
-        register = RegisterPresenter()
-        let registerResult = register?.checkIsRegistrationFormCorrect(name: nameTextField.text,
+        let registerResult = presenter.checkIsRegistrationFormCorrect(name: nameTextField.text,
                                                  surname: surnameTextField.text,
                                                  email: emailTextField.text,
                                                  password1: passwordTextField.text,
                                                  password2: password2TextField.text)
-        showCreateAccount(title: (registerResult?.0 ?? ""), message: (registerResult?.1 ?? ""))
+        showCreateAccount(title: (registerResult.0), message: (registerResult.1))
     }
     
-    private func checkValidation(password: String) { // TODO: Movie this too
+    private func checkValidation(password: String) { // TODO: Move this too
         guard password.count >= minPasswordLength else {
             messageLabel.text = ""
             return

@@ -17,6 +17,12 @@ protocol RegisterPresentable {
 
 final class RegisterPresenter: RegisterPresentable {
     var registerInteractor: RegisterInteractable?
+    private let router: RegisterRouting
+    
+    init(registerInteractor: RegisterInteractable? = nil, router: RegisterRouting) {
+        self.registerInteractor = registerInteractor
+        self.router = router
+    }
     
     func registerAll(email: String, password: String) {
         registerInteractor?.register(email: email, password: password)

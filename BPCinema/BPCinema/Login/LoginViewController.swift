@@ -102,9 +102,15 @@ final class LoginViewController: UIViewController {
     }
     
     @objc func performRegister(_ sender: UIButton) {
-        print("Button clicked ")
-        let registerVC = RegisterViewController()
-        registerVC.modalPresentationStyle = .fullScreen
-        present(registerVC, animated: true)
+//        print("Button clicked ")
+//        let registerVC = RegisterViewController()
+//        registerVC.modalPresentationStyle = .fullScreen
+//        present(registerVC, animated: true)
+        var router = RegisterRouter()
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else {
+            return
+        }
+        router.showRegisterView(window: window)
     }
 }

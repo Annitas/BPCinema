@@ -9,10 +9,17 @@ import Foundation
 import UIKit
 
 protocol LoginRouting {
+    var logiView: LoginViewController? { get }
+//    var listOfMovies: ListOfMoviesC
+    
     static func createLoginModule(ref: LoginViewController)
 }
 
 final class LoginRouter: LoginRouting {
+    var logiView: LoginViewController?
+    
+    
+    
     static func createLoginModule(ref: LoginViewController) {
         ref.presenter = LoginPresenter()
         ref.presenter?.loginInteractor = LoginInteractor()

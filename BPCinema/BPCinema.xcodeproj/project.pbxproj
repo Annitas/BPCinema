@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4284D37A929892F212AE8DFB /* Pods_BPCinema.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AC007DBEE8EA5D90860AF3 /* Pods_BPCinema.framework */; };
 		750864172BB06E6400A2AEBF /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750864162BB06E6400A2AEBF /* DBManager.swift */; };
+		750EF1F92BC3B39C0062C597 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750EF1F82BC3B39C0062C597 /* LoginFactory.swift */; };
+		750EF1FC2BC3BE840062C597 /* MovieTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750EF1FB2BC3BE840062C597 /* MovieTabBar.swift */; };
 		752133672BB1696C00C17682 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 752133662BB1696C00C17682 /* GoogleService-Info.plist */; };
 		7521336F2BB294D400C17682 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7521336E2BB294D400C17682 /* Constants.swift */; };
 		752133722BB2B18600C17682 /* MovieDBModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 752133702BB2B18600C17682 /* MovieDBModel.xcdatamodeld */; };
@@ -57,6 +59,8 @@
 
 /* Begin PBXFileReference section */
 		750864162BB06E6400A2AEBF /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
+		750EF1F82BC3B39C0062C597 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
+		750EF1FB2BC3BE840062C597 /* MovieTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTabBar.swift; sourceTree = "<group>"; };
 		752133662BB1696C00C17682 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7521336E2BB294D400C17682 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		752133712BB2B18600C17682 /* MovieDBModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieDBModel.xcdatamodel; sourceTree = "<group>"; };
@@ -128,6 +132,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		750EF1FA2BC3BE540062C597 /* MovieTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				750EF1FB2BC3BE840062C597 /* MovieTabBar.swift */,
+			);
+			path = MovieTabBar;
+			sourceTree = "<group>";
+		};
 		752133732BB3E70900C17682 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +176,7 @@
 				75F525022BAD278B00DFFC4B /* MovieDB */,
 				757A8D0D2BB5B4AC00E3DF74 /* Login */,
 				757A8D0E2BB5B4BB00E3DF74 /* Registration */,
+				750EF1FA2BC3BE540062C597 /* MovieTabBar */,
 				7529467E2BA99B1800D4F8CB /* DetailMovie */,
 				752946692BA84F5100D4F8CB /* ListOfMovies */,
 				757A8D0F2BB6759B00E3DF74 /* ListOfFavourites */,
@@ -243,6 +256,7 @@
 		757A8D0D2BB5B4AC00E3DF74 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				750EF1F82BC3B39C0062C597 /* LoginFactory.swift */,
 				75F5250F2BAD4A0C00DFFC4B /* LoginViewController.swift */,
 				7521337E2BB3F49A00C17682 /* LoginPresenter.swift */,
 				752133802BB3F4B300C17682 /* LoginInteractor.swift */,
@@ -432,11 +446,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				750EF1F92BC3B39C0062C597 /* LoginFactory.swift in Sources */,
 				752133792BB3EF5600C17682 /* GoToButton.swift in Sources */,
 				752133752BB3E73D00C17682 /* CustomButton.swift in Sources */,
 				757A8D152BB6773700E3DF74 /* ListOfFavouriteMoviesInteractor.swift in Sources */,
 				7521337C2BB3F3B900C17682 /* APIService.swift in Sources */,
 				7521336F2BB294D400C17682 /* Constants.swift in Sources */,
+				750EF1FC2BC3BE840062C597 /* MovieTabBar.swift in Sources */,
 				75F525102BAD4A0C00DFFC4B /* LoginViewController.swift in Sources */,
 				7596F7582BAD7FF50052D1B2 /* DBMovie.swift in Sources */,
 				7529466B2BA84F8C00D4F8CB /* ListOfMoviesViewController.swift in Sources */,

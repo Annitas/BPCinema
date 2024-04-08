@@ -15,65 +15,40 @@ protocol LoginInteractable {
 }
 
 final class LoginInteractor: LoginInteractable {
+    private let tabBarCoordinator = TabBarCoordinator()
+
     func login(email: String, password: String) {
         let auth = Auth.auth()
         auth.signIn(withEmail: email, password: password) { [weak self] authResult, error in
             if error == nil && ((self?.validate(p1: email, p2: password)) != nil) {
-                self?.showTabBar()
+                guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                      let window = windowScene.windows.first else {
+                    return
+                }
+                self?.tabBarCoordinator.showTabBar(withWindow: window)
             } else {
                 print("FAILED TO LOG IN")
-                // Handle login error
+                // TODO: Handle login error
             }
         }
     }
     
     func isAlreadyLogin() {
         if Auth.auth().currentUser != nil {
-            showTabBar()
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first else {
+                return
+            }
+            tabBarCoordinator.showTabBar(withWindow: window)
         }
     }
-    
-     /* почему не так
-     func validaten(p1: String, p2: String) -> Bool {
-        p1.isValidEmailRequirements && p2.isValidEmailRequirements
-     }
-      */
-    
-    
+
     func validate(p1: String, p2: String) -> Bool {
         return (dataValid(p1: p1, p2: p2))
     }
     
     private func dataValid(p1: String, p2: String) -> Bool {
         return p1.isValidEmailRequirements && p2.isValidPasswordRequirements
-    }
-    
-    
-    // TODO: Make this shit normal
-    
-    private func showTabBar() {
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = windowScene.windows.first else {
-            return
-        }
-        let tabBarController = UITabBarController()
-        
-        // MARK: List of popular movies tab
-        let listOfMoviesRouter = ListOfMoviesRouter()
-        listOfMoviesRouter.showListOfMovies(window: window)
-        let listOfMoviesNavController = UINavigationController(rootViewController: listOfMoviesRouter.listOfMoviesView!)
-        listOfMoviesNavController.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(systemName: "movieclapper.fill"), tag: 1)
-        
-        // MARK: List of favourite movies tab
-        let listOfFavouriteMoviesRouter = ListOfFavouriteMoviesRouter()
-        listOfFavouriteMoviesRouter.showListOfFavouriteMovies(window: window)
-        let listOfFavouriteMoviesNavController = UINavigationController(rootViewController: listOfFavouriteMoviesRouter.listOfFavouriteMoviesView!)
-        listOfFavouriteMoviesNavController.tabBarItem = UITabBarItem(title: "Favourites", image: UIImage(systemName: "heart.fill"), tag: 2)
-        
-        tabBarController.viewControllers = [listOfMoviesNavController, listOfFavouriteMoviesNavController] //
-        
-        window.rootViewController = tabBarController
-        window.makeKeyAndVisible()
     }
 }
 

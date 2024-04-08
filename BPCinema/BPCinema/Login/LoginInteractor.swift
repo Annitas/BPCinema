@@ -34,13 +34,13 @@ final class LoginInteractor: LoginInteractable {
     }
     
     func isAlreadyLogin() {
-        if Auth.auth().currentUser != nil {
-            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                  let window = windowScene.windows.first else {
-                return
-            }
-            tabBarCoordinator.showTabBar(withWindow: window)
-        }
+//        if Auth.auth().currentUser != nil {
+//            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+//                  let window = windowScene.windows.first else {
+//                return
+//            }
+//            tabBarCoordinator.showTabBar(withWindow: window)
+//        }
     }
 
     func validate(p1: String, p2: String) -> Bool {

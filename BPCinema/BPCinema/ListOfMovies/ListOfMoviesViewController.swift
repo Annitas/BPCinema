@@ -20,6 +20,11 @@ final class ListOfMoviesViewController: UIViewController {
         return tv
     }()
     
+    private lazy var spinner: CustomSpinner = {
+        let spinner = CustomSpinner(squareLength: 100)
+        return spinner
+    }()
+    
     init(presenter: ListOfMoviesPresentable) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -31,14 +36,14 @@ final class ListOfMoviesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemMint
         setupView()
         presenter.onViewAppear()
     }
     
     private func setupView() {
         view.addSubview(moviesTableView)
-        
+        view.addSubview(spinner)
+    
         NSLayoutConstraint.activate([
             moviesTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             moviesTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -47,6 +52,16 @@ final class ListOfMoviesViewController: UIViewController {
         ])
         moviesTableView.dataSource = self
         moviesTableView.delegate = self
+    }
+    
+    private func showSpinner() {
+        spinner.startAnimation(delay: 0.04, replicates: 120)
+        spinner.isHidden = false
+    }
+
+    private func hideSpinner() {
+        spinner.stopAnimation()
+        spinner.isHidden = true
     }
 }
 
@@ -76,7 +91,9 @@ extension ListOfMoviesViewController: UITableViewDelegate {
 extension ListOfMoviesViewController: ListOfMoviesUI {
     func update(movies: [MovieViewModel]) {
         DispatchQueue.main.async {
+            self.showSpinner()
             self.moviesTableView.reloadData()
+            self.hideSpinner()
         }
     }
 }

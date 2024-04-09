@@ -16,8 +16,10 @@ final class RegistrationRouter: RegisterRouting {
     var registerView: RegisterViewController?
     
     func showRegisterView(window: UIWindow?) {
-        let router = RegistrationRouter()
-        let viewController = RegistrationFactory.assembledScreen(withRouter: router)
-        
+        guard let window = window else { return }
+        let viewController = RegistrationFactory.assembledScreen(withRouter: self)
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        self.registerView = viewController
     }
 }

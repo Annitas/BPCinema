@@ -135,9 +135,9 @@ class RegisterViewController: UIViewController {
                     return
                 }
         let router = LoginRouter()
-        let loginView = LoginFactory.assembledScreen(withRouter: router)
-        window.rootViewController = loginView
-        window.makeKeyAndVisible()
+        let loginView = LoginFactory.assembledScreen(withRouter: router, window: window)
+//        window.rootViewController = loginView
+//        window.makeKeyAndVisible()
     }
     
     @objc func performList(_ sender: UIButton) {

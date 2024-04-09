@@ -12,15 +12,10 @@ import UIKit
 import UIKit
 
 final class RegistrationFactory {
-    static func assembledScreen(withRouter router: RegistrationRouter) {
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = windowScene.windows.first else {
-            return
-        }
+    static func assembledScreen(withRouter router: RegistrationRouter) -> RegisterViewController {
         let interactor = RegisterInteractor()
         let presenter = RegisterPresenter(registerInteractor: interactor, router: router)
         let registerView = RegisterViewController(presenter: presenter)
-        window.rootViewController = registerView
-        window.makeKeyAndVisible()
+        return registerView
     }
 }

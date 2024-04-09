@@ -14,6 +14,7 @@
 		750EF1FE2BC3E61D0062C597 /* RegistrationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750EF1FD2BC3E61D0062C597 /* RegistrationFactory.swift */; };
 		750EF2002BC4E3010062C597 /* ListOfMoviesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750EF1FF2BC4E3010062C597 /* ListOfMoviesFactory.swift */; };
 		750EF2022BC4EA270062C597 /* ListOfFavouritesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750EF2012BC4EA270062C597 /* ListOfFavouritesFactory.swift */; };
+		750EF2042BC505110062C597 /* CustomSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750EF2032BC505110062C597 /* CustomSpinner.swift */; };
 		752133672BB1696C00C17682 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 752133662BB1696C00C17682 /* GoogleService-Info.plist */; };
 		7521336F2BB294D400C17682 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7521336E2BB294D400C17682 /* Constants.swift */; };
 		752133722BB2B18600C17682 /* MovieDBModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 752133702BB2B18600C17682 /* MovieDBModel.xcdatamodeld */; };
@@ -67,6 +68,7 @@
 		750EF1FD2BC3E61D0062C597 /* RegistrationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationFactory.swift; sourceTree = "<group>"; };
 		750EF1FF2BC4E3010062C597 /* ListOfMoviesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfMoviesFactory.swift; sourceTree = "<group>"; };
 		750EF2012BC4EA270062C597 /* ListOfFavouritesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfFavouritesFactory.swift; sourceTree = "<group>"; };
+		750EF2032BC505110062C597 /* CustomSpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSpinner.swift; sourceTree = "<group>"; };
 		752133662BB1696C00C17682 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7521336E2BB294D400C17682 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		752133712BB2B18600C17682 /* MovieDBModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieDBModel.xcdatamodel; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				752133742BB3E73C00C17682 /* CustomButton.swift */,
 				752133762BB3EA8100C17682 /* CustomTextField.swift */,
 				752133782BB3EF5600C17682 /* GoToButton.swift */,
+				750EF2032BC505110062C597 /* CustomSpinner.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				750EF1FE2BC3E61D0062C597 /* RegistrationFactory.swift in Sources */,
 				75294BDB2BB420BB00E02E06 /* RegistrationRouter.swift in Sources */,
 				752946782BA940CE00D4F8CB /* MovieCellView.swift in Sources */,
+				750EF2042BC505110062C597 /* CustomSpinner.swift in Sources */,
 				757A8D342BBAAC2100E3DF74 /* DBMovieModel.swift in Sources */,
 				7529467D2BA9598000D4F8CB /* Mapper.swift in Sources */,
 				752946892BA99D0000D4F8CB /* DetailMovieEntity.swift in Sources */,

@@ -9,17 +9,18 @@ import Foundation
 import UIKit
 
 protocol LoginRouting: AnyObject {
-    var listOfMoviesRouter: ListOfMoviesRouting? { get }
     var loginView: LoginViewController? { get }
     
-    func showLoginView()
+    func showLoginView(in window: UIWindow?)
 }
 
 final class LoginRouter: LoginRouting {
-    var listOfMoviesRouter: ListOfMoviesRouting?
     var loginView: LoginViewController?
     
-    func showLoginView() {
-        self.listOfMoviesRouter = ListOfMoviesRouter()
+    func showLoginView(in window: UIWindow?) {
+        let loginViewController = LoginViewController(presenter: LoginPresenter(loginInteractor: LoginInteractor(), router: self))
+        window?.rootViewController = loginViewController
+        window?.makeKeyAndVisible()
+        self.loginView = loginViewController
     }
 }

@@ -39,7 +39,7 @@ final class LoginInteractor: LoginInteractable {
                   let window = windowScene.windows.first else {
                 return
             }
-            tabBarCoordinator.showTabBar(withWindow: window)
+            self.tabBarCoordinator.showTabBar(withWindow: window)
         }
     }
 

@@ -59,7 +59,7 @@ final class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)      
         emailTextField.becomeFirstResponder()
-//        presenter.isAlreadyLogin()
+        presenter.isAlreadyLogin()
     }
     
     private func setupView() {

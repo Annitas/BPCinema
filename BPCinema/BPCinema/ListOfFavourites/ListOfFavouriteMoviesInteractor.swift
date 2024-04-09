@@ -11,16 +11,6 @@ protocol ListOfFavouriteMoviesInteractable: AnyObject {
     func getFavouriteMovies() async -> PopularMovieResponseEntity
 }
 
-protocol ListOfMoviesDataService {
-    func loadMovies()
-}
-class FavoriteLisOfMoviesService {
-    
-}
-class DefaultListOfMoviesSerice {
-    
-}
-
 final class ListOfFavouriteMoviesInteractor: ListOfFavouriteMoviesInteractable  {
     func getFavouriteMovies() async -> PopularMovieResponseEntity {
         await APIService.shared.getFavouriteMovies()

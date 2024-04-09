@@ -12,7 +12,7 @@ protocol ListOfMoviesRouting: AnyObject {
     var detailRouter: DetailRouting? { get }
     var listOfMoviesView: ListOfMoviesViewController? { get }
     
-    func showListOfMovies(window: UIWindow?)
+    func showListOfMovies(listOfMoviesView: ListOfMoviesViewController)
     func showDetailMovie(withMovieID movieID: String)
 }
 
@@ -20,20 +20,16 @@ final class ListOfMoviesRouter: ListOfMoviesRouting {
     var detailRouter: DetailRouting?
     var listOfMoviesView: ListOfMoviesViewController?
     
-    func showListOfMovies(window: UIWindow?) {
-        self.detailRouter = DetailRouter()
-        let interactor = ListOfMoviesInteractor()
-        let presenter = ListOfMoviesPresenter(listOfMoviesInteractor: interactor, 
-                                              router: self)
-        listOfMoviesView = ListOfMoviesViewController(presenter: presenter)
-        presenter.ui = listOfMoviesView
-        window?.makeKeyAndVisible()
-    }
     
-    func showDetailMovie(withMovieID movieID: String) {
-        guard let fromViewController = listOfMoviesView else {
-            return
+    func showListOfMovies(listOfMoviesView: ListOfMoviesViewController) {
+            self.listOfMoviesView = listOfMoviesView
+            self.detailRouter = DetailRouter()
         }
-        detailRouter?.showDetails(fromViewController: fromViewController, withMovieID: movieID)
-    }
+        
+        func showDetailMovie(withMovieID movieID: String) {
+            guard let fromViewController = listOfMoviesView else {
+                return
+            }
+            detailRouter?.showDetails(fromViewController: fromViewController, withMovieID: movieID)
+        }
 }

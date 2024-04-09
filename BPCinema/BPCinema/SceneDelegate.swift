@@ -18,8 +18,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let vc = LoginFactory.assembledScreen(withRouter: loginRouter)
         window?.rootViewController = vc
         window?.makeKeyAndVisible()
-//        window?.rootViewController = loginView
-//        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

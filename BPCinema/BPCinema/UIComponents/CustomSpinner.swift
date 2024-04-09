@@ -30,9 +30,7 @@ final class CustomSpinner: UIView {
     
         override init(frame: CGRect) {
             super.init(frame: frame)
-            // добавляем replicatorLayer на слой нашего класса:
             layer.addSublayer(replicatorLayer)
-            // добавляем shapeLayer на replicatorLayer:
             replicatorLayer.addSublayer(shapeLayer)
         }
 

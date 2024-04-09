@@ -88,7 +88,6 @@ final class LoginViewController: UIViewController {
     }
     
     @objc func login(_ sender: UIButton) {
-        
         guard let email = emailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else {
             print("Missing fields")
@@ -102,7 +101,7 @@ final class LoginViewController: UIViewController {
     }
     
     @objc func performRegister(_ sender: UIButton) {
-        var router = RegisterRouter()
+        var router = RegistrationRouter()
         RegistrationFactory.assembledScreen(withRouter: router)
     }
 }

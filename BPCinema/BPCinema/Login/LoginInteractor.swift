@@ -35,11 +35,11 @@ final class LoginInteractor: LoginInteractable {
     
     func isAlreadyLogin() {
         if Auth.auth().currentUser != nil {
-//            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-//                  let window = windowScene.windows.first else {
-//                return
-//            }
-//            self.tabBarCoordinator.showTabBar(withWindow: window)
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first else {
+                return
+            }
+            self.tabBarCoordinator.showTabBar(withWindow: window)
         }
     }
 

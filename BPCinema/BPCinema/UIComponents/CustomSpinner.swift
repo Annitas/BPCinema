@@ -75,8 +75,6 @@ final class CustomSpinner: UIView {
             shapeLayer.removeAnimation(forKey: keyAnimation)
         }
 
-        // MARK: - Deinit
-        /// Останавливаем анимацию при деините экземпляра
         deinit {
             stopAnimation()
         }

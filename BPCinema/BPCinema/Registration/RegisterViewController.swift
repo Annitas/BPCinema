@@ -149,20 +149,6 @@ class RegisterViewController: UIViewController {
         showCreateAccount(title: (registerResult.0), message: (registerResult.1))
     }
     
-    private func checkValidation(password: String) { // TODO: Move this too
-        guard password.count >= minPasswordLength else {
-            messageLabel.text = ""
-            return
-        }
-        if password.matches(regex) {
-            messageLabel.textColor = .systemGreen
-            messageLabel.text = "Password is correct"
-        } else {
-            messageLabel.textColor = .systemRed
-            messageLabel.text = "Passwords should contain at least eight characters\n Must contain special characters"
-        }
-    }
-        
     func showCreateAccount(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ouf", style: .cancel, handler: { _ in

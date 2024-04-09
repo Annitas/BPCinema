@@ -64,7 +64,7 @@ final class ListOfFavouriteMoviesViewController: UIViewController {
         spinner.startAnimation(delay: 0.04, replicates: 20)
         spinner.isHidden = false
     }
-
+    
     private func hideSpinner() {
         spinner.stopAnimation()
         spinner.isHidden = true

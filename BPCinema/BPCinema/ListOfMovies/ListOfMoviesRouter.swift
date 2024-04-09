@@ -22,14 +22,14 @@ final class ListOfMoviesRouter: ListOfMoviesRouting {
     
     
     func showListOfMovies(listOfMoviesView: ListOfMoviesViewController) {
-            self.listOfMoviesView = listOfMoviesView
-            self.detailRouter = DetailRouter()
+        self.listOfMoviesView = listOfMoviesView
+        self.detailRouter = DetailRouter()
+    }
+    
+    func showDetailMovie(withMovieID movieID: String) {
+        guard let fromViewController = listOfMoviesView else {
+            return
         }
-        
-        func showDetailMovie(withMovieID movieID: String) {
-            guard let fromViewController = listOfMoviesView else {
-                return
-            }
-            detailRouter?.showDetails(fromViewController: fromViewController, withMovieID: movieID)
-        }
+        detailRouter?.showDetails(fromViewController: fromViewController, withMovieID: movieID)
+    }
 }

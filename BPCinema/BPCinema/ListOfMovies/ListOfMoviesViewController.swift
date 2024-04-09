@@ -37,6 +37,7 @@ final class ListOfMoviesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        self.showSpinner()
         presenter.onViewAppear()
     }
     
@@ -55,7 +56,7 @@ final class ListOfMoviesViewController: UIViewController {
     }
     
     private func showSpinner() {
-        spinner.startAnimation(delay: 0.04, replicates: 120)
+        spinner.startAnimation(delay: 0.04, replicates: 20)
         spinner.isHidden = false
     }
 
@@ -91,7 +92,7 @@ extension ListOfMoviesViewController: UITableViewDelegate {
 extension ListOfMoviesViewController: ListOfMoviesUI {
     func update(movies: [MovieViewModel]) {
         DispatchQueue.main.async {
-            self.showSpinner()
+
             self.moviesTableView.reloadData()
             self.hideSpinner()
         }

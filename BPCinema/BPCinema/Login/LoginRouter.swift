@@ -18,9 +18,8 @@ final class LoginRouter: LoginRouting {
     var loginView: LoginViewController?
     
     func showLoginView(in window: UIWindow?) {
-        let loginViewController = LoginViewController(presenter: LoginPresenter(loginInteractor: LoginInteractor(), router: self))
-        window?.rootViewController = loginViewController
-        window?.makeKeyAndVisible()
+        guard let window = window else { return }
+        let loginViewController = LoginFactory.assembledScreen(withRouter: self)
         self.loginView = loginViewController
     }
 }

@@ -8,11 +8,10 @@
 import UIKit
 
 final class LoginFactory {
-    static func assembledScreen(withRouter router: LoginRouter, window: UIWindow?) -> LoginViewController {
+    static func assembledScreen(withRouter router: LoginRouter) -> LoginViewController {
         let interactor = LoginInteractor()
         let presenter = LoginPresenter(loginInteractor: interactor, router: router)
         let loginView = LoginViewController(presenter: presenter)
-        router.showLoginView(in: window)
         return loginView
     }
 }

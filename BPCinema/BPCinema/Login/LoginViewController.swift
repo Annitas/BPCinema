@@ -101,7 +101,13 @@ final class LoginViewController: UIViewController {
     }
     
     @objc func performRegister(_ sender: UIButton) {
-        var router = RegistrationRouter()
-        RegistrationFactory.assembledScreen(withRouter: router)
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                      let window = windowScene.windows.first else {
+                    return
+                }
+        let router = RegistrationRouter()
+        let vc = RegistrationFactory.assembledScreen(withRouter: router)
+        window.rootViewController = vc
+        window.makeKeyAndVisible()
     }
 }

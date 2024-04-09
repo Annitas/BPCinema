@@ -39,6 +39,7 @@ final class ListOfFavouriteMoviesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        self.showSpinner()
         presenter.onViewAppear()
     }
     
@@ -60,7 +61,7 @@ final class ListOfFavouriteMoviesViewController: UIViewController {
     }
     
     private func showSpinner() {
-        spinner.startAnimation(delay: 0.04, replicates: 120)
+        spinner.startAnimation(delay: 0.04, replicates: 20)
         spinner.isHidden = false
     }
 
@@ -96,7 +97,6 @@ extension ListOfFavouriteMoviesViewController: UITableViewDelegate {
 extension ListOfFavouriteMoviesViewController: ListOfFavouriteMoviesUI {
     func update(movies: [MovieViewModel]) {
         DispatchQueue.main.async {
-            self.showSpinner()
             self.moviesTableView.reloadData()
             self.hideSpinner()
         }

@@ -31,7 +31,6 @@ final class APIService {
     // MARK: Favourites
     
     func addToFavorites(movieId: String, accountId: String) async {
-        do {
             let detailMovie = await getDetailMovie(withID: movieId)
             DBManager.shared.addToDB(movie: detailMovie)
             let urlString = "https://api.themoviedb.org/3/account/\(accountId)/favorite?api_key=fae05adc59b94dcb33377a38bfd09528"
@@ -64,9 +63,6 @@ final class APIService {
                 }
             })
             dataTask.resume()
-        } catch {
-            print("Error: \(error)")
-        }
     }
 
 
@@ -88,9 +84,10 @@ final class APIService {
 //            print("Hero... \(hero)")
 //        }
 //        print(data)
-//        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-//            throw NSError(domain: "HTTPError", code: (response as? HTTPURLResponse)?.statusCode ?? 500, userInfo: nil)
-//        }
+        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+            debugPrint("HTTPError \((response as? HTTPURLResponse)?.statusCode ?? 500)")
+            return PopularMovieResponseEntity(page: 0, results: [PopularMovieEntity(id: 0, title: "", overview: "", imageURL: "", votes: 0.0)])
+        }
 
         return try! JSONDecoder().decode(PopularMovieResponseEntity.self, from: data)
     }

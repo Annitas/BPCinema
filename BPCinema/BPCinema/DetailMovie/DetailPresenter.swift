@@ -37,7 +37,7 @@ final class DetailPresenter: DetailPresentable {
     
     func onViewAppear() {
         Task {
-            let model = await interactor.getDetailMovie(withID: movieID)
+            let model = await interactor.getDetails(withID: movieID)
             let viewModel = mapper.map(entity: model)
             await MainActor.run {
                 self.ui?.updateUI(viewModel: viewModel)
@@ -47,6 +47,6 @@ final class DetailPresenter: DetailPresentable {
     }
     
     func addToFavourites(withID id: String) async {
-        await interactor.addToFavorites(movieId: id, accountId: "21098921")
+        await interactor.addMovieToFavourite(movieId: id)
     }
 }

@@ -35,13 +35,7 @@ final class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        loginButton.addTarget(self, action: #selector(login(_:)), for: .touchUpInside)
-        goToRegisterButton.addTarget(self, action: #selector(performRegister(_:)), for: .touchUpInside)
-        emailTextField.text = "anita.stashevskayaa@mail.ru"
-        passwordTextField.text = "qazwsx"
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        tapGesture.cancelsTouchesInView = false
-        view.addGestureRecognizer(tapGesture)
+        
     }
     @objc func hideKeyboard() {
         view.endEditing(true)
@@ -68,6 +62,16 @@ final class LoginViewController: UIViewController {
         view.addSubview(passwordTextField)
         view.addSubview(loginButton)
         view.addSubview(goToRegisterButton)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+        
+        loginButton.addTarget(self, action: #selector(login(_:)), for: .touchUpInside)
+        goToRegisterButton.addTarget(self, action: #selector(performRegister(_:)), for: .touchUpInside)
+        
+        emailTextField.text = "anita.stashevskayaa@mail.ru"
+        passwordTextField.text = "qazwsx"
         
         NSLayoutConstraint.activate([
             emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),

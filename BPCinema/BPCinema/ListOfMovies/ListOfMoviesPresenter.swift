@@ -36,8 +36,7 @@ final class ListOfMoviesPresenter: ListOfMoviesPresentable {
     
     func onViewAppear() {
         Task {
-            models = await listOfMoviesInteractor.getListOfMoview().results
-            print(await listOfMoviesInteractor.getListOfMoview().page ?? "")
+            models = await listOfMoviesInteractor.getMovies().results
             viewModels = models.map(mapper.map(entity:))
             ui?.update(movies: viewModels)
         }

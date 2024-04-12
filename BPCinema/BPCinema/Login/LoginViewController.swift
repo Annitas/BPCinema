@@ -8,19 +8,9 @@
 import UIKit
 import FirebaseAuth
 
-protocol LoginViewProtocol {
-    var emailLabel: String { get set }
-    var passwordLabel: String { get set }
-    var loginButtonEnabled: Bool { get set }
-}
-
-struct LoginViewModel: LoginViewProtocol {
-    var emailLabel: String = "Enter email"
-    var passwordLabel: String = "Enter password"
-    var loginButtonEnabled: Bool = false
-}
-
 final class LoginViewController: UIViewController {
+    private let presenter: LoginPresentable
+    
     private var headerView: UIView = {
         let view = UIView()
         view.backgroundColor = .custom
@@ -33,18 +23,19 @@ final class LoginViewController: UIViewController {
     private let loginButton = CustomButton(title: "Login")
     private let goToRegisterButton = GoToButton(title: "Create an account")
     
-    var presenter: LoginPresentable?
+    init(presenter: LoginPresentable) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        loginButton.addTarget(self, action: #selector(login(_:)), for: .touchUpInside)
-        goToRegisterButton.addTarget(self, action: #selector(performRegister(_:)), for: .touchUpInside)
-        emailTextField.text = "anita.stashevskayaa@mail.ru"
-        passwordTextField.text = "qazwsx"
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        tapGesture.cancelsTouchesInView = false
-        view.addGestureRecognizer(tapGesture)
+        
     }
     @objc func hideKeyboard() {
         view.endEditing(true)
@@ -62,8 +53,7 @@ final class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)      
         emailTextField.becomeFirstResponder()
-        LoginRouter.createLoginModule(ref: self)
-        presenter?.isAlreadyLogin()
+        presenter.isAlreadyLogin()
     }
     
     private func setupView() {
@@ -72,6 +62,16 @@ final class LoginViewController: UIViewController {
         view.addSubview(passwordTextField)
         view.addSubview(loginButton)
         view.addSubview(goToRegisterButton)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+        
+        loginButton.addTarget(self, action: #selector(login(_:)), for: .touchUpInside)
+        goToRegisterButton.addTarget(self, action: #selector(performRegister(_:)), for: .touchUpInside)
+        
+        emailTextField.text = "anita.stashevskayaa@mail.ru"
+        passwordTextField.text = "qazwsx"
         
         NSLayoutConstraint.activate([
             emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -92,7 +92,6 @@ final class LoginViewController: UIViewController {
     }
     
     @objc func login(_ sender: UIButton) {
-        
         guard let email = emailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else {
             print("Missing fields")
@@ -101,14 +100,18 @@ final class LoginViewController: UIViewController {
         
         if let email = emailTextField.text, let pass = passwordTextField.text
         {
-            presenter?.loginAll(email: email, password: pass)
+            presenter.loginAll(email: email, password: pass)
         }
     }
     
     @objc func performRegister(_ sender: UIButton) {
-        print("Button clicked ")
-        let registerVC = RegisterViewController()
-        registerVC.modalPresentationStyle = .fullScreen
-        present(registerVC, animated: true)
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                      let window = windowScene.windows.first else {
+                    return
+                }
+        let router = RegistrationRouter()
+        let vc = RegistrationFactory.assembledScreen(withRouter: router)
+        window.rootViewController = vc
+        window.makeKeyAndVisible()
     }
 }

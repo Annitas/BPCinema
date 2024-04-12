@@ -38,7 +38,16 @@ class RegisterViewController: UIViewController {
     private let registerButton = CustomButton(title: "Register") // TODO: disable this while password is incorrect
     private let goToLoginButton = GoToButton(title: "Back to sign in")
     
-    var register: RegisterPresentable?
+    private let presenter: RegisterPresentable
+    
+    init(presenter: RegisterPresentable) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,35 +130,25 @@ class RegisterViewController: UIViewController {
     }
 
     @objc func backToLogin(_ sender: UIButton) {
-        let loginVC = LoginViewController()
-        loginVC.modalPresentationStyle = .fullScreen
-        present(loginVC, animated: true)
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                      let window = windowScene.windows.first else {
+                    return
+                }
+        let router = LoginRouter()
+        let loginView = LoginFactory.assembledScreen(withRouter: router)
+        window.rootViewController = loginView
+        window.makeKeyAndVisible()
     }
     
     @objc func performList(_ sender: UIButton) {
-        register = RegisterPresenter()
-        let registerResult = register?.checkIsRegistrationFormCorrect(name: nameTextField.text,
+        let registerResult = presenter.checkIsRegistrationFormCorrect(name: nameTextField.text,
                                                  surname: surnameTextField.text,
                                                  email: emailTextField.text,
                                                  password1: passwordTextField.text,
                                                  password2: password2TextField.text)
-        showCreateAccount(title: (registerResult?.0 ?? ""), message: (registerResult?.1 ?? ""))
+        showCreateAccount(title: (registerResult.0), message: (registerResult.1))
     }
     
-    private func checkValidation(password: String) { // TODO: Movie this too
-        guard password.count >= minPasswordLength else {
-            messageLabel.text = ""
-            return
-        }
-        if password.matches(regex) {
-            messageLabel.textColor = .systemGreen
-            messageLabel.text = "Password is correct"
-        } else {
-            messageLabel.textColor = .systemRed
-            messageLabel.text = "Passwords should contain at least eight characters\n Must contain special characters"
-        }
-    }
-        
     func showCreateAccount(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ouf", style: .cancel, handler: { _ in

@@ -8,16 +8,27 @@
 import Foundation
 
 protocol DetailMovieInteractable: AnyObject {
-    func getDetailMovie(withID id: String) async -> DetailMovieEntity
-    func addToFavorites(movieId: String, accountId: String) async
+    func getDetails(withID id: String) async -> DetailMovieEntity
+    func addMovieToFavourite(movieId: String) async
 }
 
 final class DetailMovieInteractor: DetailMovieInteractable {
-    func getDetailMovie(withID id: String) async -> DetailMovieEntity {
-        return await APIService.shared.getDetailMovie(withID: id)
+    func getDetails(withID id: String) async -> DetailMovieEntity {
+        do {
+            return try await NetworkService.request(type: .getMovieDetails(id: id), responseType: DetailMovieEntity.self)
+        } catch {
+            return DetailMovieEntity(title: "", overview: "", backdropPath: "", status: "", releaseDate: "", voteAverage: 0.0, voteCount: 0)
+        }
     }
     
-    func addToFavorites(movieId: String, accountId: String) async {
-        await APIService.shared.addToFavorites(movieId: movieId, accountId: accountId)
+    func addMovieToFavourite(movieId: String) async {
+        do {
+            let detailMovie = try! await NetworkService.request(type: .getMovieDetails(id: movieId), responseType: DetailMovieEntity.self)
+            DBManager.shared.addToDB(movie: detailMovie)
+            try await NetworkService.request(type: .addMovieToFavourites(movieId: movieId), responseType: DetailMovieEntity.self)
+        } catch {
+            print("OOOPS")
+        }
     }
+    
 }

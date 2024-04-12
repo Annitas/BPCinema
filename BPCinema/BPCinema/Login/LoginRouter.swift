@@ -8,13 +8,18 @@
 import Foundation
 import UIKit
 
-protocol LoginRouting {
-    static func createLoginModule(ref: LoginViewController)
+protocol LoginRouting: AnyObject {
+    var loginView: LoginViewController? { get }
+    
+    func showLoginView(in window: UIWindow?)
 }
 
 final class LoginRouter: LoginRouting {
-    static func createLoginModule(ref: LoginViewController) {
-        ref.presenter = LoginPresenter()
-        ref.presenter?.loginInteractor = LoginInteractor()
+    var loginView: LoginViewController?
+    
+    func showLoginView(in window: UIWindow?) {
+        guard let window = window else { return }
+        let loginViewController = LoginFactory.assembledScreen(withRouter: self)
+        self.loginView = loginViewController
     }
 }

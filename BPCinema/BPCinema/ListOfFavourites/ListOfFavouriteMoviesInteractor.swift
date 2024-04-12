@@ -8,17 +8,21 @@
 import Foundation
 
 protocol ListOfFavouriteMoviesInteractable: AnyObject {
-    func getFavouriteMovies() async -> PopularMovieResponseEntity
+    func getFavourites() async -> PopularMovieResponseEntity
 }
 
 final class ListOfFavouriteMoviesInteractor: ListOfFavouriteMoviesInteractable  {
-    func getFavouriteMovies() async -> PopularMovieResponseEntity {
-        await APIService.shared.getFavouriteMovies()
+    func getFavourites() async -> PopularMovieResponseEntity {
+        do {
+            return try await NetworkService.request(type: .getFavourites, responseType: PopularMovieResponseEntity.self)
+        } catch {
+            return PopularMovieResponseEntity(page: 0, results: [PopularMovieEntity(id: 0, title: "", overview: "", imageURL: "", votes: 0.0)])
+        }
     }
 }
 
 final class ListOfFavouriteMoviesInteractorMock: ListOfFavouriteMoviesInteractable {
-    func getFavouriteMovies() async -> PopularMovieResponseEntity {
+    func getFavourites() async -> PopularMovieResponseEntity {
         return PopularMovieResponseEntity(page: 1, results: [
             .init(id: 0, title: "Panda", overview: "----", imageURL: "", votes: 10),
             .init(id: 1, title: "Red Panda", overview: "rferferf", imageURL: "", votes: 10),

@@ -37,8 +37,7 @@ final class ListOfFavouriteMoviesPresenter: ListOfFavouriteMoviesPresentable {
     
     func onViewAppear() {
         Task {
-            models = await listOfFavouriteMoviesInteractor.getFavouriteMovies().results
-            print(await listOfFavouriteMoviesInteractor.getFavouriteMovies().page ?? "")
+            models = await listOfFavouriteMoviesInteractor.getFavourites().results
             viewModels = models.map(mapper.map(entity:))
             ui?.update(movies: viewModels)
         }

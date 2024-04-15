@@ -7,18 +7,23 @@
 
 import Foundation
 
-protocol DetailMovieInteractable: AnyObject {
-    func getDetails(withID id: String) async -> DetailMovieEntity
+protocol MovieDetailsInteractorProtocol {
+    func getGetailMovie(withID id: String) async -> DetailMovieEntity
     func addMovieToFavourite(movieId: String) async
+    var movie: DetailMovieEntity { get }
+    
 }
 
-final class DetailMovieInteractor: DetailMovieInteractable {
-    func getDetails(withID id: String) async -> DetailMovieEntity {
+final class MovieDetailsInteractor: MovieDetailsInteractorProtocol {
+    var movie = DetailMovieEntity()
+    
+    func getGetailMovie(withID id: String) async -> DetailMovieEntity {
         do {
-            return try await NetworkService.request(type: .getMovieDetails(id: id), responseType: DetailMovieEntity.self)
+            movie = try await NetworkService.request(type: .getMovieDetails(id: id), responseType: DetailMovieEntity.self)
         } catch {
-            return DetailMovieEntity(title: "", overview: "", backdropPath: "", status: "", releaseDate: "", voteAverage: 0.0, voteCount: 0)
+            movie = DetailMovieEntity(title: "", overview: "", backdropPath: "", status: "", releaseDate: "", voteAverage: 0.0, voteCount: 0)
         }
+        return movie
     }
     
     func addMovieToFavourite(movieId: String) async {
@@ -27,8 +32,7 @@ final class DetailMovieInteractor: DetailMovieInteractable {
             DBManager.shared.addToDB(movie: detailMovie)
             try await NetworkService.request(type: .addMovieToFavourites(movieId: movieId), responseType: DetailMovieEntity.self)
         } catch {
-            print("OOOPS")
+            print("OOOPS problem in detail interactor")
         }
     }
-    
 }

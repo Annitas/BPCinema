@@ -1,5 +1,5 @@
 //
-//  APIService.swift
+//  NetworkService.swift
 //  BPCinema
 //
 //  Created by Anita Stashevskaya on 27.03.2024.
@@ -119,7 +119,6 @@ extension NetworkService {
         } else {
             decoder.dateDecodingStrategy = .iso8601
         }
-        print("TYPE REQUEST \(type)")
         
         do {
             return try decoder.decode(T.self, from: data)

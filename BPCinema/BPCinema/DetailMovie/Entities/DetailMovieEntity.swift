@@ -8,11 +8,11 @@
 import Foundation
 
 struct DetailMovieEntity: Decodable {
-    let title: String
-    let overview: String
-    let backdropPath: String
-    let status: String
-    let releaseDate: String
-    let voteAverage: Double
-    let voteCount: Int
+    var title: String = ""
+    var overview: String = ""
+    var backdropPath: String = ""
+    var status: String = ""
+    var releaseDate: String = ""
+    var voteAverage: Double = 0.0
+    var voteCount: Int = 0
 }

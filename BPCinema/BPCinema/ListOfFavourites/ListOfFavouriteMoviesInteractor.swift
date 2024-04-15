@@ -5,31 +5,38 @@
 //  Created by Anita Stashevskaya on 29.03.2024.
 //
 
-import Foundation
-
-protocol ListOfFavouriteMoviesInteractable: AnyObject {
-    func getFavourites() async -> PopularMovieResponseEntity
+protocol ListOfFavouriteMoviesInteractorProtocol {
+    func getFavourites() async -> [PopularMovieEntity]
+    var movies: [PopularMovieEntity] { get }
 }
 
-final class ListOfFavouriteMoviesInteractor: ListOfFavouriteMoviesInteractable  {
-    func getFavourites() async -> PopularMovieResponseEntity {
+final class ListOfFavouriteMoviesInteractor: ListOfFavouriteMoviesInteractorProtocol  {
+    var service: PopularMoviesServiceProtocol
+    init(service: PopularMoviesServiceProtocol = PopularMoviesService()) {
+        self.service = service
+    }
+    
+    var movies: [PopularMovieEntity] = []
+    
+    func getFavourites() async -> [PopularMovieEntity] {
         do {
-            return try await NetworkService.request(type: .getFavourites, responseType: PopularMovieResponseEntity.self)
+            movies = try await service.getFavourites()
         } catch {
-            return PopularMovieResponseEntity(page: 0, results: [PopularMovieEntity(id: 0, title: "", overview: "", imageURL: "", votes: 0.0)])
+            movies = []
         }
+        return movies
     }
 }
 
-final class ListOfFavouriteMoviesInteractorMock: ListOfFavouriteMoviesInteractable {
-    func getFavourites() async -> PopularMovieResponseEntity {
-        return PopularMovieResponseEntity(page: 1, results: [
-            .init(id: 0, title: "Panda", overview: "----", imageURL: "", votes: 10),
-            .init(id: 1, title: "Red Panda", overview: "rferferf", imageURL: "", votes: 10),
-            .init(id: 2, title: "Kung Fu Panda", overview: "kmlkmlkm", imageURL: "", votes: 20),
-            .init(id: 3, title: "Panda panda", overview: "m;mom[", imageURL: "", votes: 20),
-            .init(id: 4, title: "Another Panda", overview: "yftcuvuoijok", imageURL: "", votes: 30),
-            .init(id: 5, title: "Another Panda", overview: "yftcuvuoijok", imageURL: "", votes: 40),
-        ])
+protocol PopularMoviesServiceProtocol {
+    func getFavourites() async throws -> [PopularMovieEntity]
+}
+
+class PopularMoviesService: PopularMoviesServiceProtocol {
+    func getFavourites() async throws -> [PopularMovieEntity] {
+        try await NetworkService.request(type: .getFavourites, responseType: PopularMovieResponseEntity.self)
+            .results
+            .map { PopularMovieEntity(id: $0.id, title: $0.title, overview: $0.overview, imageURL: $0.imageURL, votes: $0.votes) }
     }
 }
+

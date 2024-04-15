@@ -12,13 +12,13 @@ final class TabBarCoordinator {
     func showTabBar(withWindow window: UIWindow) {
         let tabBarController = UITabBarController()
         
-        let listOfMoviesRouter = ListOfMoviesRouter()
-        let listOfMoviesVC = ListOfMoviesFactory.assembledScreen(withRouter: listOfMoviesRouter)
+        let listOfMoviesRouter = MovieListRouter()
+        let listOfMoviesVC = ListOfMoviesFactory.assembledScreen(listOfMoviesRouter)
         let listOfMoviesNavController = UINavigationController(rootViewController: listOfMoviesVC)
         listOfMoviesNavController.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(systemName: "movieclapper.fill"), tag: 1)
         
         let listOfFavouriteMoviesRouter = ListOfFavouriteMoviesRouter()
-        let listOfFavouriteMoviesVC = ListOfFavouriteMoviesFactory.assembledScreen(withRouter: listOfFavouriteMoviesRouter)
+        let listOfFavouriteMoviesVC = ListOfFavouriteMoviesFactory.assembledScreen(listOfFavouriteMoviesRouter)
         let listOfFavouriteMoviesNavController = UINavigationController(rootViewController: listOfFavouriteMoviesVC)
         listOfFavouriteMoviesNavController.tabBarItem = UITabBarItem(title: "Favourites", image: UIImage(systemName: "heart.fill"), tag: 2)
         

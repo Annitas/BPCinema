@@ -8,13 +8,12 @@
 import UIKit
 
 final class ListOfMoviesFactory {
-    static func assembledScreen(withRouter router: ListOfMoviesRouter) -> ListOfMoviesViewController {
-        let interactor = ListOfMoviesInteractor()
-        let presenter = ListOfMoviesPresenter(listOfMoviesInteractor: interactor,
-                                              router: router)
-        let listOfMoviesView = ListOfMoviesViewController(presenter: presenter)
-        presenter.ui = listOfMoviesView
-        router.showListOfMovies(listOfMoviesView: listOfMoviesView)
-        return listOfMoviesView
+    class func assembledScreen(_ router: MovieListRouter = .init()) -> ListOfMoviesViewController {
+        let interactor = MovieListInteractor()
+        let presenter = ListOfMoviesPresenter(router: router, interactor: interactor)
+        let viewController = ListOfMoviesViewController()
+        viewController.presenter = presenter
+        router.viewController = viewController
+        return viewController
     }
 }

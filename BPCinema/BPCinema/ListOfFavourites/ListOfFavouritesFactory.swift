@@ -8,13 +8,12 @@
 import UIKit
 
 final class ListOfFavouriteMoviesFactory {
-    static func assembledScreen(withRouter router: ListOfFavouriteMoviesRouter) -> ListOfFavouriteMoviesViewController {
+    static func assembledScreen(_ router: ListOfFavouriteMoviesRouter = .init()) -> ListOfFavouriteMoviesViewController {
         let interactor = ListOfFavouriteMoviesInteractor()
-        let presenter = ListOfFavouriteMoviesPresenter(listOfFavouriteMoviesInteractor: interactor,
-                                              router: router)
-        let listOfFavouriteMoviesView = ListOfFavouriteMoviesViewController(presenter: presenter)
-        presenter.ui = listOfFavouriteMoviesView
-        router.showListOfFavouriteMovies(listOfFavouriteMoviesView: listOfFavouriteMoviesView)
-        return listOfFavouriteMoviesView
+        let presenter = ListOfFavouriteMoviesPresenter(router: router, interactor: interactor)
+        let viewController = ListOfFavouriteMoviesViewController()
+        viewController.presenter = presenter
+        router.viewController = viewController
+        return viewController
     }
 }

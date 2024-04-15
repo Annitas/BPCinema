@@ -7,46 +7,54 @@
 
 import Foundation
 
-
-protocol ListOfFavouriteMoviesPresentable: AnyObject {
-    var ui: ListOfFavouriteMoviesUI? { get }
-    var viewModels: [MovieViewModel] { get }
-    func onViewAppear()
-    func onTapCell(atIndex: Int)
+protocol ListOfFavouriteMoviesInteractorProtocol {
+    func getFavourites() async -> [PopularMovieEntity]
+    var movies: [PopularMovieEntity] { get }
 }
 
-protocol ListOfFavouriteMoviesUI: AnyObject {
-    func update(movies: [MovieViewModel])
-}
-
-final class ListOfFavouriteMoviesPresenter: ListOfFavouriteMoviesPresentable {
-    weak var ui: ListOfFavouriteMoviesUI?
-    private let listOfFavouriteMoviesInteractor: ListOfFavouriteMoviesInteractable
-    var viewModels: [MovieViewModel] = []
-    private var models: [PopularMovieEntity] = []
-    private let mapper: Mapper
-    private let router: ListOfFavouriteMoviesRouting
+final class ListOfFavouriteMoviesPresenter {
+    var movies: [PopularMovieEntity] = []
     
-//    var outputChanged: (() -> Void)?
-    
-    init(listOfFavouriteMoviesInteractor: ListOfFavouriteMoviesInteractable,
-         mapper: Mapper = Mapper(),
-         router: ListOfFavouriteMoviesRouting) {
-        self.listOfFavouriteMoviesInteractor = listOfFavouriteMoviesInteractor
-        self.mapper = mapper
-        self.router = router
-    }
-    
-    func onViewAppear() {
-        Task {
-            models = await listOfFavouriteMoviesInteractor.getFavourites().results
-            viewModels = models.map(mapper.map(entity:))
-            ui?.update(movies: viewModels)
+    let interactor: ListOfFavouriteMoviesInteractorProtocol
+    var output: Output = .init() {
+        didSet {
+            outputChanged?()
         }
     }
+    var outputChanged: (() -> ())?
+    var input: Input = .init()
+    struct Output {
+        var viewModel: MovieListViewModel = .init(movies: [])
+    }
+    struct Input {
+        var movieSelected: ((Int) -> ())?
+    }
+    var router: Router<ListOfFavouriteMoviesViewController>
+    private let mapper: Mapper
     
-    func onTapCell(atIndex: Int) {
-        let movieID = models[atIndex].id
-        router.showDetailMovie(withMovieID: movieID.description)
+    var viewModels: [MovieViewModel] = []
+//    private var models: [PopularMovieEntity] = []
+    
+    init(router: Router<ListOfFavouriteMoviesViewController> = ListOfFavouriteMoviesRouter(),
+         interactor: ListOfFavouriteMoviesInteractorProtocol = ListOfFavouriteMoviesInteractor(),
+         output: Output = .init(),
+         outputChanged: (() -> Void)? = nil,
+         mapper: Mapper = Mapper()
+         ) {
+        self.router = router
+        self.interactor = interactor
+        self.output = output
+        self.outputChanged = outputChanged
+        self.mapper = mapper
+        Task {
+            let models = await interactor.getFavourites().map(mapper.map(entity:))
+            await MainActor.run {
+                self.output.viewModel = .init(movies: models)
+            }
+        }
+        input.movieSelected = { [unowned self] movieIndex in
+            let movie = interactor.movies[movieIndex]
+            (self.router as? MovieDetailsRoute)?.openMovieDetails(movie)
+        }
     }
 }

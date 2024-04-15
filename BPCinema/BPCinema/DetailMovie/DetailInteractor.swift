@@ -9,7 +9,9 @@ import Foundation
 
 protocol MovieDetailsInteractorProtocol {
     func getGetailMovie(withID id: String) async -> DetailMovieEntity
+    func addMovieToFavourite(movieId: String) async
     var movie: DetailMovieEntity { get }
+    
 }
 
 final class MovieDetailsInteractor: MovieDetailsInteractorProtocol {
@@ -23,22 +25,6 @@ final class MovieDetailsInteractor: MovieDetailsInteractorProtocol {
         }
         return movie
     }
-}
-
-
-protocol DetailMovieInteractable: AnyObject {
-    func getDetails(withID id: String) async -> DetailMovieEntity
-    func addMovieToFavourite(movieId: String) async
-}
-
-final class DetailMovieInteractor: DetailMovieInteractable {
-    func getDetails(withID id: String) async -> DetailMovieEntity {
-        do {
-            return try await NetworkService.request(type: .getMovieDetails(id: id), responseType: DetailMovieEntity.self)
-        } catch {
-            return DetailMovieEntity(title: "", overview: "", backdropPath: "", status: "", releaseDate: "", voteAverage: 0.0, voteCount: 0)
-        }
-    }
     
     func addMovieToFavourite(movieId: String) async {
         do {
@@ -49,5 +35,4 @@ final class DetailMovieInteractor: DetailMovieInteractable {
             print("OOOPS")
         }
     }
-    
 }

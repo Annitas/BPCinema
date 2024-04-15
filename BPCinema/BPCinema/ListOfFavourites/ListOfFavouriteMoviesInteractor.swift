@@ -7,21 +7,43 @@
 
 import Foundation
 
-protocol ListOfFavouriteMoviesInteractable: AnyObject {
-    func getFavourites() async -> PopularMovieResponseEntity
-}
 
-final class ListOfFavouriteMoviesInteractor: ListOfFavouriteMoviesInteractable  {
-    func getFavourites() async -> PopularMovieResponseEntity {
+//protocol ListOfFavouriteMoviesInteractorProtocol {
+//    func getFavourites() async -> [PopularMovieEntity]
+//    var movies: [PopularMovieEntity] { get }
+//}
+
+final class ListOfFavouriteMoviesInteractor: ListOfFavouriteMoviesInteractorProtocol  {
+    var service: SecondServiceProtocol
+    init(service: SecondServiceProtocol = SecondService()) {
+        self.service = service
+    }
+    
+    var movies: [PopularMovieEntity] = []
+    
+    func getFavourites() async -> [PopularMovieEntity] {
         do {
-            return try await NetworkService.request(type: .getFavourites, responseType: PopularMovieResponseEntity.self)
+            movies = try await service.getFavourites()
         } catch {
-            return PopularMovieResponseEntity(page: 0, results: [PopularMovieEntity(id: 0, title: "", overview: "", imageURL: "", votes: 0.0)])
+            movies = []
         }
+        return movies
     }
 }
 
-final class ListOfFavouriteMoviesInteractorMock: ListOfFavouriteMoviesInteractable {
+protocol SecondServiceProtocol {
+    func getFavourites() async throws -> [PopularMovieEntity]
+}
+
+class SecondService: SecondServiceProtocol {
+    func getFavourites() async throws -> [PopularMovieEntity] {
+        try await NetworkService.request(type: .getFavourites, responseType: PopularMovieResponseEntity.self)
+            .results
+            .map { PopularMovieEntity(id: $0.id, title: $0.title, overview: $0.overview, imageURL: $0.imageURL, votes: $0.votes) }
+    }
+}
+
+final class ListOfFavouriteMoviesInteractorMock {
     func getFavourites() async -> PopularMovieResponseEntity {
         return PopularMovieResponseEntity(page: 1, results: [
             .init(id: 0, title: "Panda", overview: "----", imageURL: "", votes: 10),

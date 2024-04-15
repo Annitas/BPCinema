@@ -26,20 +26,20 @@ extension MovieDetailsRoute where Self: RouterProtocol {
     }
 }
 
-
-
-protocol DetailRouting {
-    func showDetails(fromViewController: UIViewController, withMovieID movieID: String)
-}
-
-final class DetailRouter: DetailRouting {
-    func showDetails(fromViewController: UIViewController, withMovieID movieID: String) {
-//        let interactor = DetailMovieInteractor()
-//        let presenter = DetailPresenter(movieID: movieID,
-//                                        interactor: interactor,
-//                                        mapper: MapperDetailMovieViewModel())
-//        let view = DetailMovieViewController(presenter: presenter)
-//        presenter.ui = view
-//        fromViewController.present(view, animated: true)
-    }
-}
+//
+//
+//protocol DetailRouting {
+//    func showDetails(fromViewController: UIViewController, withMovieID movieID: String)
+//}
+//
+//final class DetailRouter: DetailRouting {
+//    func showDetails(fromViewController: UIViewController, withMovieID movieID: String) {
+////        let interactor = DetailMovieInteractor()
+////        let presenter = DetailPresenter(movieID: movieID,
+////                                        interactor: interactor,
+////                                        mapper: MapperDetailMovieViewModel())
+////        let view = DetailMovieViewController(presenter: presenter)
+////        presenter.ui = view
+////        fromViewController.present(view, animated: true)
+//    }
+//}

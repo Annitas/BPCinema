@@ -18,7 +18,7 @@ final class TabBarCoordinator {
         listOfMoviesNavController.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(systemName: "movieclapper.fill"), tag: 1)
         
         let listOfFavouriteMoviesRouter = ListOfFavouriteMoviesRouter()
-        let listOfFavouriteMoviesVC = ListOfFavouriteMoviesFactory.assembledScreen(withRouter: listOfFavouriteMoviesRouter)
+        let listOfFavouriteMoviesVC = ListOfFavouriteMoviesFactory.assembledScreen(listOfFavouriteMoviesRouter)
         let listOfFavouriteMoviesNavController = UINavigationController(rootViewController: listOfFavouriteMoviesVC)
         listOfFavouriteMoviesNavController.tabBarItem = UITabBarItem(title: "Favourites", image: UIImage(systemName: "heart.fill"), tag: 2)
         

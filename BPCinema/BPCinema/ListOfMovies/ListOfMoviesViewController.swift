@@ -44,7 +44,7 @@ final class ListOfMoviesViewController: UIViewController {
         return spinner
     }()
     
-    let tableView: UITableView = .init()
+    let tableView: UITableView = .init() // check this
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)

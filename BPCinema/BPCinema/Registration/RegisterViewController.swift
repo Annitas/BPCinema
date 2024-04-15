@@ -135,7 +135,7 @@ class RegisterViewController: UIViewController {
                     return
                 }
         let router = LoginRouter()
-        let loginView = LoginFactory.assembledScreen(withRouter: router)
+        let loginView = LoginFactory.assembledScreen(router)
         window.rootViewController = loginView
         window.makeKeyAndVisible()
     }

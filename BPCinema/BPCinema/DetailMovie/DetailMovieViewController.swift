@@ -10,16 +10,7 @@ import UIKit
 import Kingfisher
 
 final class DetailMovieViewController: UIViewController {
-    var presenter: MovieDetailsPresenter? {
-        didSet {
-            guard let presenter else { return }
-            viewModel = presenter.output.viewModel
-            presenter.outputChanged = { [weak self] in
-                self?.viewModel = presenter.output.viewModel
-            }
-        }
-    }
-    
+    private let presenter: MovieDetailsPresenter
     var viewModel: DetailMovieViewModel = DetailMovieViewModel(title: "", overview: "", backdropPath: URL(string: "")) {
         didSet {
             movieName.text = viewModel.title
@@ -63,8 +54,13 @@ final class DetailMovieViewController: UIViewController {
         return button
     }()
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(_ presenter: MovieDetailsPresenter) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+        viewModel = presenter.output.viewModel
+        presenter.outputChanged = { [weak self] in
+            self?.viewModel = presenter.output.viewModel
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -84,7 +80,7 @@ final class DetailMovieViewController: UIViewController {
     }
     
     private func addToFavouritesAsync() async {
-        await presenter?.addToFavourites(withID: presenter?.movieID ?? "")
+        await presenter.addToFavourites(withID: presenter.movieID)
     }
     
     private func setupView() {

@@ -11,7 +11,6 @@ import Foundation
 import UIKit
 
 final class ListOfFavouriteMoviesViewController: UIViewController {
-    
     var presenter: ListOfFavouriteMoviesPresenter? {
         didSet {
             guard let presenter else { return }

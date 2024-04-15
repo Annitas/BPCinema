@@ -33,7 +33,6 @@ final class ListOfFavouriteMoviesPresenter {
     private let mapper: Mapper
     
     var viewModels: [MovieViewModel] = []
-//    private var models: [PopularMovieEntity] = []
     
     init(router: Router<ListOfFavouriteMoviesViewController> = ListOfFavouriteMoviesRouter(),
          interactor: ListOfFavouriteMoviesInteractorProtocol = ListOfFavouriteMoviesInteractor(),

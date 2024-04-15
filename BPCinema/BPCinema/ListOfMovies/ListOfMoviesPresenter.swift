@@ -14,12 +14,14 @@ protocol MovieListInteractorProtocol {
 
 final class ListOfMoviesPresenter {
     let interactor: MovieListInteractorProtocol
+    var router: Router<ListOfMoviesViewController>
     var output: Output = .init() {
         didSet {
             outputChanged?()
         }
     }
     var input: Input = .init()
+    var outputChanged: (() -> ())?
     
     struct Output {
         var viewModel: MovieListViewModel = .init(movies: [])
@@ -28,8 +30,6 @@ final class ListOfMoviesPresenter {
         var movieSelected: ((Int) -> ())?
     }
     private let mapper: Mapper
-    var outputChanged: (() -> ())?
-    var router: Router<ListOfMoviesViewController>
     
     init(router: Router<ListOfMoviesViewController> = MovieListRouter(),
          interactor: MovieListInteractorProtocol = MovieListInteractor(), 

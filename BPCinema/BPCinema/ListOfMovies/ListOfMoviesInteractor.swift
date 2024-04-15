@@ -11,8 +11,8 @@ import Foundation
 import CoreData
 
 class MovieListInteractor: MovieListInteractorProtocol {
-    var service: SomeServiceProtocol
-    init(service: SomeServiceProtocol = SomeService()) {
+    var service: MovieListServiceProtocol
+    init(service: MovieListServiceProtocol = MovieService()) {
         self.service = service
     }
     var movies: [PopularMovieEntity] = []
@@ -26,11 +26,11 @@ class MovieListInteractor: MovieListInteractorProtocol {
     }
 }
 
-protocol SomeServiceProtocol {
+protocol MovieListServiceProtocol {
     func getMovies() async throws -> [PopularMovieEntity]
 }
 
-class SomeService: SomeServiceProtocol {
+class MovieService: MovieListServiceProtocol {
     func getMovies() async throws -> [PopularMovieEntity] {
         try await NetworkService.request(type: .getMovies, responseType: PopularMovieResponseEntity.self)
             .results

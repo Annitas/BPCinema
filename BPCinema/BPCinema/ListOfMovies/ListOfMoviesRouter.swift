@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 final class MovieListRouter: Router<ListOfMoviesViewController>, MovieListRouter.Routes {
     var openMovieDetailsTransition: Transition = PushTransition()
-    
     typealias Routes = MovieDetailsRoute
 }
 

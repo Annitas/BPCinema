@@ -32,7 +32,7 @@ final class MovieDetailsInteractor: MovieDetailsInteractorProtocol {
             DBManager.shared.addToDB(movie: detailMovie)
             try await NetworkService.request(type: .addMovieToFavourites(movieId: movieId), responseType: DetailMovieEntity.self)
         } catch {
-            print("OOOPS")
+            print("OOOPS problem in detail interactor")
         }
     }
 }

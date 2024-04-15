@@ -9,10 +9,6 @@ import Foundation
 import UIKit
 import PinLayout
 
-struct MovieListViewModel {
-    let movies: [MovieViewModel]
-}
-
 final class ListOfMoviesViewController: UIViewController {
     var presenter: ListOfMoviesPresenter? {
         didSet {
@@ -44,20 +40,6 @@ final class ListOfMoviesViewController: UIViewController {
         return spinner
     }()
     
-    let tableView: UITableView = .init() // check this
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        
-        view.addSubview(tableView)
-        tableView.dataSource = self
-        tableView.delegate = self
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         configureSubviews()
@@ -66,13 +48,6 @@ final class ListOfMoviesViewController: UIViewController {
     private func configureSubviews() {
         setupView()
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        // Установка цвета фона для UITabBar
-//        tabBarController?.tabBar.barTintColor = .systemBackground
-//    }
-
     
     private func setupView() {
         view.addSubview(moviesTableView)

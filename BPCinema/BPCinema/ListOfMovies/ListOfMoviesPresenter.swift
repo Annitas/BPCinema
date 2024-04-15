@@ -42,7 +42,7 @@ final class ListOfMoviesPresenter {
         self.outputChanged = outputChanged
         self.mapper = mapper
         Task {
-            let array = await interactor.getMovies("1").map(mapper.map(entity:)) // MARK: - HERE FOR PAGINATION
+            let array = await interactor.getMovies("1").map(mapper.map(entity:))
             await MainActor.run {
                 self.output.viewModel = .init(movies: array)
             }

@@ -48,16 +48,11 @@ final class ListOfFavouriteMoviesViewController: UIViewController {
     
     private func setupView() {
         view.addSubview(moviesTableView)
-//        view.addSubview(spinner)
-        
         NSLayoutConstraint.activate([
             moviesTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             moviesTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             moviesTableView.topAnchor.constraint(equalTo: view.topAnchor),
             moviesTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-//            spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
         moviesTableView.dataSource = self
         moviesTableView.delegate = self

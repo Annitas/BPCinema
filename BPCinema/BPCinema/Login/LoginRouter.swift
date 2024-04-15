@@ -8,18 +8,22 @@
 import Foundation
 import UIKit
 
-protocol LoginRouting: AnyObject {
-    var loginView: LoginViewController? { get }
+final class LoginRouter: Router<LoginViewController>, LoginRouter.Routes {
+    var openMovieListTransition: Transition = PushTransition()
     
-    func showLoginView(in window: UIWindow?)
+    typealias Routes = MovieListRoute
 }
 
-final class LoginRouter: LoginRouting {
-    var loginView: LoginViewController?
-    
-    func showLoginView(in window: UIWindow?) {
-        guard let window = window else { return }
-        let loginViewController = LoginFactory.assembledScreen(withRouter: self)
-        self.loginView = loginViewController
+
+protocol LoginRoute {
+    var openLoginTransition: Transition { get }
+    func openLogin()
+}
+
+extension LoginRoute where Self: RouterProtocol {
+    func openLogin() {
+        let router = LoginRouter()
+        let viewController = LoginFactory.assembledScreen(router)
+        openWithNextRouter(viewController, nextRouter: router, transition: openLoginTransition)
     }
 }

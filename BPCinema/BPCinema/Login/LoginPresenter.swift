@@ -15,9 +15,9 @@ protocol LoginPresentable {
 
 final class LoginPresenter: LoginPresentable {
     var loginInteractor: LoginInteractable?
-    private let router: LoginRouting
+    private let router: Router<LoginViewController>
     
-    init(loginInteractor: LoginInteractable? = nil, router: LoginRouting) {
+    init(loginInteractor: LoginInteractable? = nil, router: Router<LoginViewController>) {
         self.loginInteractor = loginInteractor
         self.router = router
     }

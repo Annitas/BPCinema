@@ -1,6 +1,15 @@
 {
-  "originHash" : "2174eaf93f622d57be865cd78b51b72620c12528f1f0957292620977c4d69891",
+  "originHash" : "efcd7e763ab190e6ac85892a97e7aa71e402651b19b583f708080c8b4031fa6e",
   "pins" : [
+    {
+      "identity" : "pinlayout",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/layoutBox/PinLayout",
+      "state" : {
+        "revision" : "8eaa3a15e4dcabaca4c95aea4c0ff0c9b4a67213",
+        "version" : "1.10.5"
+      }
+    },
     {
       "identity" : "realm-core",
       "kind" : "remoteSourceControl",

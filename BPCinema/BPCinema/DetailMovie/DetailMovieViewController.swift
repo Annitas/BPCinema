@@ -10,7 +10,23 @@ import UIKit
 import Kingfisher
 
 final class DetailMovieViewController: UIViewController {
-    private let presenter: DetailPresentable
+    var presenter: MovieDetailsPresenter? {
+        didSet {
+            guard let presenter else { return }
+            viewModel = presenter.output.viewModel
+            presenter.outputChanged = { [weak self] in
+                self?.viewModel = presenter.output.viewModel
+            }
+        }
+    }
+    
+    var viewModel: DetailMovieViewModel = DetailMovieViewModel(title: "", overview: "", backdropPath: URL(string: "")) {
+        didSet {
+            movieName.text = viewModel.title
+            movieDescription.text = viewModel.overview
+            movieImageView.kf.setImage(with: viewModel.backdropPath)
+        }
+    }
     
     private let movieImageView: UIImageView = {
         let iv = UIImageView()
@@ -47,9 +63,8 @@ final class DetailMovieViewController: UIViewController {
         return button
     }()
     
-    init(presenter: DetailPresentable) {
-        self.presenter = presenter
-        super.init(nibName: nil, bundle: nil)
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
     required init?(coder: NSCoder) {
@@ -61,7 +76,6 @@ final class DetailMovieViewController: UIViewController {
         view.backgroundColor = .white
         favoriteButton.addTarget(self, action: #selector(addToFavourites(_:)), for: .touchUpInside)
         setupView()
-        presenter.onViewAppear()
     }
     @objc func addToFavourites(_ sender: UIButton) {
         Task {
@@ -70,7 +84,7 @@ final class DetailMovieViewController: UIViewController {
     }
     
     private func addToFavouritesAsync() async {
-        await presenter.addToFavourites(withID: presenter.movieID)
+//        await presenter.addToFavourites(withID: presenter.movieID)
     }
     
     private func setupView() {
@@ -98,11 +112,11 @@ final class DetailMovieViewController: UIViewController {
         ])
     }
 }
-
-extension DetailMovieViewController: DetailPresenterUI {
-    func updateUI(viewModel: DetailMovieViewModel) {
-        movieImageView.kf.setImage(with: viewModel.backdropPath)
-        movieName.text = viewModel.title
-        movieDescription.text = viewModel.overview
-    }
-}
+//
+//extension DetailMovieViewController: DetailPresenterUI {
+//    func updateUI(viewModel: DetailMovieViewModel) {
+//        movieImageView.kf.setImage(with: viewModel.backdropPath)
+//        movieName.text = viewModel.title
+//        movieDescription.text = viewModel.overview
+//    }
+//}

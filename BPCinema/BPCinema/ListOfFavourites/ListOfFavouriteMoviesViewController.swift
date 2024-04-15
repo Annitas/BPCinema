@@ -83,7 +83,7 @@ extension ListOfFavouriteMoviesViewController: UITableViewDataSource {
             fatalError()
         }
         let model = presenter.viewModels[indexPath.row]
-        cell.configure(model: model)
+//        cell.configure(model: model)
         return cell
     }
 }

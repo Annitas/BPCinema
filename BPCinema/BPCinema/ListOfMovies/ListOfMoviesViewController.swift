@@ -7,9 +7,28 @@
 
 import Foundation
 import UIKit
+import PinLayout
+
+struct MovieListViewModel {
+    let movies: [MovieViewModel]
+}
 
 final class ListOfMoviesViewController: UIViewController {
-    private let presenter: ListOfMoviesPresentable
+    var presenter: ListOfMoviesPresenter? {
+        didSet {
+            guard let presenter else { return }
+            viewModel = presenter.output.viewModel
+            presenter.outputChanged = { [weak self] in
+                self?.viewModel = presenter.output.viewModel
+            }
+        }
+    }
+    
+    var viewModel: MovieListViewModel = MovieListViewModel(movies: []) {
+        didSet {
+            moviesTableView.reloadData()
+        }
+    }
     
     private var moviesTableView: UITableView = {
         let tv = UITableView()
@@ -25,26 +44,39 @@ final class ListOfMoviesViewController: UIViewController {
         return spinner
     }()
     
-    init(presenter: ListOfMoviesPresentable) {
-        self.presenter = presenter
-        super.init(nibName: nil, bundle: nil)
+    let tableView: UITableView = .init()
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        view.addSubview(tableView)
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupView()
-        self.showSpinner()
-        presenter.onViewAppear()
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        configureSubviews()
     }
+    
+    private func configureSubviews() {
+        setupView()
+    }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        // Установка цвета фона для UITabBar
+//        tabBarController?.tabBar.barTintColor = .systemBackground
+//    }
+
     
     private func setupView() {
         view.addSubview(moviesTableView)
-        view.addSubview(spinner)
-    
+        
         NSLayoutConstraint.activate([
             moviesTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             moviesTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -68,33 +100,22 @@ final class ListOfMoviesViewController: UIViewController {
 
 extension ListOfMoviesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter.viewModels.count
+        viewModel.movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: "MovieCellView",
+            withIdentifier: String(describing: MovieCellView.self),
             for: indexPath) as? MovieCellView else {
             fatalError()
         }
-        let model = presenter.viewModels[indexPath.row]
-        cell.configure(model: model)
+        cell.viewModel = viewModel.movies[indexPath.row]
         return cell
     }
 }
 
 extension ListOfMoviesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.onTapCell(atIndex: indexPath.row)
-    }
-}
-
-extension ListOfMoviesViewController: ListOfMoviesUI {
-    func update(movies: [MovieViewModel]) {
-        DispatchQueue.main.async {
-
-            self.moviesTableView.reloadData()
-            self.hideSpinner()
-        }
+        presenter?.input.movieSelected?(indexPath.row)
     }
 }

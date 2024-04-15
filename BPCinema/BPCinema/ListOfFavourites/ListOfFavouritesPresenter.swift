@@ -27,6 +27,8 @@ final class ListOfFavouriteMoviesPresenter: ListOfFavouriteMoviesPresentable {
     private let mapper: Mapper
     private let router: ListOfFavouriteMoviesRouting
     
+//    var outputChanged: (() -> Void)?
+    
     init(listOfFavouriteMoviesInteractor: ListOfFavouriteMoviesInteractable,
          mapper: Mapper = Mapper(),
          router: ListOfFavouriteMoviesRouting) {

@@ -10,29 +10,30 @@
 import Foundation
 import CoreData
 
-protocol ListOfMoviesInteractable: AnyObject {
-    func getMovies() async -> PopularMovieResponseEntity
-}
-
-final class ListOfMoviesInteractor: ListOfMoviesInteractable {
-    func getMovies() async -> PopularMovieResponseEntity {
+class MovieListInteractor: MovieListInteractorProtocol {
+    var service: SomeServiceProtocol
+    init(service: SomeServiceProtocol = SomeService()) {
+        self.service = service
+    }
+    var movies: [PopularMovieEntity] = []
+    func getMovies() async -> [PopularMovieEntity] {
         do {
-            return try await NetworkService.request(type: .getMovies, responseType: PopularMovieResponseEntity.self)
+            movies = try await service.getMovies()
         } catch {
-            return PopularMovieResponseEntity(page: 0, results: [PopularMovieEntity(id: 0, title: "", overview: "", imageURL: "", votes: 0.0)])
+            movies = []
         }
+        return movies
     }
 }
 
-final class ListOfMoviesInteractorMock: ListOfMoviesInteractable {
-    func getMovies() async -> PopularMovieResponseEntity {
-        return PopularMovieResponseEntity(page: 1, results: [
-            .init(id: 0, title: "Panda", overview: "----", imageURL: "", votes: 10),
-            .init(id: 1, title: "Red Panda", overview: "rferferf", imageURL: "", votes: 10),
-            .init(id: 2, title: "Kung Fu Panda", overview: "kmlkmlkm", imageURL: "", votes: 20),
-            .init(id: 3, title: "Panda panda", overview: "m;mom[", imageURL: "", votes: 20),
-            .init(id: 4, title: "Another Panda", overview: "yftcuvuoijok", imageURL: "", votes: 30),
-            .init(id: 5, title: "Another Panda", overview: "yftcuvuoijok", imageURL: "", votes: 40),
-        ])
+protocol SomeServiceProtocol {
+    func getMovies() async throws -> [PopularMovieEntity]
+}
+
+class SomeService: SomeServiceProtocol {
+    func getMovies() async throws -> [PopularMovieEntity] {
+        try await NetworkService.request(type: .getMovies, responseType: PopularMovieResponseEntity.self)
+            .results
+            .map { PopularMovieEntity(id: $0.id, title: $0.title, overview: $0.overview, imageURL: $0.imageURL, votes: $0.votes) }
     }
 }

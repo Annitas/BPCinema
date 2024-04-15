@@ -8,6 +8,24 @@
 import Foundation
 import UIKit
 
+final class MovieDetailsRouter: Router<DetailMovieViewController>, MovieDetailsRouter.Routes {
+    typealias Routes = Any
+}
+
+protocol MovieDetailsRoute {
+    var openMovieDetailsTransition: Transition { get }
+    func openMovieDetails(_ movie: PopularMovieEntity)
+}
+extension MovieDetailsRoute where Self: RouterProtocol {
+    func openMovieDetails(_ movie: PopularMovieEntity) {
+        let router = MovieDetailsRouter()
+        let viewController = MovieDetailsFactory.assembledScreen(router)
+        openWithNextRouter(viewController, nextRouter: router, transition: openMovieDetailsTransition)
+    }
+}
+
+
+
 protocol DetailRouting {
     func showDetails(fromViewController: UIViewController, withMovieID movieID: String)
 }
@@ -15,11 +33,11 @@ protocol DetailRouting {
 final class DetailRouter: DetailRouting {
     func showDetails(fromViewController: UIViewController, withMovieID movieID: String) {
         let interactor = DetailMovieInteractor()
-        let presenter = DetailPresenter(movieID: movieID,
-                                        interactor: interactor,
-                                        mapper: MapperDetailMovieViewModel())
-        let view = DetailMovieViewController(presenter: presenter)
-        presenter.ui = view
-        fromViewController.present(view, animated: true)
+//        let presenter = DetailPresenter(movieID: movieID,
+//                                        interactor: interactor,
+//                                        mapper: MapperDetailMovieViewModel())
+//        let view = DetailMovieViewController(presenter: presenter)
+//        presenter.ui = view
+//        fromViewController.present(view, animated: true)
     }
 }

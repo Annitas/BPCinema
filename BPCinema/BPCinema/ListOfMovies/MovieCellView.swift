@@ -10,6 +10,16 @@ import UIKit
 import Kingfisher
 
 final class MovieCellView: UITableViewCell {
+    var viewModel: MovieViewModel = MovieViewModel(title: "", overview: "", imageURL: URL(string: "")) {
+        didSet {
+            movieName.text = viewModel.title
+            movieDescription.text = viewModel.overview
+            movieImageView.kf.setImage(with: viewModel.imageURL)
+            setNeedsLayout()
+            layoutIfNeeded()
+        }
+    }
+    
     private let movieImageView: UIImageView = {
         let imageV = UIImageView()
         imageV.contentMode = .scaleAspectFill
@@ -50,7 +60,6 @@ final class MovieCellView: UITableViewCell {
         addSubview(movieName)
         addSubview(movieDescription)
         
-        
         NSLayoutConstraint.activate([
             movieImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
             movieImageView.topAnchor.constraint(equalTo: topAnchor, constant: 12),
@@ -67,11 +76,5 @@ final class MovieCellView: UITableViewCell {
             movieDescription.topAnchor.constraint(equalTo: movieName.bottomAnchor, constant: 8),
             movieDescription.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -12),
         ])
-    }
-    
-    func configure(model: MovieViewModel) {
-        movieImageView.kf.setImage(with: model.imageURL)
-        movieName.text = model.title
-        movieDescription.text = model.overview
     }
 }

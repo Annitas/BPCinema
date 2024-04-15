@@ -119,7 +119,6 @@ extension NetworkService {
         } else {
             decoder.dateDecodingStrategy = .iso8601
         }
-        print("TYPE REQUEST \(type)")
         
         do {
             return try decoder.decode(T.self, from: data)

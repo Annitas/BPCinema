@@ -7,43 +7,50 @@
 
 import Foundation
 
-protocol ListOfMoviesPresentable: AnyObject {
-    var ui: ListOfMoviesUI? { get }
-    var viewModels: [MovieViewModel] { get }
-    func onViewAppear()
-    func onTapCell(atIndex: Int)
+protocol MovieListInteractorProtocol {
+    func getMovies() async -> [PopularMovieEntity]
+    var movies: [PopularMovieEntity] { get }
 }
 
-protocol ListOfMoviesUI: AnyObject {
-    func update(movies: [MovieViewModel])
-}
-
-final class ListOfMoviesPresenter: ListOfMoviesPresentable {
-    weak var ui: ListOfMoviesUI?
-    private let listOfMoviesInteractor: ListOfMoviesInteractable
-    var viewModels: [MovieViewModel] = []
-    private var models: [PopularMovieEntity] = []
-    private let mapper: Mapper
-    private let router: ListOfMoviesRouting
-    
-    init(listOfMoviesInteractor: ListOfMoviesInteractable, 
-         mapper: Mapper = Mapper(),
-         router: ListOfMoviesRouting) {
-        self.listOfMoviesInteractor = listOfMoviesInteractor
-        self.mapper = mapper
-        self.router = router
-    }
-    
-    func onViewAppear() {
-        Task {
-            models = await listOfMoviesInteractor.getMovies().results
-            viewModels = models.map(mapper.map(entity:))
-            ui?.update(movies: viewModels)
+final class ListOfMoviesPresenter {
+    let interactor: MovieListInteractorProtocol
+    var output: Output = .init() {
+        didSet {
+            outputChanged?()
         }
     }
+    var input: Input = .init()
     
-    func onTapCell(atIndex: Int) {
-        let movieID = models[atIndex].id
-        router.showDetailMovie(withMovieID: movieID.description)
+    struct Output {
+        var viewModel: MovieListViewModel = .init(movies: [])
+    }
+    struct Input {
+        var movieSelected: ((Int) -> ())?
+    }
+    private let mapper: Mapper
+    var outputChanged: (() -> ())?
+    var router: Router<ListOfMoviesViewController>
+    
+    init(router: Router<ListOfMoviesViewController> = MovieListRouter(),
+         interactor: MovieListInteractorProtocol = MovieListInteractor(), 
+         output: Output = .init(),
+         outputChanged: (() -> Void)? = nil,
+         mapper: Mapper = Mapper()) {
+        self.router = router
+        self.interactor = interactor
+        self.output = output
+        self.outputChanged = outputChanged
+        self.mapper = mapper
+        Task {
+            let array = await interactor.getMovies().map(mapper.map(entity:))
+            await MainActor.run {
+                self.output.viewModel = .init(movies: array)
+            }
+        }
+
+        input.movieSelected = { [unowned self] movieIndex in
+            let movie = interactor.movies[movieIndex]
+            (self.router as? MovieDetailsRoute)?.openMovieDetails(movie)
+        }
     }
 }

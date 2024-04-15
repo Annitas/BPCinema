@@ -10,15 +10,6 @@ import UIKit
 import Kingfisher
 
 final class DetailMovieViewController: UIViewController {
-//    var presenter: MovieDetailsPresenter? {
-//        didSet {
-//            guard let presenter else { return }
-//            viewModel = presenter.output.viewModel
-//            presenter.outputChanged = { [weak self] in
-//                self?.viewModel = presenter.output.viewModel
-//            }
-//        }
-//    }
     private let presenter: MovieDetailsPresenter
     var viewModel: DetailMovieViewModel = DetailMovieViewModel(title: "", overview: "", backdropPath: URL(string: "")) {
         didSet {

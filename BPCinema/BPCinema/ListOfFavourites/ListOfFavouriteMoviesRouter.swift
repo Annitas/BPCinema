@@ -5,8 +5,6 @@
 //  Created by Anita Stashevskaya on 29.03.2024.
 //
 
-import Foundation
-import UIKit
 
 final class ListOfFavouriteMoviesRouter: Router<ListOfFavouriteMoviesViewController>, ListOfFavouriteMoviesRouter.Routes {
     var openMovieDetailsTransition: Transition = PushTransition()

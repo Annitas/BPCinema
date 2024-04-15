@@ -41,20 +41,14 @@ final class ListOfFavouriteMoviesViewController: UIViewController {
         return spinner
     }()
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        setupView()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        self.showSpinner()
     }
     
     private func setupView() {
         view.addSubview(moviesTableView)
-        view.addSubview(spinner)
+//        view.addSubview(spinner)
         
         NSLayoutConstraint.activate([
             moviesTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -62,8 +56,8 @@ final class ListOfFavouriteMoviesViewController: UIViewController {
             moviesTableView.topAnchor.constraint(equalTo: view.topAnchor),
             moviesTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+//            spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
         moviesTableView.dataSource = self
         moviesTableView.delegate = self

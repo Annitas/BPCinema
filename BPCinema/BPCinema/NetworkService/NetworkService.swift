@@ -1,5 +1,5 @@
 //
-//  APIService.swift
+//  NetworkService.swift
 //  BPCinema
 //
 //  Created by Anita Stashevskaya on 27.03.2024.

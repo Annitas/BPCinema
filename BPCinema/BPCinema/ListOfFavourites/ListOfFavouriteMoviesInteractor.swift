@@ -5,7 +5,10 @@
 //  Created by Anita Stashevskaya on 29.03.2024.
 //
 
-import Foundation
+protocol ListOfFavouriteMoviesInteractorProtocol {
+    func getFavourites() async -> [PopularMovieEntity]
+    var movies: [PopularMovieEntity] { get }
+}
 
 final class ListOfFavouriteMoviesInteractor: ListOfFavouriteMoviesInteractorProtocol  {
     var service: PopularMoviesServiceProtocol

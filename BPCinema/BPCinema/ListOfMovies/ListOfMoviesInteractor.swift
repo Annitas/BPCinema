@@ -16,9 +16,9 @@ class MovieListInteractor: MovieListInteractorProtocol {
         self.service = service
     }
     var movies: [PopularMovieEntity] = []
-    func getMovies() async -> [PopularMovieEntity] {
+    func getMovies(_ page: String = "1") async -> [PopularMovieEntity] {
         do {
-            movies = try await service.getMovies()
+            movies = try await service.getMovies(page)
         } catch {
             movies = []
         }
@@ -27,12 +27,12 @@ class MovieListInteractor: MovieListInteractorProtocol {
 }
 
 protocol MovieListServiceProtocol {
-    func getMovies() async throws -> [PopularMovieEntity]
+    func getMovies(_ page: String) async throws -> [PopularMovieEntity]
 }
 
 class MovieService: MovieListServiceProtocol {
-    func getMovies() async throws -> [PopularMovieEntity] {
-        try await NetworkService.request(type: .getMovies, responseType: PopularMovieResponseEntity.self)
+    func getMovies(_ page: String = "1") async throws -> [PopularMovieEntity] {
+        try await NetworkService.request(type: .getMovies(page), responseType: PopularMovieResponseEntity.self)
             .results
             .map { PopularMovieEntity(id: $0.id, title: $0.title, overview: $0.overview, imageURL: $0.imageURL, votes: $0.votes) }
     }

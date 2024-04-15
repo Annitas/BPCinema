@@ -19,7 +19,9 @@ protocol MovieDetailsRoute {
 extension MovieDetailsRoute where Self: RouterProtocol {
     func openMovieDetails(_ movie: PopularMovieEntity) {
         let router = MovieDetailsRouter()
-        let viewController = MovieDetailsFactory.assembledScreen(router)
+        let movieID = String(movie.id)
+        print("ID OF MOVIE \(movieID)")
+        let viewController = MovieDetailsFactory.assembledScreen(router, movieID: movieID)
         openWithNextRouter(viewController, nextRouter: router, transition: openMovieDetailsTransition)
     }
 }
@@ -32,7 +34,7 @@ protocol DetailRouting {
 
 final class DetailRouter: DetailRouting {
     func showDetails(fromViewController: UIViewController, withMovieID movieID: String) {
-        let interactor = DetailMovieInteractor()
+//        let interactor = DetailMovieInteractor()
 //        let presenter = DetailPresenter(movieID: movieID,
 //                                        interactor: interactor,
 //                                        mapper: MapperDetailMovieViewModel())

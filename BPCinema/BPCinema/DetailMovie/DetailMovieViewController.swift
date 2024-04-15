@@ -95,7 +95,7 @@ final class DetailMovieViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             movieImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            movieImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
+            movieImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             movieImageView.heightAnchor.constraint(equalToConstant: 200),
             movieImageView.widthAnchor.constraint(equalToConstant: 350),
             
@@ -112,11 +112,3 @@ final class DetailMovieViewController: UIViewController {
         ])
     }
 }
-//
-//extension DetailMovieViewController: DetailPresenterUI {
-//    func updateUI(viewModel: DetailMovieViewModel) {
-//        movieImageView.kf.setImage(with: viewModel.backdropPath)
-//        movieName.text = viewModel.title
-//        movieDescription.text = viewModel.overview
-//    }
-//}

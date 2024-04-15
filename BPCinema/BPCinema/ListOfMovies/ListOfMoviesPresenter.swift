@@ -17,13 +17,6 @@ final class ListOfMoviesPresenter {
     }
     var input: Input = .init()
     var outputChanged: (() -> ())?
-    
-    struct Output {
-        var viewModel: MovieListViewModel = .init(movies: [])
-    }
-    struct Input {
-        var movieSelected: ((Int) -> ())?
-    }
     private let mapper: Mapper
     
     init(router: Router<ListOfMoviesViewController> = MovieListRouter(),
@@ -47,5 +40,14 @@ final class ListOfMoviesPresenter {
             let movie = interactor.movies[movieIndex]
             (self.router as? MovieDetailsRoute)?.openMovieDetails(movie)
         }
+    }
+}
+
+extension ListOfMoviesPresenter {
+    struct Output {
+        var viewModel: MovieListViewModel = .init(movies: [])
+    }
+    struct Input {
+        var movieSelected: ((Int) -> ())?
     }
 }

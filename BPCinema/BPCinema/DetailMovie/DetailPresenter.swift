@@ -52,10 +52,6 @@ final class MovieDetailsPresenter {
 }
 
 extension MovieDetailsPresenter: MovieDetailsPresenterProtocol {
-    struct Input {
-        
-    }
-
     struct Output {
         var viewModel: DetailMovieViewModel = .init(title: "", overview: "", backdropPath: URL(string: ""))
     }

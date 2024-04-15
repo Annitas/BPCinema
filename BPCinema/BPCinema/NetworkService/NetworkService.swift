@@ -10,7 +10,7 @@ import Foundation
 enum NetworkService {
     static let baseURL = URL(string: "https://api.themoviedb.org/3/")
     
-    case getMovies
+    case getMovies(_ page: String)
     case getFavourites
     case getMovieDetails(id: String)
     case addMovieToFavourites(movieId: String)
@@ -41,10 +41,10 @@ extension NetworkService {
     
     var queryItems: [URLQueryItem]? {
         switch self {
-        case .getMovies:
+        case .getMovies(let page):
             return [
                 URLQueryItem(name: "api_key", value: "fae05adc59b94dcb33377a38bfd09528"),
-                URLQueryItem(name: "page", value: "1")
+                URLQueryItem(name: "page", value: page)
             ]
         case .getFavourites:
             return [

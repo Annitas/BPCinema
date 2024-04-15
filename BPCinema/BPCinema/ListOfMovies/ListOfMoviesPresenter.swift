@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MovieListInteractorProtocol {
-    func getMovies() async -> [PopularMovieEntity]
+    func getMovies(_ page: String) async -> [PopularMovieEntity]
     var movies: [PopularMovieEntity] { get }
 }
 
@@ -42,7 +42,7 @@ final class ListOfMoviesPresenter {
         self.outputChanged = outputChanged
         self.mapper = mapper
         Task {
-            let array = await interactor.getMovies().map(mapper.map(entity:))
+            let array = await interactor.getMovies("1").map(mapper.map(entity:))
             await MainActor.run {
                 self.output.viewModel = .init(movies: array)
             }

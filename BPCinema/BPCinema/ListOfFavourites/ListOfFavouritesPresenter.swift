@@ -7,8 +7,6 @@
 
 
 final class ListOfFavouriteMoviesPresenter {
-    var movies: [PopularMovieEntity] = []
-    
     let interactor: ListOfFavouriteMoviesInteractorProtocol
     var output: Output = .init() {
         didSet {
@@ -25,9 +23,6 @@ final class ListOfFavouriteMoviesPresenter {
     }
     var router: Router<ListOfFavouriteMoviesViewController>
     private let mapper: Mapper
-    
-    var viewModels: [MovieViewModel] = []
-    
     init(router: Router<ListOfFavouriteMoviesViewController> = ListOfFavouriteMoviesRouter(),
          interactor: ListOfFavouriteMoviesInteractorProtocol = ListOfFavouriteMoviesInteractor(),
          output: Output = .init(),

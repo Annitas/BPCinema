@@ -10,6 +10,11 @@
 import Foundation
 import CoreData
 
+protocol MovieListInteractorProtocol {
+    func getMovies(_ page: String) async -> [PopularMovieEntity]
+    var movies: [PopularMovieEntity] { get }
+}
+
 class MovieListInteractor: MovieListInteractorProtocol {
     var service: MovieListServiceProtocol
     init(service: MovieListServiceProtocol = MovieService()) {

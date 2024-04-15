@@ -11,8 +11,7 @@ final class MovieDetailsFactory {
     class func assembledScreen(_ router: MovieDetailsRouter = .init(), movieID: String) -> DetailMovieViewController {
         let interactor = MovieDetailsInteractor()
         let presenter = MovieDetailsPresenter(router, interactor, movieID: movieID)
-        let viewController = DetailMovieViewController()
-        viewController.presenter = presenter
+        let viewController = DetailMovieViewController(presenter)
         router.viewController = viewController
         return viewController
     }

@@ -7,11 +7,6 @@
 
 import Foundation
 
-protocol MovieListInteractorProtocol {
-    func getMovies(_ page: String) async -> [PopularMovieEntity]
-    var movies: [PopularMovieEntity] { get }
-}
-
 final class ListOfMoviesPresenter {
     let interactor: MovieListInteractorProtocol
     var router: Router<ListOfMoviesViewController>

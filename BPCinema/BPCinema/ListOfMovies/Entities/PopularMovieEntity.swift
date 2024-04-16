@@ -13,7 +13,9 @@ struct PopularMovieEntity: Decodable {
     var overview: String
     var imageURL: String
     var votes: Double
-    
+//    init(from decoder: any Decoder) throws {
+//        
+//    }
     enum CodingKeys: String, CodingKey {
         case id, title, overview
         case imageURL = "poster_path"

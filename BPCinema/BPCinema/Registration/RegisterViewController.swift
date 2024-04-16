@@ -35,7 +35,7 @@ class RegisterViewController: UIViewController {
     private let minPasswordLength = 6
     private lazy var regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!#%*?&]).{\(minPasswordLength),}$"
     
-    private let registerButton = CustomButton(title: "Register") // TODO: disable this while password is incorrect
+    private let registerButton = CustomButton(title: "Register")
     private let goToLoginButton = GoToButton(title: "Back to sign in")
     
     private let presenter: RegisterPresentable

@@ -7,13 +7,3 @@
 
 import UIKit
 
-final class ListOfFavouriteMoviesFactory {
-    static func assembledScreen(_ router: ListOfFavouriteMoviesRouter = .init()) -> ListOfFavouriteMoviesViewController {
-        let interactor = ListOfFavouriteMoviesInteractor()
-        let presenter = ListOfFavouriteMoviesPresenter(router: router, interactor: interactor)
-        let viewController = ListOfFavouriteMoviesViewController()
-        viewController.presenter = presenter
-        router.viewController = viewController
-        return viewController
-    }
-}

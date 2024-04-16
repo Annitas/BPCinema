@@ -25,7 +25,7 @@ final class ListOfMoviesPresenter: ListOfMoviesPresenterProtocol {
     var outputChanged: (() -> ())?
     private let mapper: Mapper
     
-    init(router: Router<ListOfMoviesViewController> = MovieListRouter(),
+    init(router: Router<ListOfMoviesViewController>,
          interactor: MovieListInteractorProtocol = MovieListInteractor(), 
          output: Output = .init(),
          outputChanged: (() -> Void)? = nil,
@@ -35,46 +35,28 @@ final class ListOfMoviesPresenter: ListOfMoviesPresenterProtocol {
         self.output = output
         self.outputChanged = outputChanged
         self.mapper = mapper
-        Task {
-            let array = await interactor.getMovies("1").map(mapper.map(entity:))
-            await MainActor.run {
-                self.output.viewModel = .init(movies: array)
+        
+        switch String(describing: router) {
+        case "BPCinema.MovieListRouter":
+            Task {
+                let array = await interactor.getMovies("1").map(mapper.map(entity:))
+                await MainActor.run {
+                    self.output.viewModel = .init(movies: array)
+                }
             }
-        }
-
-        input.movieSelected = { [unowned self] movieIndex in
-            let movie = interactor.movies[movieIndex]
-            (self.router as? MovieDetailsRoute)?.openMovieDetails(movie)
-        }
-    }
-}
-
-final class ListOfFavouriteMoviesPresenter: ListOfMoviesPresenterProtocol {
-    let interactor: MovieListInteractorProtocol
-    var output: Output = .init() {
-        didSet {
-            outputChanged?()
-        }
-    }
-    var outputChanged: (() -> ())?
-    var input: Input = .init()
-    var router: Router<ListOfMoviesViewController>
-    private let mapper: Mapper
-    init(router: Router<ListOfMoviesViewController> = ListOfFavouriteMoviesRouter(),
-         interactor: MovieListInteractorProtocol = MovieListInteractor(),
-         output: Output = .init(),
-         outputChanged: (() -> Void)? = nil,
-         mapper: Mapper = Mapper()
-         ) {
-        self.router = router
-        self.interactor = interactor
-        self.output = output
-        self.outputChanged = outputChanged
-        self.mapper = mapper
-        Task {
-            let models = await interactor.getFavourites().map(mapper.map(entity:))
-            await MainActor.run {
-                self.output.viewModel = .init(movies: models)
+        case "BPCinema.ListOfFavouriteMoviesRouter":
+            Task {
+                let models = await interactor.getFavourites().map(mapper.map(entity:))
+                await MainActor.run {
+                    self.output.viewModel = .init(movies: models)
+                }
+            }
+        default:
+            Task {
+                let array = await interactor.getMovies("1").map(mapper.map(entity:))
+                await MainActor.run {
+                    self.output.viewModel = .init(movies: array)
+                }
             }
         }
         input.movieSelected = { [unowned self] movieIndex in

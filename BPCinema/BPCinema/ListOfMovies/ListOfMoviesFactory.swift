@@ -20,7 +20,7 @@ final class ListOfMoviesFactory {
 final class ListOfFavouriteMoviesFactory {
     static func assembledScreen(_ router: ListOfFavouriteMoviesRouter = .init()) -> ListOfMoviesViewController {
         let interactor = MovieListInteractor()
-        let presenter = ListOfFavouriteMoviesPresenter(router: router, interactor: interactor)
+        let presenter = ListOfMoviesPresenter(router: router, interactor: interactor)
         let viewController = ListOfMoviesViewController()
         viewController.presenter = presenter
         router.viewController = viewController

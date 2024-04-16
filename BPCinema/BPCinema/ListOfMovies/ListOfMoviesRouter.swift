@@ -24,7 +24,7 @@ extension MovieListRoute where Self: RouterProtocol {
     }
 }
 
-final class ListOfFavouriteMoviesRouter: Router<ListOfFavouriteMoviesViewController>, ListOfFavouriteMoviesRouter.Routes {
+final class ListOfFavouriteMoviesRouter: Router<ListOfMoviesViewController>, ListOfFavouriteMoviesRouter.Routes {
     var openMovieDetailsTransition: Transition = PushTransition()
     typealias Routes = MovieDetailsRoute
 }

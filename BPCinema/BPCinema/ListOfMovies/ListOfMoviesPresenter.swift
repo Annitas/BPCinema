@@ -7,7 +7,13 @@
 
 import Foundation
 
-final class ListOfMoviesPresenter {
+protocol ListOfMoviesPresenterProtocol {
+    var output: Output { get }
+    var input: Input { get }
+    var outputChanged: (() -> ())? { get set }
+}
+
+final class ListOfMoviesPresenter: ListOfMoviesPresenterProtocol {
     let interactor: MovieListInteractorProtocol
     var router: Router<ListOfMoviesViewController>
     var output: Output = .init() {
@@ -43,16 +49,7 @@ final class ListOfMoviesPresenter {
     }
 }
 
-extension ListOfMoviesPresenter {
-    struct Output {
-        var viewModel: MovieListViewModel = .init(movies: [])
-    }
-    struct Input {
-        var movieSelected: ((Int) -> ())?
-    }
-}
-
-final class ListOfFavouriteMoviesPresenter {
+final class ListOfFavouriteMoviesPresenter: ListOfMoviesPresenterProtocol {
     let interactor: MovieListInteractorProtocol
     var output: Output = .init() {
         didSet {
@@ -61,9 +58,9 @@ final class ListOfFavouriteMoviesPresenter {
     }
     var outputChanged: (() -> ())?
     var input: Input = .init()
-    var router: Router<ListOfFavouriteMoviesViewController>
+    var router: Router<ListOfMoviesViewController>
     private let mapper: Mapper
-    init(router: Router<ListOfFavouriteMoviesViewController> = ListOfFavouriteMoviesRouter(),
+    init(router: Router<ListOfMoviesViewController> = ListOfFavouriteMoviesRouter(),
          interactor: MovieListInteractorProtocol = MovieListInteractor(),
          output: Output = .init(),
          outputChanged: (() -> Void)? = nil,
@@ -84,14 +81,5 @@ final class ListOfFavouriteMoviesPresenter {
             let movie = interactor.movies[movieIndex]
             (self.router as? MovieDetailsRoute)?.openMovieDetails(movie)
         }
-    }
-}
-
-extension ListOfFavouriteMoviesPresenter {
-    struct Output {
-        var viewModel: MovieListViewModel = .init(movies: [])
-    }
-    struct Input {
-        var movieSelected: ((Int) -> ())?
     }
 }

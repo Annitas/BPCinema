@@ -46,11 +46,9 @@ final class MovieDetailsPresenter {
                 self.output.viewModel = .init(title: viewModel.title, overview: viewModel.overview, backdropPath: viewModel.backdropPath)
             }
         }
-        print("== init end")
-    }
-    
-    func addToFavourites(withID id: String) async {
-        await interactor.addMovieToFavourite(movieId: id)
+        input.addToFavouritesSelected = { [unowned self] movieIndex in
+            await interactor.addMovieToFavourite(movieId: movieIndex)
+        }
     }
 }
 

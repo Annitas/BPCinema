@@ -7,17 +7,11 @@
 
 import UIKit
 import FirebaseAuth
+import PinLayout
 
 final class LoginViewController: UIViewController {
     private let presenter: LoginPresentable
-    
-    private var headerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .custom
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
+
     private var emailTextField = CustomTextField(placeholderText: "Email")
     private var passwordTextField = CustomTextField(placeholderText: "Password", isPassword: true)
     private let loginButton = CustomButton(title: "Login")
@@ -73,6 +67,8 @@ final class LoginViewController: UIViewController {
         emailTextField.text = "anita.stashevskayaa@mail.ru"
         passwordTextField.text = "qazwsx"
         
+//        emailTextField.pin.top(25%).hCenter()
+            
         NSLayoutConstraint.activate([
             emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),

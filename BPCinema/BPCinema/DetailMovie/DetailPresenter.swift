@@ -11,6 +11,7 @@ import Foundation
 protocol MovieDetailsPresenterProtocol {
     var router: Router<DetailMovieViewController> { get }
     var interactor: MovieDetailsInteractorProtocol { get }
+    var input: Input { get }
 }
 
 final class MovieDetailsPresenter {
@@ -24,6 +25,7 @@ final class MovieDetailsPresenter {
     let movieID: String
     var outputChanged: (() -> ())?
     private let mapper: MapperDetailMovieViewModel
+    var input: Input = .init()
     
     init(_ router: Router<DetailMovieViewController>,
          _ interactor: MovieDetailsInteractorProtocol,

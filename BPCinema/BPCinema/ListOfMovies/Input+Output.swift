@@ -10,4 +10,5 @@ struct Output {
 }
 struct Input {
     var movieSelected: ((Int) -> ())?
+    var addToFavouritesSelected: ((String) async -> ())?
 }

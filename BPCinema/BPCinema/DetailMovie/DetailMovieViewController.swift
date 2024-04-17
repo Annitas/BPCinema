@@ -75,7 +75,7 @@ final class DetailMovieViewController: UIViewController {
     }
     @objc func addToFavourites(_ sender: UIButton) {
         Task {
-            await addToFavouritesAsync()
+            presenter.input.addToFavouritesSelected
         }
     }
     

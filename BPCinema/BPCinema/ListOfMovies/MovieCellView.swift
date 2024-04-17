@@ -15,8 +15,6 @@ final class MovieCellView: UITableViewCell {
             movieName.text = viewModel.title
             movieDescription.text = viewModel.overview
             movieImageView.kf.setImage(with: viewModel.imageURL)
-            setNeedsLayout()
-            layoutIfNeeded()
         }
     }
     
@@ -60,6 +58,26 @@ final class MovieCellView: UITableViewCell {
         addSubview(movieName)
         addSubview(movieDescription)
         
+//        movieImageView.pin
+//                    .width(110)
+//                    .height(180)
+//                    .top(12)
+//                    .left(12)
+//                    .bottom(12)
+//                
+//                movieName.pin
+//                    .after(of: movieImageView)
+//                    .marginTop(5)
+//                    .right(11)
+//                    .marginLeft(18)
+//                
+//                movieDescription.pin
+//                    .below(of: movieName)
+//                    .right(11)
+//                    .left(to: movieName.edge.left)
+//                    .bottom(-12)
+//                    .marginLeft(18)
+
         NSLayoutConstraint.activate([
             movieImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
             movieImageView.topAnchor.constraint(equalTo: topAnchor, constant: 12),

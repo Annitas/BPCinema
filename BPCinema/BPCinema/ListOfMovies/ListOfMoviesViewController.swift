@@ -10,9 +10,9 @@ import UIKit
 import PinLayout
 
 final class ListOfMoviesViewController: UIViewController {
-    var presenter: ListOfMoviesPresenter? {
+    var presenter: ListOfMoviesPresenterProtocol? {
         didSet {
-            guard let presenter else { return }
+            guard var presenter else { return }
             viewModel = presenter.output.viewModel
             presenter.outputChanged = { [weak self] in
                 self?.viewModel = presenter.output.viewModel

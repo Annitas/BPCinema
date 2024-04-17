@@ -12,6 +12,7 @@ import CoreData
 
 protocol MovieListInteractorProtocol {
     func getMovies(_ page: String) async -> [PopularMovieEntity]
+    func getFavourites() async -> [PopularMovieEntity]
     var movies: [PopularMovieEntity] { get }
 }
 
@@ -29,15 +30,30 @@ class MovieListInteractor: MovieListInteractorProtocol {
         }
         return movies
     }
+    func getFavourites() async -> [PopularMovieEntity] {
+        do {
+            movies = try await service.getFavourites()
+        } catch {
+            movies = []
+        }
+        return movies
+    }
 }
 
 protocol MovieListServiceProtocol {
     func getMovies(_ page: String) async throws -> [PopularMovieEntity]
+    func getFavourites() async throws -> [PopularMovieEntity]
 }
 
 class MovieService: MovieListServiceProtocol {
     func getMovies(_ page: String = "1") async throws -> [PopularMovieEntity] {
         try await NetworkService.request(type: .getMovies(page), responseType: PopularMovieResponseEntity.self)
+            .results
+            .map { PopularMovieEntity(id: $0.id, title: $0.title, overview: $0.overview, imageURL: $0.imageURL, votes: $0.votes) }
+    }
+    
+    func getFavourites() async throws -> [PopularMovieEntity] {
+        try await NetworkService.request(type: .getFavourites, responseType: PopularMovieResponseEntity.self)
             .results
             .map { PopularMovieEntity(id: $0.id, title: $0.title, overview: $0.overview, imageURL: $0.imageURL, votes: $0.votes) }
     }

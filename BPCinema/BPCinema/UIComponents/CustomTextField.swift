@@ -17,7 +17,7 @@ class CustomTextField: UITextField {
         autocorrectionType = UITextAutocorrectionType.no
         autocapitalizationType = .none
         leftViewMode = .always
-        leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
+//        leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         keyboardType = UIKeyboardType.default
         returnKeyType = UIReturnKeyType.done
         clearButtonMode = UITextField.ViewMode.whileEditing

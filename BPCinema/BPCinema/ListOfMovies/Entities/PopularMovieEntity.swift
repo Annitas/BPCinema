@@ -13,12 +13,19 @@ struct PopularMovieEntity: Decodable {
     var overview: String
     var imageURL: String
     var votes: Double
-//    init(from decoder: any Decoder) throws {
-//        
-//    }
+    
     enum CodingKeys: String, CodingKey {
         case id, title, overview
         case imageURL = "poster_path"
         case votes = "vote_average"
     }
+    
+//    init(from decoder: any Decoder) throws {
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        self.id = try container.decode(Int.self, forKey: .id)
+//        self.title = try container.decode(String.self, forKey: .title)
+//        self.overview = try container.decode(String.self, forKey: .overview)
+//        self.imageURL = "https://image.tmdb.org/t/p/w200 + \(self.imageURL)"
+//        self.votes = try container.decode(Double.self, forKey: .votes)
+//    }
 }

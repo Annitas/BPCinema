@@ -52,12 +52,8 @@ final class ListOfMoviesViewController: UIViewController {
     private func setupView() {
         view.addSubview(moviesTableView)
         
-        NSLayoutConstraint.activate([
-            moviesTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            moviesTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            moviesTableView.topAnchor.constraint(equalTo: view.topAnchor),
-            moviesTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
+        moviesTableView.pin.all()
+
         moviesTableView.dataSource = self
         moviesTableView.delegate = self
     }

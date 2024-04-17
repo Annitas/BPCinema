@@ -52,7 +52,7 @@ final class ListOfMoviesViewController: UIViewController {
     private func setupView() {
         view.addSubview(moviesTableView)
         
-        moviesTableView.pin.all(10)
+        moviesTableView.pin.all()
 
         moviesTableView.dataSource = self
         moviesTableView.delegate = self

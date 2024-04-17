@@ -5,9 +5,8 @@
 //  Created by Anita Stashevskaya on 19.03.2024.
 //
 
-import Foundation
 import UIKit
-import Kingfisher
+import PinLayout
 
 final class MovieCellView: UITableViewCell {
     var viewModel: MovieViewModel = MovieViewModel(title: "", overview: "", imageURL: URL(string: "")) {
@@ -17,7 +16,7 @@ final class MovieCellView: UITableViewCell {
             movieImageView.kf.setImage(with: viewModel.imageURL)
         }
     }
-    
+    private let padding: CGFloat = 10
     private let movieImageView: UIImageView = {
         let imageV = UIImageView()
         imageV.contentMode = .scaleAspectFill
@@ -57,42 +56,44 @@ final class MovieCellView: UITableViewCell {
         addSubview(movieImageView)
         addSubview(movieName)
         addSubview(movieDescription)
-        
-//        movieImageView.pin
-//                    .width(110)
-//                    .height(180)
-//                    .top(12)
-//                    .left(12)
-//                    .bottom(12)
-//                
-//                movieName.pin
-//                    .after(of: movieImageView)
-//                    .marginTop(5)
-//                    .right(11)
-//                    .marginLeft(18)
-//                
-//                movieDescription.pin
-//                    .below(of: movieName)
-//                    .right(11)
-//                    .left(to: movieName.edge.left)
-//                    .bottom(-12)
-//                    .marginLeft(18)
 
-        NSLayoutConstraint.activate([
-            movieImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            movieImageView.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            movieImageView.heightAnchor.constraint(equalToConstant: 180),
-            movieImageView.widthAnchor.constraint(equalToConstant: 110),
-            movieImageView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -12),
-            
-            movieName.leadingAnchor.constraint(equalTo: movieImageView.trailingAnchor, constant: 18),
-            movieName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11),
-            movieName.topAnchor.constraint(equalTo: movieImageView.topAnchor, constant: 5),
-            
-            movieDescription.leadingAnchor.constraint(equalTo: movieImageView.trailingAnchor, constant: 20),
-            movieDescription.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11),
-            movieDescription.topAnchor.constraint(equalTo: movieName.bottomAnchor, constant: 8),
-            movieDescription.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -12),
-        ])
+//        NSLayoutConstraint.activate([
+//            movieImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+//            movieImageView.topAnchor.constraint(equalTo: topAnchor, constant: 12),
+//            movieImageView.heightAnchor.constraint(equalToConstant: 180),
+//            movieImageView.widthAnchor.constraint(equalToConstant: 110),
+//            movieImageView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -12),
+//            
+//            movieName.leadingAnchor.constraint(equalTo: movieImageView.trailingAnchor, constant: 18),
+//            movieName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11),
+//            movieName.topAnchor.constraint(equalTo: movieImageView.topAnchor, constant: 5),
+//            
+//            movieDescription.leadingAnchor.constraint(equalTo: movieImageView.trailingAnchor, constant: 20),
+//            movieDescription.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11),
+//            movieDescription.topAnchor.constraint(equalTo: movieName.bottomAnchor, constant: 8),
+//            movieDescription.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -12),
+//        ])
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layout()
+    }
+    
+    private func layout() {
+        movieImageView.pin.topLeft(padding).height(180).width(110).bottom(padding)
+        movieName.pin.after(of: movieImageView, aligned: .top).right().marginHorizontal(padding).sizeToFit(.width)
+
+        movieDescription.pin.after(of: movieImageView).below(of: movieName).horizontally().margin(padding).sizeToFit(.width)
+    }
+    
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        // 1) Set the contentView's width to the specified size parameter
+        contentView.pin.width(size.width)
+        contentView.pin.height(size.height)
+        // 2) Layout the contentView's controls
+        layout()
+        let cellHeight = (movieDescription.frame.maxY + movieName.frame.maxY) > movieImageView.frame.maxY ? (movieDescription.frame.maxY + movieName.frame.maxY) : movieImageView.frame.maxY
+        // 3) Returns a size that contains all controls
+        return CGSize(width: contentView.frame.width, height: cellHeight)
     }
 }
